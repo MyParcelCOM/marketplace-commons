@@ -26,12 +26,12 @@ class PhysicalProperties
     ])]
     public function toArray(): array
     {
-        return [
+        return array_filter([
             'weight' => $this->weight,
             'height' => $this->height,
             'width'  => $this->width,
             'length' => $this->length,
             'volume' => $this->volume,
-        ];
+        ]);
     }
 }

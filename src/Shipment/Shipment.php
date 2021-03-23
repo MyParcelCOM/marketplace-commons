@@ -28,7 +28,7 @@ class Shipment
         private PhysicalProperties $physicalProperties,
         private ItemCollection $items,
         private ?Customs $customs = null,
-        private array $tags,
+        private array $tags = [],
     ) {
         foreach ($this->tags as $tag) {
             if (!is_string($tag)) {
