@@ -10,8 +10,8 @@ use function array_filter;
 class Item
 {
     public function __construct(
-        private string $description,
-        private int $quantity,
+        private ?string $description,
+        private ?int $quantity,
         private ?string $sku = null,
         private ?string $imageUrl = null,
         private ?Price $itemValue = null,
