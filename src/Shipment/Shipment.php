@@ -54,7 +54,7 @@ class Shipment
                 'physical_properties' => array_filter($this->physicalProperties->toArray()),
                 'items'               => array_filter($this->items->toArray()),
                 'tags'                => array_filter($this->tags),
-                'customs'             => array_filter($this->customs->toArray()),
+                'customs'             => $this->customs ? array_filter($this->customs->toArray()) : null,
             ]),
             'relationships' => [
                 'shop' => [
