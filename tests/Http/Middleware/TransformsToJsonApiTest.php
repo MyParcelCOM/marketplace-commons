@@ -30,7 +30,7 @@ class TransformsToJsonApiTest extends TestCase
         $middleware = new TransformsToJsonApi();
 
         $responseMock = Mockery::mock(JsonResponse::class, [
-            'getOriginalContent' => new stdClass()
+            'getOriginalContent' => new stdClass(),
         ]);
 
         $next = static fn() => $responseMock;
@@ -47,9 +47,9 @@ class TransformsToJsonApiTest extends TestCase
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => [
                 Mockery::mock(Shipment::class, [
-                    'transformToJsonApiArray' => []
-                ])
-            ]
+                    'transformToJsonApiArray' => [],
+                ]),
+            ],
         ]);
 
         $next = static fn() => $responseMock;
@@ -58,8 +58,8 @@ class TransformsToJsonApiTest extends TestCase
 
         self::assertEquals([
             'data' => [
-                []
-            ]
+                [],
+            ],
         ], $middleware->handle($requestMock, $next)->getOriginalContent());
     }
 }

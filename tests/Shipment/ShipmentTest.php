@@ -286,7 +286,7 @@ class ShipmentTest extends TestCase
                     'license_number'     => 'test5',
                     'certificate_number' => 'test6',
                 ],
-                'tags' => [$tag]
+                'tags'                => [$tag],
             ],
             'relationships' => [
                 'shop' => [
