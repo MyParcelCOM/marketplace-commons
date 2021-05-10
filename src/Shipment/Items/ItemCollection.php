@@ -28,6 +28,6 @@ class ItemCollection extends ArrayObject
 
     public function toArray(): array
     {
-        return array_map(static fn (Item $item) => $item->toArray(), (array) $this);
+        return array_map(static fn(Item $item) => $item->toArray(), (array) $this);
     }
 }

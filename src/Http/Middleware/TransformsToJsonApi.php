@@ -11,7 +11,6 @@ use function array_map;
 use function array_reduce;
 use function is_array;
 use function is_object;
-use function response;
 
 class TransformsToJsonApi
 {
