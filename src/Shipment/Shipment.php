@@ -8,7 +8,7 @@ use DateTimeInterface;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
-use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumbers;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
 use MyParcelCom\Integration\ShopId;
 use function array_filter;
 use function is_string;
@@ -28,8 +28,8 @@ class Shipment
         private Price $price,
         private PhysicalProperties $physicalProperties,
         private ItemCollection $items,
-        private ?TaxIdentificationNumbers $senderTaxIdentificationNumbers = null,
-        private ?TaxIdentificationNumbers $recipientTaxIdentificationNumbers = null,
+        private ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
+        private ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
         private ?Customs $customs = null,
         private array $tags = [],
     ) {
