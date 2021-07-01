@@ -13,6 +13,7 @@ use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\PhysicalProperties;
 use MyParcelCom\Integration\Shipment\Price;
 use MyParcelCom\Integration\Shipment\Shipment;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumbers;
 use MyParcelCom\Integration\ShopId;
 use PHPUnit\Framework\TestCase;
 use function random_int;
@@ -97,28 +98,27 @@ class ShipmentTest extends TestCase
         self::assertEquals([
             'type'          => 'shipments',
             'attributes'    => [
-                'recipient_address'   => [
+                'recipient_address'                    => [
                     'street_1'     => $street1,
                     'city'         => $city,
                     'country_code' => $countryCode,
                     'first_name'   => $firstName,
                     'last_name'    => $lastName,
                 ],
-                'description'         => $description,
-                'customer_reference'  => $customerReference,
-                'channel'             => $channel,
-                'total_value'         => [
+                'description'                          => $description,
+                'customer_reference'                   => $customerReference,
+                'channel'                              => $channel,
+                'total_value'                          => [
                     'amount'   => $amount,
                     'currency' => $currencyCode,
                 ],
-                'price'               => [
+                'price'                                => [
                     'amount'   => $amount,
                     'currency' => $currencyCode,
                 ],
-                'physical_properties' => [
+                'physical_properties'                  => [
                     'weight' => $weight,
                 ],
-
             ],
             'relationships' => [
                 'shop' => [
@@ -222,6 +222,15 @@ class ShipmentTest extends TestCase
             ],
         ]);
 
+        $taxNumberMock = Mockery::mock(TaxIdentificationNumbers::class, [
+            'toArray' => [
+                'country_code' => 'UK',
+                'Description'  => 'The IOSS number for the Kazan company',
+                'number'       => 'KSI818298',
+                'type'         => 'ioss',
+            ],
+        ]);
+
         $shipment = new Shipment(
             shopId: $shopIdMock,
             createdAt: $createdAt,
@@ -235,6 +244,8 @@ class ShipmentTest extends TestCase
             price: $priceMock,
             physicalProperties: $physicalPropertiesMock,
             items: $itemsMock,
+            senderTaxIdentificationNumbers: $taxNumberMock,
+            recipientTaxIdentificationNumbers: $taxNumberMock,
             customs: $customsMock,
             tags: [$tag],
         );
@@ -242,43 +253,43 @@ class ShipmentTest extends TestCase
         self::assertEquals([
             'type'          => 'shipments',
             'attributes'    => [
-                'created_at'          => $createdAt->getTimestamp(),
-                'recipient_address'   => [
+                'created_at'                           => $createdAt->getTimestamp(),
+                'recipient_address'                    => [
                     'street_1'     => $recipientStreet1,
                     'city'         => $recipientCity,
                     'country_code' => $recipientCountryCode,
                     'first_name'   => $recipientFirstName,
                     'last_name'    => $recipientLastName,
                 ],
-                'sender_address'      => [
+                'sender_address'                       => [
                     'street_1'     => $senderStreet1,
                     'city'         => $senderCity,
                     'country_code' => $senderCountryCode,
                     'first_name'   => $senderFirstName,
                     'last_name'    => $senderLastName,
                 ],
-                'return_address'      => [
+                'return_address'                       => [
                     'street_1'     => $returnStreet1,
                     'city'         => $returnCity,
                     'country_code' => $returnCountryCode,
                     'first_name'   => $returnFirstName,
                     'last_name'    => $returnLastName,
                 ],
-                'description'         => $description,
-                'customer_reference'  => $customerReference,
-                'channel'             => $channel,
-                'total_value'         => [
+                'description'                          => $description,
+                'customer_reference'                   => $customerReference,
+                'channel'                              => $channel,
+                'total_value'                          => [
                     'amount'   => $amount,
                     'currency' => $currencyCode,
                 ],
-                'price'               => [
+                'price'                                => [
                     'amount'   => $amount,
                     'currency' => $currencyCode,
                 ],
-                'physical_properties' => [
+                'physical_properties'                  => [
                     'weight' => $weight,
                 ],
-                'customs'             => [
+                'customs'                              => [
                     'content_type'       => 'test',
                     'invoice_number'     => 'test2',
                     'non_delivery'       => 'test3',
@@ -286,7 +297,19 @@ class ShipmentTest extends TestCase
                     'license_number'     => 'test5',
                     'certificate_number' => 'test6',
                 ],
-                'tags'                => [$tag],
+                'sender_tax_identification_numbers'    => [
+                    'country_code' => 'UK',
+                    'Description'  => 'The IOSS number for the Kazan company',
+                    'number'       => 'KSI818298',
+                    'type'         => 'ioss',
+                ],
+                'recipient_tax_identification_numbers' => [
+                    'country_code' => 'UK',
+                    'Description'  => 'The IOSS number for the Kazan company',
+                    'number'       => 'KSI818298',
+                    'type'         => 'ioss',
+                ],
+                'tags'                                 => [$tag],
             ],
             'relationships' => [
                 'shop' => [
