@@ -22,7 +22,7 @@ class TaxIdentificationNumber
         return array_filter([
             'country_code' => $this->countryCode,
             'number'       => $this->number,
-            'type'         => new TaxNumberTypeEnum($this->type),
+            'type'         => (new TaxNumberTypeEnum($this->type))->getValue(),
             'description'  => $this->description,
         ]);
     }

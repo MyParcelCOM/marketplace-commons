@@ -8,60 +8,33 @@ use Faker\Factory;
 use Mockery;
 use MyParcelCom\Integration\Shipment\Items\Item;
 use MyParcelCom\Integration\Shipment\Price;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\Enums\TaxNumberTypeEnum;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumber;
 use PHPUnit\Framework\TestCase;
 use function random_int;
 
 class TaxIdentificationNumberTest extends TestCase
 {
-    public function test_it_should_return_empty_array_when_all_inputs_are_nulls(): void
-    {
-        $item = new Item();
-
-        self::assertEquals([], $item->toArray());
-    }
-
     public function test_it_should_return_full_item_with_all_inputs(): void
     {
         $faker = Factory::create();
-        $description = $faker->text(20);
-        $quantity = random_int(10, 99);
-        $sku = $faker->text(25);
-        $imageUrl = $faker->imageUrl();
-        $hsCode = $faker->text(15);
-        $itemWeight = random_int(1000, 5000);
-        $originCountryCode = $faker->countryCode;
-        $amount = random_int(1000, 5000);
-        $currencyCode = $faker->currencyCode;
-        $itemValueMock = Mockery::mock(Price::class, [
-            'toArray' => [
-                'amount'   => $amount,
-                'currency' => $currencyCode,
-            ],
-        ]);
+        $countryCode = $faker->countryCode;
+        $type = new TaxNumberTypeEnum('eori');
+        $description = $faker->text(25);
+        $number = $faker->text(9);
 
-        $item = new Item(
+        $item = new TaxIdentificationNumber(
+            countryCode: $countryCode,
+            type: $type,
+            number: $number,
             description: $description,
-            quantity: $quantity,
-            sku: $sku,
-            imageUrl: $imageUrl,
-            itemValue: $itemValueMock,
-            hsCode: $hsCode,
-            itemWeight: $itemWeight,
-            originCountryCode: $originCountryCode,
         );
 
         self::assertEquals([
-            'description'         => $description,
-            'quantity'            => $quantity,
-            'sku'                 => $sku,
-            'image_url'           => $imageUrl,
-            'item_value'          => [
-                'amount'   => $amount,
-                'currency' => $currencyCode,
-            ],
-            'hs_code'             => $hsCode,
-            'item_weight'         => $itemWeight,
-            'origin_country_code' => $originCountryCode,
+            'description' => $description,
+            'country_code' => $countryCode,
+            'number'      => $number,
+            'type'        => 'eori',
         ], $item->toArray());
     }
 }
