@@ -9,9 +9,9 @@ use function array_map;
 
 class TaxIdentificationNumberCollection extends ArrayObject
 {
-    public function __construct(TaxIdentificationNumber ...$number)
+    public function __construct(TaxIdentificationNumber ...$numbers)
     {
-        parent::__construct($number);
+        parent::__construct($numbers);
     }
 
     public function toArray(): array
