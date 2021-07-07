@@ -8,6 +8,7 @@ use DateTimeInterface;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
 use MyParcelCom\Integration\ShopId;
 use function array_filter;
 use function is_string;
@@ -27,6 +28,8 @@ class Shipment
         private Price $price,
         private PhysicalProperties $physicalProperties,
         private ItemCollection $items,
+        private ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
+        private ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
         private ?Customs $customs = null,
         private array $tags = [],
     ) {
@@ -42,19 +45,21 @@ class Shipment
         return [
             'type'          => 'shipments',
             'attributes'    => array_filter([
-                'created_at'          => $this->createdAt ? $this->createdAt->getTimestamp() : null,
-                'recipient_address'   => $this->recipientAddress->toArray(),
-                'sender_address'      => $this->senderAddress ? $this->senderAddress->toArray() : null,
-                'return_address'      => $this->returnAddress ? $this->returnAddress->toArray() : null,
-                'description'         => $this->description,
-                'customer_reference'  => $this->customerReference,
-                'channel'             => $this->channel,
-                'total_value'         => array_filter($this->totalValue->toArray()),
-                'price'               => array_filter($this->price->toArray()),
-                'physical_properties' => array_filter($this->physicalProperties->toArray()),
-                'items'               => array_filter($this->items->toArray()),
-                'tags'                => array_filter($this->tags),
-                'customs'             => $this->customs ? array_filter($this->customs->toArray()) : null,
+                'created_at'                           => $this->createdAt ? $this->createdAt->getTimestamp() : null,
+                'recipient_address'                    => $this->recipientAddress->toArray(),
+                'sender_address'                       => $this->senderAddress ? $this->senderAddress->toArray() : null,
+                'return_address'                       => $this->returnAddress ? $this->returnAddress->toArray() : null,
+                'description'                          => $this->description,
+                'customer_reference'                   => $this->customerReference,
+                'channel'                              => $this->channel,
+                'total_value'                          => array_filter($this->totalValue->toArray()),
+                'price'                                => array_filter($this->price->toArray()),
+                'physical_properties'                  => array_filter($this->physicalProperties->toArray()),
+                'items'                                => array_filter($this->items->toArray()),
+                'tags'                                 => array_filter($this->tags),
+                'customs'                              => $this->customs ? array_filter($this->customs->toArray()) : null,
+                'sender_tax_identification_numbers'    => $this->senderTaxIdentificationNumbers ? array_filter($this->senderTaxIdentificationNumbers->toArray()) : null,
+                'recipient_tax_identification_numbers' => $this->recipientTaxIdentificationNumbers ? array_filter($this->recipientTaxIdentificationNumbers->toArray()) : null,
             ]),
             'relationships' => [
                 'shop' => [
