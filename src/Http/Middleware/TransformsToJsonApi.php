@@ -24,6 +24,10 @@ class TransformsToJsonApi
 
         $originalControllerResponse = $response->getOriginalContent();
 
+        if (empty($originalControllerResponse)) {
+            return new JsonResponse(['data' => []]);
+        }
+
         if (!$this->containsShipments($originalControllerResponse)) {
             return $response;
         }

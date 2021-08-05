@@ -62,4 +62,21 @@ class TransformsToJsonApiTest extends TestCase
             ],
         ], $middleware->handle($requestMock, $next)->getOriginalContent());
     }
+
+    public function test_it_should_transform_if_original_content_is_empty(): void
+    {
+        $middleware = new TransformsToJsonApi();
+
+        $responseMock = Mockery::mock(JsonResponse::class, [
+            'getOriginalContent' => [],
+        ]);
+
+        $next = static fn() => $responseMock;
+
+        $requestMock = Mockery::mock(Request::class);
+
+        self::assertEquals([
+            'data' => [],
+        ], $middleware->handle($requestMock, $next)->getOriginalContent());
+    }
 }
