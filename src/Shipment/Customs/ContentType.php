@@ -7,11 +7,11 @@ namespace MyParcelCom\Integration\Shipment\Customs;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method ContentType MERCHANDISE()
- * @method ContentType SAMPLE_MERCHANDISE()
- * @method ContentType RETURNED_MERCHANDISE()
- * @method ContentType GIFTS()
- * @method ContentType DOCUMENTS()
+ * @method static ContentType MERCHANDISE()
+ * @method static ContentType SAMPLE_MERCHANDISE()
+ * @method static ContentType RETURNED_MERCHANDISE()
+ * @method static ContentType GIFTS()
+ * @method static ContentType DOCUMENTS()
  */
 class ContentType extends Enum
 {
