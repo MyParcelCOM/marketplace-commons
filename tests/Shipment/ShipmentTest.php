@@ -8,6 +8,7 @@ use Faker\Factory;
 use Mockery;
 use MyParcelCom\Integration\Shipment\Address;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
+use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\PhysicalProperties;
@@ -29,12 +30,29 @@ class ShipmentTest extends TestCase
             recipientAddress: Mockery::mock(Address::class),
             description: '',
             customerReference: '',
-            channel: '',
+            channel: 'test',
             totalValue: Mockery::mock(Price::class),
             price: Mockery::mock(Price::class),
             physicalProperties: Mockery::mock(PhysicalProperties::class),
             items: Mockery::mock(ItemCollection::class),
             tags: [1, 2, 3],
+        );
+    }
+    public function test_it_should_throw_exception_when_channel_is_empty(): void
+    {
+        $this->expectException(InvalidChannelException::class);
+
+        new Shipment(
+            shopId: Mockery::mock(ShopId::class),
+            recipientAddress: Mockery::mock(Address::class),
+            description: '',
+            customerReference: '',
+            channel: '',
+            totalValue: Mockery::mock(Price::class),
+            price: Mockery::mock(Price::class),
+            physicalProperties: Mockery::mock(PhysicalProperties::class),
+            items: Mockery::mock(ItemCollection::class),
+            tags: [],
         );
     }
 
