@@ -6,6 +6,7 @@ namespace MyParcelCom\Integration\Shipment;
 
 use DateTimeInterface;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
+use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
@@ -33,6 +34,10 @@ class Shipment
         private ?Customs $customs = null,
         private array $tags = [],
     ) {
+        if (empty($this->channel)) {
+            throw new InvalidChannelException('Shipment channel cannot be empty');
+        }
+
         foreach ($this->tags as $tag) {
             if (!is_string($tag)) {
                 throw new InvalidTagException('Tags should be strings');
