@@ -12,6 +12,7 @@ use MyParcelCom\Integration\Shipment\Customs\Incoterm;
 use MyParcelCom\Integration\Shipment\Customs\NonDelivery;
 use MyParcelCom\Integration\Shipment\Price;
 use PHPUnit\Framework\TestCase;
+use function random_int;
 
 class CustomsTest extends TestCase
 {
@@ -27,7 +28,7 @@ class CustomsTest extends TestCase
             invoiceNumber: $invoiceNumber,
             nonDelivery: Mockery::mock(NonDelivery::class, ['getValue' => 'test2']),
             incoterm: Mockery::mock(Incoterm::class, ['getValue' => 'test3']),
-            shippingValue: Mockery::mock(Price::class, ['toArray' => []]),
+            shippingValue: Mockery::mock(Price::class, ['toArray' => ['amount' => 1, 'currency' => 'USD']]),
             licenseNumber: $licenseNumber,
             certificateNumber: $certificateNumber,
         );
@@ -37,9 +38,16 @@ class CustomsTest extends TestCase
             'invoice_number'     => $invoiceNumber,
             'non_delivery'       => 'test2',
             'incoterm'           => 'test3',
-            'shipping_value'     => [],
+            'shipping_value'     => ['amount' => 1, 'currency' => 'USD'],
             'license_number'     => $licenseNumber,
             'certificate_number' => $certificateNumber,
         ], $customs->toArray());
+    }
+
+    public function test_it_should_convert_empty_customs_object_into_empty_array(): void
+    {
+        $customs = new Customs();
+
+        self::assertEquals([], $customs->toArray());
     }
 }
