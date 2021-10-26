@@ -16,20 +16,24 @@ use Illuminate\Validation\ValidationException;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class HandlerTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
+    private Handler $handler;
+    private ResponseFactory $responseFactoryMock;
+
+    protected function setUp(): void
+    {
+        $this->handler = new Handler(Mockery::mock(Container::class));
+        $this->responseFactoryMock = Mockery::mock(ResponseFactory::class);
+    }
+
     public function test_it_transforms_a_generic_exception_into_json(): void
     {
-        $containerMock = Mockery::mock(Container::class);
-        $handler = new Handler($containerMock);
-
-        $responseFactoryMock = Mockery::mock(ResponseFactory::class);
-        $responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
+        $this->responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
             $this->assertEquals([
                 'errors' => [
                     [
@@ -40,22 +44,18 @@ class HandlerTest extends TestCase
             ], $response);
         });
 
-        $handler->setResponseFactory($responseFactoryMock);
+        $this->handler->setResponseFactory($this->responseFactoryMock);
 
         $requestMock = Mockery::mock(Request::class);
 
         $exception = new Exception('Some internal error', 500);
 
-        $handler->render($requestMock, $exception);
+        $this->handler->render($requestMock, $exception);
     }
 
     public function test_it_transforms_a_request_exception_into_json_and_use_status_code(): void
     {
-        $containerMock = Mockery::mock(Container::class);
-        $handler = new Handler($containerMock);
-
-        $responseFactoryMock = Mockery::mock(ResponseFactory::class);
-        $responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
+        $this->responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
             $this->assertEquals([
                 'errors' => [
                     [
@@ -66,25 +66,21 @@ class HandlerTest extends TestCase
             ], $response);
         });
 
-        $handler->setResponseFactory($responseFactoryMock);
+        $this->handler->setResponseFactory($this->responseFactoryMock);
 
         $requestMock = Mockery::mock(Request::class);
 
         $exception = new BadRequestException('Some request error', 400);
 
-        $handler->render($requestMock, $exception);
+        $this->handler->render($requestMock, $exception);
     }
 
     public function test_it_transforms_a_validation_exception_into_a_multi_error_exception(): void
     {
-        $containerMock = Mockery::mock(Container::class);
-        $handler = new Handler($containerMock);
-
-        $responseFactoryMock = Mockery::mock(ResponseFactory::class);
-        $responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
+        $this->responseFactoryMock->shouldReceive('json')->andReturnUsing(function ($response) {
             $this->assertCount(2, $response['errors']);
         });
-        $handler->setResponseFactory($responseFactoryMock);
+        $this->handler->setResponseFactory($this->responseFactoryMock);
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -103,6 +99,6 @@ class HandlerTest extends TestCase
         $validationException = Mockery::mock(ValidationException::class);
         $validationException->validator = $validator;
 
-        $handler->render($requestMock, $validationException);
+        $this->handler->render($requestMock, $validationException);
     }
 }
