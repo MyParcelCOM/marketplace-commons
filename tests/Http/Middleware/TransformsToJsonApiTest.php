@@ -46,9 +46,13 @@ class TransformsToJsonApiTest extends TestCase
 
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => [
-                Mockery::mock(Shipment::class, [
-                    'transformToJsonApiArray' => [],
-                ]),
+                'items'         => [
+                    Mockery::mock(Shipment::class, [
+                        'transformToJsonApiArray' => [],
+                    ]),
+                ],
+                'total_records' => 1,
+                'total_pages'   => 1,
             ],
         ]);
 
@@ -59,6 +63,10 @@ class TransformsToJsonApiTest extends TestCase
         self::assertEquals([
             'data' => [
                 [],
+            ],
+            'meta' => [
+                'total_records' => 1,
+                'total_pages'   => 1,
             ],
         ], $middleware->handle($requestMock, $next)->getOriginalContent());
     }
