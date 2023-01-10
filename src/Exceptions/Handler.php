@@ -10,6 +10,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
@@ -22,6 +23,10 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontFlash = [];
+
+    protected $dontReport = [
+        InvalidArgumentException::class,
+    ];
 
     private ResponseFactory $responseFactory;
 
@@ -111,11 +116,11 @@ class Handler extends ExceptionHandler
                 $pointer = str_replace('.', '/', $invalidAttribute);
                 $title = strpos($errorMessage, 'required') !== false ? 'Missing input' : 'Invalid input';
                 $errors[] = [
-                    'status' => $exception->getCode(),
+                    'status'  => $exception->getCode(),
                     'message' => $exception->getMessage(),
-                    'title' => $title,
-                    'detail' => $errorMessage,
-                    'source' => ['pointer' => $pointer],
+                    'title'   => $title,
+                    'detail'  => $errorMessage,
+                    'source'  => ['pointer' => $pointer],
                 ];
             }
         }
