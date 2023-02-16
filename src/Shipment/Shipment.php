@@ -18,10 +18,7 @@ class Shipment
 {
     public function __construct(
         private ShopId $shopId,
-        private ?DateTimeInterface $createdAt = null,
         private Address $recipientAddress,
-        private ?Address $senderAddress = null,
-        private ?Address $returnAddress = null,
         private string $description,
         private string $customerReference,
         private string $channel,
@@ -29,6 +26,9 @@ class Shipment
         private Price $price,
         private PhysicalProperties $physicalProperties,
         private ItemCollection $items,
+        private ?DateTimeInterface $createdAt = null,
+        private ?Address $senderAddress = null,
+        private ?Address $returnAddress = null,
         private ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
         private ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
         private ?Customs $customs = null,
