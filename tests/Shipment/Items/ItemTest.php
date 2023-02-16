@@ -13,11 +13,13 @@ use function random_int;
 
 class ItemTest extends TestCase
 {
-    public function test_it_should_return_empty_array_when_all_inputs_are_nulls(): void
+    public function test_it_should_return_is_preferential_origin_only_when_all_inputs_are_nulls(): void
     {
         $item = new Item();
 
-        self::assertEquals([], $item->toArray());
+        self::assertEquals([
+            'is_preferential_origin' => false,
+        ], $item->toArray());
     }
 
     public function test_it_should_return_full_item_with_all_inputs(): void
@@ -51,17 +53,18 @@ class ItemTest extends TestCase
         );
 
         self::assertEquals([
-            'description'         => $description,
-            'quantity'            => $quantity,
-            'sku'                 => $sku,
-            'image_url'           => $imageUrl,
-            'item_value'          => [
+            'description'            => $description,
+            'quantity'               => $quantity,
+            'sku'                    => $sku,
+            'image_url'              => $imageUrl,
+            'item_value'             => [
                 'amount'   => $amount,
                 'currency' => $currencyCode,
             ],
-            'hs_code'             => $hsCode,
-            'item_weight'         => $itemWeight,
-            'origin_country_code' => $originCountryCode,
+            'hs_code'                => $hsCode,
+            'item_weight'            => $itemWeight,
+            'origin_country_code'    => $originCountryCode,
+            'is_preferential_origin' => false,
         ], $item->toArray());
     }
 }
