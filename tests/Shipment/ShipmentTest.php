@@ -38,6 +38,7 @@ class ShipmentTest extends TestCase
             tags: [1, 2, 3],
         );
     }
+
     public function test_it_should_throw_exception_when_channel_is_empty(): void
     {
         $this->expectException(InvalidChannelException::class);

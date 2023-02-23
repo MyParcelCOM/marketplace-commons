@@ -6,9 +6,9 @@ namespace Tests\Shipment\TaxIdentificationNumbers;
 
 use Faker\Factory;
 use Mockery;
-use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumber;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use PHPUnit\Framework\TestCase;
 
 class TaxIdentificationNumberCollectionTest extends TestCase

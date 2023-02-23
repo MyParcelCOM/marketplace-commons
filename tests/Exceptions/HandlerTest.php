@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exceptions;
 
-use Error;
 use Exception;
-use MyParcelCom\Integration\Exceptions\Handler;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\MessageBag;
@@ -15,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use MyParcelCom\Integration\Exceptions\Handler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
@@ -37,7 +36,7 @@ class HandlerTest extends TestCase
             $this->assertEquals([
                 'errors' => [
                     [
-                        'status'  => 500,
+                        'status' => 500,
                         'detail' => 'Some internal error',
                     ],
                 ],
@@ -59,7 +58,7 @@ class HandlerTest extends TestCase
             $this->assertEquals([
                 'errors' => [
                     [
-                        'status'  => 400,
+                        'status' => 400,
                         'detail' => 'Some request error',
                     ],
                 ],

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Http\Middleware;
 
-use Closure;
 use Faker\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -31,11 +30,11 @@ class MatchingChannelOnlyTest extends TestCase
             ->with('included')
             ->andReturn([
                 [
-                    'type' => 'shipments',
+                    'type'       => 'shipments',
                     'attributes' => [
-                        'channel' => $shipmentChannel
-                    ]
-                ]
+                        'channel' => $shipmentChannel,
+                    ],
+                ],
             ])
             ->getMock();
 
@@ -57,17 +56,17 @@ class MatchingChannelOnlyTest extends TestCase
             ->with('included')
             ->andReturn([
                 [
-                    'type' => 'shipments',
+                    'type'       => 'shipments',
                     'attributes' => [
-                        'channel' => $shipmentChannel
-                    ]
-                ]
+                        'channel' => $shipmentChannel,
+                    ],
+                ],
             ])
             ->getMock();
 
         $responseMock = Mockery::mock(Response::class);
 
-        $response = $middleware->handle($requestMock, fn (Request $request) => $responseMock, $expectedChannel);
+        $response = $middleware->handle($requestMock, fn(Request $request) => $responseMock, $expectedChannel);
 
         self::assertSame($responseMock, $response);
     }

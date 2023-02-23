@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Shipment\TaxIdentificationNumbers;
 
 use Faker\Factory;
-use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumber;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use PHPUnit\Framework\TestCase;
 
 class TaxIdentificationNumberTest extends TestCase
@@ -27,10 +27,10 @@ class TaxIdentificationNumberTest extends TestCase
         );
 
         self::assertEquals([
-            'description' => $description,
+            'description'  => $description,
             'country_code' => $countryCode,
-            'number'      => $number,
-            'type'        => 'eori',
+            'number'       => $number,
+            'type'         => 'eori',
         ], $item->toArray());
     }
 
@@ -51,8 +51,8 @@ class TaxIdentificationNumberTest extends TestCase
 
         self::assertEquals([
             'country_code' => $countryCode,
-            'number'      => $number,
-            'type'        => 'eori',
+            'number'       => $number,
+            'type'         => 'eori',
         ], $item->toArray());
     }
 }
