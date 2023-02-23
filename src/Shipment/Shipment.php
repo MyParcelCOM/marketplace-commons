@@ -50,10 +50,10 @@ class Shipment
         return [
             'type'          => 'shipments',
             'attributes'    => array_filter([
-                'created_at'                           => $this->createdAt ? $this->createdAt->getTimestamp() : null,
+                'created_at'                           => $this->createdAt?->getTimestamp(),
                 'recipient_address'                    => $this->recipientAddress->toArray(),
-                'sender_address'                       => $this->senderAddress ? $this->senderAddress->toArray() : null,
-                'return_address'                       => $this->returnAddress ? $this->returnAddress->toArray() : null,
+                'sender_address'                       => $this->senderAddress?->toArray(),
+                'return_address'                       => $this->returnAddress?->toArray(),
                 'description'                          => $this->description,
                 'customer_reference'                   => $this->customerReference,
                 'channel'                              => $this->channel,
