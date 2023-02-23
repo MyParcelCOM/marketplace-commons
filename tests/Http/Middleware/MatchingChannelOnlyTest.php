@@ -22,8 +22,8 @@ class MatchingChannelOnlyTest extends TestCase
     {
         $faker = Factory::create();
         $middleware = new MatchingChannelOnly();
-        $expectedChannel = $faker->word;
-        $shipmentChannel = $faker->word;
+        $expectedChannel = $faker->word();
+        $shipmentChannel = $faker->word();
 
         /** @var Request $requestMock */
         $requestMock = Mockery::mock(Request::class)
@@ -49,7 +49,7 @@ class MatchingChannelOnlyTest extends TestCase
     {
         $faker = Factory::create();
         $middleware = new MatchingChannelOnly();
-        $expectedChannel = $shipmentChannel = $faker->word;
+        $expectedChannel = $shipmentChannel = $faker->word();
 
         /** @var Request $requestMock */
         $requestMock = Mockery::mock(Request::class)

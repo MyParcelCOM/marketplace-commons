@@ -14,7 +14,7 @@ class PriceTest extends TestCase
     public function test_it_should_convert_price_into_array(): void
     {
         $amount = random_int(100, 900);
-        $currencyCode = Factory::create()->currencyCode;
+        $currencyCode = Factory::create()->currencyCode();
 
         $price = new Price($amount, $currencyCode);
 
