@@ -6,9 +6,9 @@ namespace Tests\Shipment\TaxIdentificationNumbers;
 
 use Faker\Factory;
 use Mockery;
-use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumber;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
+use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use PHPUnit\Framework\TestCase;
 
 class TaxIdentificationNumberCollectionTest extends TestCase
@@ -17,14 +17,14 @@ class TaxIdentificationNumberCollectionTest extends TestCase
     {
         $faker = Factory::create();
         $firstSet = [
-            'country_code' => $faker->countryCode,
+            'country_code' => $faker->countryCode(),
             'type'         => TaxNumberType::EORI(),
             'description'  => $faker->text(25),
             'number'       => $faker->text(9),
         ];
 
         $secondSet = [
-            'country_code' => $faker->countryCode,
+            'country_code' => $faker->countryCode(),
             'type'         => TaxNumberType::IOSS(),
             'description'  => $faker->text(25),
             'number'       => $faker->text(9),

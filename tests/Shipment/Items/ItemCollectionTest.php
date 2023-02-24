@@ -19,12 +19,12 @@ class ItemCollectionTest extends TestCase
         $description = $faker->text(20);
         $quantity = random_int(10, 99);
         $sku = $faker->text(25);
-        $imageUrl = $faker->imageUrl();
+        $imageUrl = $faker->url();
         $hsCode = $faker->text(15);
         $itemWeight = random_int(1000, 5000);
-        $originCountryCode = $faker->countryCode;
+        $originCountryCode = $faker->countryCode();
         $amount = random_int(1000, 5000);
-        $currencyCode = $faker->currencyCode;
+        $currencyCode = $faker->currencyCode();
 
         $items = new ItemCollection(
             Mockery::mock(Item::class, [

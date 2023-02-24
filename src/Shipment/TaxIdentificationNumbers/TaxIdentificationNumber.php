@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Shipment\TaxIdentificationNumbers;
 
-use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use function array_filter;
 
 class TaxIdentificationNumber

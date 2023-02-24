@@ -12,7 +12,6 @@ use MyParcelCom\Integration\Shipment\Customs\Incoterm;
 use MyParcelCom\Integration\Shipment\Customs\NonDelivery;
 use MyParcelCom\Integration\Shipment\Price;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class CustomsTest extends TestCase
 {

@@ -38,6 +38,7 @@ class ShipmentTest extends TestCase
             tags: [1, 2, 3],
         );
     }
+
     public function test_it_should_throw_exception_when_channel_is_empty(): void
     {
         $this->expectException(InvalidChannelException::class);
@@ -60,16 +61,16 @@ class ShipmentTest extends TestCase
     {
         $faker = Factory::create();
 
-        $shopUuid = $faker->uuid;
+        $shopUuid = $faker->uuid();
         $shopIdMock = Mockery::mock(ShopId::class, ['toString' => $shopUuid]);
 
-        $street1 = $faker->streetAddress;
-        $city = $faker->city;
-        $countryCode = $faker->countryCode;
-        $firstName = $faker->firstName;
-        $lastName = $faker->lastName;
+        $street1 = $faker->streetAddress();
+        $city = $faker->city();
+        $countryCode = $faker->countryCode();
+        $firstName = $faker->firstName();
+        $lastName = $faker->lastName();
         $amount = random_int(100, 900);
-        $currencyCode = Factory::create()->currencyCode;
+        $currencyCode = $faker->currencyCode();
         $weight = random_int(100, 300);
 
         $addressMock = Mockery::mock(Address::class, [
@@ -153,14 +154,14 @@ class ShipmentTest extends TestCase
     {
         $faker = Factory::create();
 
-        $shopUuid = $faker->uuid;
+        $shopUuid = $faker->uuid();
         $shopIdMock = Mockery::mock(ShopId::class, ['toString' => $shopUuid]);
 
-        $recipientStreet1 = $faker->streetAddress;
-        $recipientCity = $faker->city;
-        $recipientCountryCode = $faker->countryCode;
-        $recipientFirstName = $faker->firstName;
-        $recipientLastName = $faker->lastName;
+        $recipientStreet1 = $faker->streetAddress();
+        $recipientCity = $faker->city();
+        $recipientCountryCode = $faker->countryCode();
+        $recipientFirstName = $faker->firstName();
+        $recipientLastName = $faker->lastName();
 
         $recipientAddressMock = Mockery::mock(Address::class, [
             'toArray' => [
@@ -172,11 +173,11 @@ class ShipmentTest extends TestCase
             ],
         ]);
 
-        $senderStreet1 = $faker->streetAddress;
-        $senderCity = $faker->city;
-        $senderCountryCode = $faker->countryCode;
-        $senderFirstName = $faker->firstName;
-        $senderLastName = $faker->lastName;
+        $senderStreet1 = $faker->streetAddress();
+        $senderCity = $faker->city();
+        $senderCountryCode = $faker->countryCode();
+        $senderFirstName = $faker->firstName();
+        $senderLastName = $faker->lastName();
 
         $senderAddressMock = Mockery::mock(Address::class, [
             'toArray' => [
@@ -188,11 +189,11 @@ class ShipmentTest extends TestCase
             ],
         ]);
 
-        $returnStreet1 = $faker->streetAddress;
-        $returnCity = $faker->city;
-        $returnCountryCode = $faker->countryCode;
-        $returnFirstName = $faker->firstName;
-        $returnLastName = $faker->lastName;
+        $returnStreet1 = $faker->streetAddress();
+        $returnCity = $faker->city();
+        $returnCountryCode = $faker->countryCode();
+        $returnFirstName = $faker->firstName();
+        $returnLastName = $faker->lastName();
 
         $returnAddressMock = Mockery::mock(Address::class, [
             'toArray' => [
@@ -205,7 +206,7 @@ class ShipmentTest extends TestCase
         ]);
 
         $amount = random_int(100, 900);
-        $currencyCode = Factory::create()->currencyCode;
+        $currencyCode = $faker->currencyCode();
         $priceMock = Mockery::mock(Price::class, [
             'toArray' => [
                 'amount'   => $amount,
@@ -226,9 +227,9 @@ class ShipmentTest extends TestCase
         $customerReference = $faker->text(16);
         $description = $faker->text(15);
 
-        $tag = $faker->word;
+        $tag = $faker->word();
 
-        $createdAt = $faker->dateTime;
+        $createdAt = $faker->dateTime();
         $customsMock = Mockery::mock(Customs::class, [
             'toArray' => [
                 'content_type'       => 'test',

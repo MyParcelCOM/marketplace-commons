@@ -114,7 +114,7 @@ class Handler extends ExceptionHandler
 
             foreach ($errorMessages as $errorMessage) {
                 $pointer = str_replace('.', '/', $invalidAttribute);
-                $title = strpos($errorMessage, 'required') !== false ? 'Missing input' : 'Invalid input';
+                $title = str_contains($errorMessage, 'required') ? 'Missing input' : 'Invalid input';
                 $errors[] = [
                     'status'  => $exception->getCode(),
                     'message' => $exception->getMessage(),

@@ -14,11 +14,11 @@ class AddressTest extends TestCase
     public function test_it_convert_address_to_array_with_minimum_required_inputs(): void
     {
         $faker = Factory::create();
-        $street1 = $faker->streetAddress;
-        $city = $faker->city;
-        $countryCode = $faker->countryCode;
-        $firstName = $faker->firstName;
-        $lastName = $faker->lastName;
+        $street1 = $faker->streetAddress();
+        $city = $faker->city();
+        $countryCode = $faker->countryCode();
+        $firstName = $faker->firstName();
+        $lastName = $faker->lastName();
 
         $address = new Address(
             street1: $street1,
@@ -40,19 +40,19 @@ class AddressTest extends TestCase
     public function test_it_convert_address_to_array_with_all_inputs(): void
     {
         $faker = Factory::create();
-        $street1 = $faker->streetAddress;
-        $street2 = $faker->streetAddress;
+        $street1 = $faker->streetAddress();
+        $street2 = $faker->streetAddress();
         $streetNumber = random_int(10, 99);
-        $streetNumberSuffix = $faker->streetSuffix;
-        $postalCode = $faker->postcode;
-        $city = $faker->city;
-        $countryCode = $faker->countryCode;
-        $firstName = $faker->firstName;
-        $lastName = $faker->lastName;
-        $stateCode = $faker->countryISOAlpha3;
-        $company = $faker->company;
-        $email = $faker->email;
-        $phoneNumber = $faker->phoneNumber;
+        $streetNumberSuffix = $faker->streetSuffix();
+        $postalCode = $faker->postcode();
+        $city = $faker->city();
+        $countryCode = $faker->countryCode();
+        $firstName = $faker->firstName();
+        $lastName = $faker->lastName();
+        $stateCode = $faker->countryISOAlpha3();
+        $company = $faker->company();
+        $email = $faker->email();
+        $phoneNumber = $faker->phoneNumber();
 
         $address = new Address(
             street1: $street1,
