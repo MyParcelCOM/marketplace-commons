@@ -6,11 +6,11 @@ namespace Tests\Shipment\Customs;
 
 use Faker\Factory;
 use Mockery;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Customs\ContentType;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Customs\Incoterm;
 use MyParcelCom\Integration\Shipment\Customs\NonDelivery;
-use MyParcelCom\Integration\Shipment\Price;
 use PHPUnit\Framework\TestCase;
 
 class CustomsTest extends TestCase

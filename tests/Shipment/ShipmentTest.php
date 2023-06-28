@@ -6,13 +6,13 @@ namespace Tests\Shipment;
 
 use Faker\Factory;
 use Mockery;
-use MyParcelCom\Integration\Shipment\Address;
+use MyParcelCom\Integration\Address;
+use MyParcelCom\Integration\PhysicalProperties;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
-use MyParcelCom\Integration\Shipment\PhysicalProperties;
-use MyParcelCom\Integration\Shipment\Price;
 use MyParcelCom\Integration\Shipment\Shipment;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
 use MyParcelCom\Integration\ShopId;

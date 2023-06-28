@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Shipment;
 
 use DateTimeInterface;
+use MyParcelCom\Integration\Address;
+use MyParcelCom\Integration\PhysicalProperties;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
