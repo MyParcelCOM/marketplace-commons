@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Shipment\Items;
+namespace MyParcelCom\Integration\Order\Items;
 
 use MyParcelCom\Integration\Collection;
 
