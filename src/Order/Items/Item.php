@@ -28,7 +28,7 @@ class Item
             'image_url'              => $this->imageUrl,
             'quantity'               => $this->quantity,
             'item_weight'            => $this->weight,
-            'item_weight_unit'       => $this->weightUnit->getValue(),
+            'item_weight_unit'       => $this->weightUnit?->getValue(),
         ], [$this, 'isNotNull']);
     }
 

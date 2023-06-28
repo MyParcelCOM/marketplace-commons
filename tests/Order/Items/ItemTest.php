@@ -43,4 +43,25 @@ class ItemTest extends TestCase
             'item_weight_unit'       => $weightUnit->getValue(),
         ], $item->toArray());
     }
+
+    public function test_it_converts_item_to_array_with_minimum_input(): void
+    {
+        $faker = Factory::create();
+
+        $name = $faker->name;
+        $description = $faker->text;
+        $quantity = $faker->numberBetween(1, 100);
+
+        $item = new Item(
+            name: $name,
+            description: $description,
+            quantity: $quantity,
+        );
+
+        self::assertEquals([
+            'name'                   => $name,
+            'description'            => $description,
+            'quantity'               => $quantity,
+        ], $item->toArray());
+    }
 }
