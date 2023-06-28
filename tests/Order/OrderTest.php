@@ -47,26 +47,24 @@ class OrderTest extends TestCase
         );
 
         self::assertEquals([
-            'data' => [
-                'type'          => 'orders',
-                'attributes'    => [
-                    'id'                => $id,
-                    'created_at'        => $createdAt->format(DateTimeInterface::ATOM),
-                    'recipient_address' => [
+            'type'          => 'orders',
+            'attributes'    => [
+                'id'                => $id,
+                'created_at'        => $createdAt->format(DateTimeInterface::ATOM),
+                'recipient_address' => [
+                    'test' => 'test',
+                ],
+                'items'             => [
+                    [
                         'test' => 'test',
                     ],
-                    'items'             => [
-                        [
-                            'test' => 'test',
-                        ],
-                    ],
                 ],
-                'relationships' => [
-                    'shop' => [
-                        'data' => [
-                            'type' => 'shops',
-                            'id'   => $shopUuid,
-                        ],
+            ],
+            'relationships' => [
+                'shop' => [
+                    'data' => [
+                        'type' => 'shops',
+                        'id'   => $shopUuid,
                     ],
                 ],
             ],
