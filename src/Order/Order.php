@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Order;
 
 use DateTimeInterface;
-use JsonSerializable;
 use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\ProvidesJsonAPI;
 use MyParcelCom\Integration\ShopId;
 
-class Order implements JsonSerializable, ProvidesJsonAPI
+class Order implements ProvidesJsonAPI
 {
     public function __construct(
         private ShopId $shopId,

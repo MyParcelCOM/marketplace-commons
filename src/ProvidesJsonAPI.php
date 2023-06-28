@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-interface ProvidesJsonAPI
+use JsonSerializable;
+
+interface ProvidesJsonAPI extends JsonSerializable
 {
     public function transformToJsonApiArray(): array;
 }

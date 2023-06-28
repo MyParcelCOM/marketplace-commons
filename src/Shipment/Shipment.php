@@ -80,4 +80,9 @@ class Shipment implements ProvidesJsonAPI
             ],
         ];
     }
+
+    public function jsonSerialize()
+    {
+        return $this->transformToJsonApiArray();
+    }
 }
