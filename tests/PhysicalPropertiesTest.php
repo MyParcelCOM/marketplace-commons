@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Shipment;
+namespace Tests;
 
-use MyParcelCom\Integration\Shipment\PhysicalProperties;
+use MyParcelCom\Integration\PhysicalProperties;
 use PHPUnit\Framework\TestCase;
 use function random_int;
 

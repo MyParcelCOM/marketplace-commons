@@ -6,8 +6,8 @@ namespace Tests\Shipment\Items;
 
 use Faker\Factory;
 use Mockery;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Items\Item;
-use MyParcelCom\Integration\Shipment\Price;
 use PHPUnit\Framework\TestCase;
 use function random_int;
 

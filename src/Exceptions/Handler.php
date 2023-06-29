@@ -32,6 +32,9 @@ class Handler extends ExceptionHandler
 
     private bool $debug = false;
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setDebug(bool $debug): self
     {
         $this->debug = $debug;

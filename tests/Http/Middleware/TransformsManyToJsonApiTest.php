@@ -7,16 +7,16 @@ namespace Tests\Http\Middleware;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mockery;
-use MyParcelCom\Integration\Http\Middleware\TransformsToJsonApi;
-use MyParcelCom\Integration\Shipment\Shipment;
+use MyParcelCom\Integration\Http\Middleware\TransformsManyToJsonApi;
+use MyParcelCom\Integration\ProvidesJsonAPI;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class TransformsToJsonApiTest extends TestCase
+class TransformsManyToJsonApiTest extends TestCase
 {
     public function test_it_should_not_transform_if_response_is_not_json(): void
     {
-        $middleware = new TransformsToJsonApi();
+        $middleware = new TransformsManyToJsonApi();
 
         $next = static fn() => new stdClass();
 
@@ -25,9 +25,9 @@ class TransformsToJsonApiTest extends TestCase
         self::assertNotInstanceOf(JsonResponse::class, $middleware->handle($requestMock, $next));
     }
 
-    public function test_it_should_not_transform_if_original_content_does_not_have_shipments(): void
+    public function test_it_should_not_transform_if_original_content_does_not_have_json_api_objects(): void
     {
-        $middleware = new TransformsToJsonApi();
+        $middleware = new TransformsManyToJsonApi();
 
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => new stdClass(),
@@ -40,14 +40,14 @@ class TransformsToJsonApiTest extends TestCase
         self::assertSame($responseMock, $middleware->handle($requestMock, $next));
     }
 
-    public function test_it_should_transform_if_original_content_have_shipments(): void
+    public function test_it_should_transform_if_original_content_have_json_api_objects(): void
     {
-        $middleware = new TransformsToJsonApi();
+        $middleware = new TransformsManyToJsonApi();
 
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => [
                 'items'         => [
-                    Mockery::mock(Shipment::class, [
+                    Mockery::mock(ProvidesJsonAPI::class, [
                         'transformToJsonApiArray' => [],
                     ]),
                 ],
@@ -73,7 +73,7 @@ class TransformsToJsonApiTest extends TestCase
 
     public function test_it_should_transform_if_original_content_is_empty(): void
     {
-        $middleware = new TransformsToJsonApi();
+        $middleware = new TransformsManyToJsonApi();
 
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => [],

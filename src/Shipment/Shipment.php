@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Shipment;
 
 use DateTimeInterface;
+use MyParcelCom\Integration\Address;
+use MyParcelCom\Integration\PhysicalProperties;
+use MyParcelCom\Integration\Price;
+use MyParcelCom\Integration\ProvidesJsonAPI;
 use MyParcelCom\Integration\Shipment\Customs\Customs;
 use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
@@ -14,7 +18,7 @@ use MyParcelCom\Integration\ShopId;
 use function array_filter;
 use function is_string;
 
-class Shipment
+class Shipment implements ProvidesJsonAPI
 {
     public function __construct(
         private ShopId $shopId,
@@ -75,5 +79,10 @@ class Shipment
                 ],
             ],
         ];
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->transformToJsonApiArray();
     }
 }

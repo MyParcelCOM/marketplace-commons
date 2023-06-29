@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Shipment;
+namespace MyParcelCom\Integration;
 
 use JetBrains\PhpStorm\ArrayShape;
 

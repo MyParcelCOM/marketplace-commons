@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Shipment;
+namespace Tests;
 
 use Faker\Factory;
-use MyParcelCom\Integration\Shipment\Price;
+use MyParcelCom\Integration\Price;
 use PHPUnit\Framework\TestCase;
 use function random_int;
 

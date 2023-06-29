@@ -7,12 +7,12 @@ namespace MyParcelCom\Integration\Http\Middleware;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
-use MyParcelCom\Integration\Shipment\Shipment;
+use MyParcelCom\Integration\ProvidesJsonAPI;
 use function array_key_exists;
 use function array_map;
 use function is_array;
 
-class TransformsToJsonApi
+class TransformsManyToJsonApi
 {
     public function handle($request, Closure $next)
     {
@@ -28,13 +28,13 @@ class TransformsToJsonApi
             return new JsonResponse(['data' => []]);
         }
 
-        if (!$this->containsItems($originalControllerResponse)) {
+        if (!$this->containsJsonAPIObjects($originalControllerResponse)) {
             return $response;
         }
 
         return new JsonResponse([
             'data' => array_map(
-                static fn(Shipment $shipment) => $shipment->transformToJsonApiArray(),
+                static fn(ProvidesJsonAPI $shipment) => $shipment->transformToJsonApiArray(),
                 Arr::get($originalControllerResponse, 'items', [])
             ),
             'meta' => array_filter([
@@ -44,8 +44,14 @@ class TransformsToJsonApi
         ]);
     }
 
-    private function containsItems(mixed $originalContent): bool
+    private function containsJsonAPIObjects(mixed $originalContent): bool
     {
-        return is_array($originalContent) && array_key_exists('items', $originalContent);
+        return is_array($originalContent)
+            && array_key_exists('items', $originalContent)
+            && array_reduce(
+                $originalContent['items'],
+                static fn(bool $carry, mixed $item) => $carry && $item instanceof ProvidesJsonAPI,
+                true
+            );
     }
 }
