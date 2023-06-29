@@ -48,8 +48,8 @@ class OrderTest extends TestCase
 
         self::assertEquals([
             'type'          => 'orders',
+            'id'            => $id,
             'attributes'    => [
-                'id'                => $id,
                 'created_at'        => $createdAt->format(DateTimeInterface::ATOM),
                 'recipient_address' => [
                     'test' => 'test',

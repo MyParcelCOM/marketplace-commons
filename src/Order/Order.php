@@ -25,8 +25,8 @@ class Order implements ProvidesJsonAPI
     {
         return [
             'type'          => 'orders',
+            'id'            => $this->id,
             'attributes'    => [
-                'id'                => $this->id,
                 'created_at'        => $this->createdAt->format(DateTimeInterface::ATOM),
                 'recipient_address' => $this->recipientAddress->toArray(),
                 'items'             => $this->items->toArray(),
