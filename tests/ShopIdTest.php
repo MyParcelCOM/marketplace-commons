@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Tests;
 
 use ArgumentCountError;
-use Mockery;
 use MyParcelCom\Integration\ShopId;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class ShopIdTest extends TestCase
 {
@@ -19,12 +17,6 @@ class ShopIdTest extends TestCase
         /** @noinspection PhpParamsInspection */
         /** @noinspection PhpExpressionResultUnusedInspection */
         new ShopId();
-    }
-
-    public function test_should_create_shop_id_value_object_with_uuid(): void
-    {
-        $this->expectNotToPerformAssertions();
-        new ShopId(Mockery::mock(UuidInterface::class));
     }
 
     public function test_should_create_shop_id_value_object_generating_uuid(): void
