@@ -34,13 +34,13 @@ class ItemTest extends TestCase
         );
 
         self::assertEquals([
-            'sku'                    => $sku,
-            'name'                   => $name,
-            'description'            => $description,
-            'image_url'              => $imageUrl,
-            'quantity'               => $quantity,
-            'item_weight'            => $weight,
-            'item_weight_unit'       => $weightUnit->getValue(),
+            'sku'              => $sku,
+            'name'             => $name,
+            'description'      => $description,
+            'image_url'        => $imageUrl,
+            'quantity'         => $quantity,
+            'item_weight'      => $weight,
+            'item_weight_unit' => $weightUnit->getValue(),
         ], $item->toArray());
     }
 
@@ -59,9 +59,9 @@ class ItemTest extends TestCase
         );
 
         self::assertEquals([
-            'name'                   => $name,
-            'description'            => $description,
-            'quantity'               => $quantity,
+            'name'        => $name,
+            'description' => $description,
+            'quantity'    => $quantity,
         ], $item->toArray());
     }
 }

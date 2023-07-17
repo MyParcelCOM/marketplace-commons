@@ -18,7 +18,7 @@ class TransformsManyToJsonApiTest extends TestCase
     {
         $middleware = new TransformsManyToJsonApi();
 
-        $next = static fn() => new stdClass();
+        $next = static fn () => new stdClass();
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -33,7 +33,7 @@ class TransformsManyToJsonApiTest extends TestCase
             'getOriginalContent' => new stdClass(),
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -56,7 +56,7 @@ class TransformsManyToJsonApiTest extends TestCase
             ],
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -79,7 +79,7 @@ class TransformsManyToJsonApiTest extends TestCase
             'getOriginalContent' => [],
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 

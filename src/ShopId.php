@@ -11,7 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 class ShopId
 {
     public function __construct(
-        private UuidInterface $uuid
+        private UuidInterface $uuid,
     ) {
     }
 

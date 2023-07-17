@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-use function array_filter;
-
 class Address
 {
     public function __construct(

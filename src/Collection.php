@@ -23,6 +23,6 @@ class Collection extends ArrayObject
 
     public function toArray(): array
     {
-        return array_map(static fn($entry) => $entry->toArray(), (array) $this);
+        return array_map(static fn ($entry) => $entry->toArray(), (array) $this);
     }
 }

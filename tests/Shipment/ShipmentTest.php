@@ -17,7 +17,6 @@ use MyParcelCom\Integration\Shipment\Shipment;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
 use MyParcelCom\Integration\ShopId;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class ShipmentTest extends TestCase
 {

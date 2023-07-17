@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Shipment\Items;
 
 use MyParcelCom\Integration\Price;
-use function array_filter;
 
 class Item
 {

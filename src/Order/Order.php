@@ -42,7 +42,7 @@ class Order implements ProvidesJsonAPI
         ];
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->transformToJsonApiArray();
     }

@@ -66,7 +66,7 @@ class MatchingChannelOnlyTest extends TestCase
 
         $responseMock = Mockery::mock(Response::class);
 
-        $response = $middleware->handle($requestMock, fn(Request $request) => $responseMock, $expectedChannel);
+        $response = $middleware->handle($requestMock, fn (Request $request) => $responseMock, $expectedChannel);
 
         self::assertSame($responseMock, $response);
     }

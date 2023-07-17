@@ -47,10 +47,10 @@ class CollectionTest extends TestCase
 
         self::assertEquals([
             [
-                'description'         => $description1,
+                'description' => $description1,
             ],
             [
-                'description'         => $description2,
+                'description' => $description2,
             ],
         ], $items->toArray());
     }

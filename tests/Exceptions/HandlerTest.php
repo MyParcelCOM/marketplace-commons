@@ -84,8 +84,12 @@ class HandlerTest extends TestCase
         $requestMock = Mockery::mock(Request::class);
 
         $messageBag = Mockery::mock(MessageBag::class);
-        $messageBag->shouldReceive('get')->once()->with('some.missing.pointer')->andReturn(['You are missing required input bro!']);
-        $messageBag->shouldReceive('get')->once()->with('some.invalid.pointer')->andReturn(['Your input is invalid yo!']);
+        $messageBag
+            ->shouldReceive('get')->once()->with('some.missing.pointer')
+            ->andReturn(['You are missing required input bro!']);
+        $messageBag
+            ->shouldReceive('get')->once()->with('some.invalid.pointer')
+            ->andReturn(['Your input is invalid yo!']);
 
         $validator = Mockery::mock(Validator::class, [
             'failed' => [
