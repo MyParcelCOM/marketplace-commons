@@ -8,9 +8,6 @@ use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use MyParcelCom\Integration\ProvidesJsonAPI;
-use function array_key_exists;
-use function array_map;
-use function is_array;
 
 class TransformsManyToJsonApi
 {
@@ -34,8 +31,8 @@ class TransformsManyToJsonApi
 
         return new JsonResponse([
             'data' => array_map(
-                static fn(ProvidesJsonAPI $shipment) => $shipment->transformToJsonApiArray(),
-                Arr::get($originalControllerResponse, 'items', [])
+                static fn (ProvidesJsonAPI $shipment) => $shipment->transformToJsonApiArray(),
+                Arr::get($originalControllerResponse, 'items', []),
             ),
             'meta' => array_filter([
                 'total_records' => (int) Arr::get($originalControllerResponse, 'total_records'),
@@ -50,8 +47,8 @@ class TransformsManyToJsonApi
             && array_key_exists('items', $originalContent)
             && array_reduce(
                 $originalContent['items'],
-                static fn(bool $carry, mixed $item) => $carry && $item instanceof ProvidesJsonAPI,
-                true
+                static fn (bool $carry, mixed $item) => $carry && $item instanceof ProvidesJsonAPI,
+                true,
             );
     }
 }

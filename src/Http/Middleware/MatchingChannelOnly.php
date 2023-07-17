@@ -8,7 +8,6 @@ use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use function collect;
 
 /**
  * When used this middleware will discontinue all requests that
@@ -29,7 +28,7 @@ class MatchingChannelOnly
     {
         $included = $request->get('included');
 
-        $shipment = collect($included)->first(fn($include) => $include['type'] === 'shipments', []);
+        $shipment = collect($included)->first(fn ($include) => $include['type'] === 'shipments', []);
 
         return (string) Arr::get($shipment, 'attributes.channel');
     }

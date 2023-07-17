@@ -21,7 +21,7 @@ class TransformsOneToJsonApiTest extends TestCase
     {
         $middleware = new TransformsOneToJsonApi();
 
-        $next = static fn() => new stdClass();
+        $next = static fn () => new stdClass();
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -36,7 +36,7 @@ class TransformsOneToJsonApiTest extends TestCase
             'getOriginalContent' => null,
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -51,7 +51,7 @@ class TransformsOneToJsonApiTest extends TestCase
             'getOriginalContent' => new stdClass(),
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 
@@ -65,12 +65,12 @@ class TransformsOneToJsonApiTest extends TestCase
         $responseMock = Mockery::mock(JsonResponse::class, [
             'getOriginalContent' => Mockery::mock(ProvidesJsonAPI::class, [
                 'transformToJsonApiArray' => [
-                    'test' => 'test'
+                    'test' => 'test',
                 ],
             ]),
         ]);
 
-        $next = static fn() => $responseMock;
+        $next = static fn () => $responseMock;
 
         $requestMock = Mockery::mock(Request::class);
 

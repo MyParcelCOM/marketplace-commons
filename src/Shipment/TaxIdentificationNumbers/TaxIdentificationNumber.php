@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Shipment\TaxIdentificationNumbers;
 
-use function array_filter;
-
 class TaxIdentificationNumber
 {
     public function __construct(

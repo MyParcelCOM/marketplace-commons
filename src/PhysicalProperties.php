@@ -18,11 +18,11 @@ class PhysicalProperties
     }
 
     #[ArrayShape([
-        'weight' => "int",
-        'height' => "int|null",
-        'width'  => "int|null",
-        'length' => "int|null",
-        'volume' => "float|null",
+        'weight' => 'int',
+        'height' => 'int|null',
+        'width'  => 'int|null',
+        'length' => 'int|null',
+        'volume' => 'float|null',
     ])]
     public function toArray(): array
     {

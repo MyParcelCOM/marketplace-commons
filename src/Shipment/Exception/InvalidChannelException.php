@@ -8,5 +8,4 @@ use InvalidArgumentException;
 
 class InvalidChannelException extends InvalidArgumentException
 {
-
 }

@@ -7,7 +7,6 @@ namespace Tests;
 use Faker\Factory;
 use MyParcelCom\Integration\Address;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class AddressTest extends TestCase
 {

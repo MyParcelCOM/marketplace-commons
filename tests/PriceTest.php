@@ -7,7 +7,6 @@ namespace Tests;
 use Faker\Factory;
 use MyParcelCom\Integration\Price;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class PriceTest extends TestCase
 {

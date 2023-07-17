@@ -15,8 +15,6 @@ use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
 use MyParcelCom\Integration\ShopId;
-use function array_filter;
-use function is_string;
 
 class Shipment implements ProvidesJsonAPI
 {
@@ -66,9 +64,15 @@ class Shipment implements ProvidesJsonAPI
                 'physical_properties'                  => array_filter($this->physicalProperties->toArray()),
                 'items'                                => array_filter($this->items->toArray()),
                 'tags'                                 => array_filter($this->tags),
-                'customs'                              => $this->customs ? array_filter($this->customs->toArray()) : null,
-                'sender_tax_identification_numbers'    => $this->senderTaxIdentificationNumbers ? array_filter($this->senderTaxIdentificationNumbers->toArray()) : null,
-                'recipient_tax_identification_numbers' => $this->recipientTaxIdentificationNumbers ? array_filter($this->recipientTaxIdentificationNumbers->toArray()) : null,
+                'customs'                              => $this->customs
+                    ? array_filter($this->customs->toArray())
+                    : null,
+                'sender_tax_identification_numbers'    => $this->senderTaxIdentificationNumbers
+                    ? array_filter($this->senderTaxIdentificationNumbers->toArray())
+                    : null,
+                'recipient_tax_identification_numbers' => $this->recipientTaxIdentificationNumbers
+                    ? array_filter($this->recipientTaxIdentificationNumbers->toArray())
+                    : null,
             ]),
             'relationships' => [
                 'shop' => [
@@ -81,7 +85,7 @@ class Shipment implements ProvidesJsonAPI
         ];
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->transformToJsonApiArray();
     }

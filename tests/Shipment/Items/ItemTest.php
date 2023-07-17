@@ -9,7 +9,6 @@ use Mockery;
 use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Items\Item;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class ItemTest extends TestCase
 {

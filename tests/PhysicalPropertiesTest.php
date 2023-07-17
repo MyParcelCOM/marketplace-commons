@@ -6,7 +6,6 @@ namespace Tests;
 
 use MyParcelCom\Integration\PhysicalProperties;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class PhysicalPropertiesTest extends TestCase
 {

@@ -10,11 +10,11 @@ class Price
 {
     public function __construct(
         private int $amount,
-        private string $currency
+        private string $currency,
     ) {
     }
 
-    #[ArrayShape(['amount' => "int", 'currency' => "string"])]
+    #[ArrayShape(['amount' => 'int', 'currency' => 'string'])]
     public function toArray(): array
     {
         return [

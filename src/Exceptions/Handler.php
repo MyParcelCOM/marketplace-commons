@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler
                 $e->getCode(),
                 [
                     'Content-Type' => 'application/vnd.api+json',
-                ]
+                ],
             );
         }
 
@@ -102,7 +102,7 @@ class Handler extends ExceptionHandler
             $status,
             [
                 'Content-Type' => 'application/vnd.api+json',
-            ]
+            ],
         );
     }
 
