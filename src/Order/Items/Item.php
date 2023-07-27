@@ -9,6 +9,7 @@ use MyParcelCom\Integration\WeightUnit;
 class Item
 {
     public function __construct(
+        private string $id,
         private string $name,
         private string $description,
         private int $quantity,
@@ -22,6 +23,7 @@ class Item
     public function toArray(): array
     {
         return array_filter([
+            'id'               => $this->id,
             'sku'              => $this->sku,
             'name'             => $this->name,
             'description'      => $this->description,

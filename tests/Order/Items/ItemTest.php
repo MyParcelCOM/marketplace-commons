@@ -15,6 +15,7 @@ class ItemTest extends TestCase
     {
         $faker = Factory::create();
 
+        $id = $faker->uuid;
         $name = $faker->name;
         $description = $faker->text;
         $sku = $faker->uuid;
@@ -24,6 +25,7 @@ class ItemTest extends TestCase
         $weightUnit = $faker->randomElement(WeightUnit::values());
 
         $item = new Item(
+            id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
@@ -34,6 +36,7 @@ class ItemTest extends TestCase
         );
 
         self::assertEquals([
+            'id'               => $id,
             'sku'              => $sku,
             'name'             => $name,
             'description'      => $description,
@@ -48,17 +51,20 @@ class ItemTest extends TestCase
     {
         $faker = Factory::create();
 
+        $id = $faker->uuid;
         $name = $faker->name;
         $description = $faker->text;
         $quantity = $faker->numberBetween(1, 100);
 
         $item = new Item(
+            id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
         );
 
         self::assertEquals([
+            'id'          => $id,
             'name'        => $name,
             'description' => $description,
             'quantity'    => $quantity,
