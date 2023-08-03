@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
-use Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use Psr\Http\Client\RequestExceptionInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -71,7 +72,7 @@ class Handler extends ExceptionHandler
                 [
                     'errors' => $this->mapValidationException($e),
                 ],
-                $e->getCode(),
+                $e->status,
                 [
                     'Content-Type' => 'application/vnd.api+json',
                 ],
@@ -91,6 +92,10 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof RequestExceptionInterface) {
             $status = (int) $e->getCode();
+        }
+
+        if ($e instanceof HttpExceptionInterface) {
+            $status = (int) $e->getStatusCode();
         }
 
         return $this->responseFactory->json(
