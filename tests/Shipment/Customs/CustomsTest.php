@@ -23,20 +23,20 @@ class CustomsTest extends TestCase
         $invoiceNumber = $faker->text(10);
 
         $customs = new Customs(
-            contentType: Mockery::mock(ContentType::class, ['getValue' => 'test']),
+            contentType: ContentType::MERCHANDISE,
             invoiceNumber: $invoiceNumber,
-            nonDelivery: Mockery::mock(NonDelivery::class, ['getValue' => 'test2']),
-            incoterm: Mockery::mock(Incoterm::class, ['getValue' => 'test3']),
+            nonDelivery: NonDelivery::RETURN,
+            incoterm: Incoterm::DAP,
             shippingValue: Mockery::mock(Price::class, ['toArray' => ['amount' => 1, 'currency' => 'USD']]),
             licenseNumber: $licenseNumber,
             certificateNumber: $certificateNumber,
         );
 
         self::assertEquals([
-            'content_type'       => 'test',
+            'content_type'       => ContentType::MERCHANDISE->value,
             'invoice_number'     => $invoiceNumber,
-            'non_delivery'       => 'test2',
-            'incoterm'           => 'test3',
+            'non_delivery'       => NonDelivery::RETURN->value,
+            'incoterm'           => Incoterm::DAP->value,
             'shipping_value'     => ['amount' => 1, 'currency' => 'USD'],
             'license_number'     => $licenseNumber,
             'certificate_number' => $certificateNumber,

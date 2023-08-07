@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Shipment\Customs;
 
-use MyCLabs\Enum\Enum;
-
-/**
- * @method NonDelivery RETURN()
- * @method NonDelivery ABANDON()
- */
-class NonDelivery extends Enum
+enum NonDelivery: string
 {
-    private const RETURN = 'return';
-    private const ABANDON = 'abandon';
+    case RETURN = 'return';
+    case ABANDON = 'abandon';
 }

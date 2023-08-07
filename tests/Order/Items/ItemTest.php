@@ -22,7 +22,7 @@ class ItemTest extends TestCase
         $imageUrl = $faker->imageUrl;
         $quantity = $faker->numberBetween(1, 100);
         $weight = $faker->numberBetween(1, 100);
-        $weightUnit = $faker->randomElement(WeightUnit::values());
+        $weightUnit = $faker->randomElement(WeightUnit::cases());
 
         $item = new Item(
             id: $id,
@@ -43,7 +43,7 @@ class ItemTest extends TestCase
             'image_url'        => $imageUrl,
             'quantity'         => $quantity,
             'item_weight'      => $weight,
-            'item_weight_unit' => $weightUnit->getValue(),
+            'item_weight_unit' => $weightUnit->value,
         ], $item->toArray());
     }
 

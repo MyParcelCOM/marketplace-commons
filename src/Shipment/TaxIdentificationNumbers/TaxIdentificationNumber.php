@@ -19,7 +19,7 @@ class TaxIdentificationNumber
         return array_filter([
             'country_code' => $this->countryCode,
             'number'       => $this->number,
-            'type'         => (new TaxNumberType($this->type))->getValue(),
+            'type'         => $this->type->value,
             'description'  => $this->description,
         ]);
     }
