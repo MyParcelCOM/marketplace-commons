@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Shipment\Customs;
 
-use MyCLabs\Enum\Enum;
-
-/**
- * @method Incoterm DAP()
- * @method Incoterm DPP()
- */
-class Incoterm extends Enum
+enum Incoterm: string
 {
-    private const DAP = 'DAP';
-    private const DPP = 'DDP';
+    case DAP = 'DAP';
+    case DPP = 'DDP';
 }

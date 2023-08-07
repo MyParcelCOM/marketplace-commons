@@ -15,7 +15,7 @@ class TaxIdentificationNumberTest extends TestCase
     {
         $faker = Factory::create();
         $countryCode = $faker->countryCode();
-        $type = new TaxNumberType('eori');
+        $type = TaxNumberType::EORI;
         $description = $faker->text(25);
         $number = $faker->text(9);
 
@@ -38,7 +38,7 @@ class TaxIdentificationNumberTest extends TestCase
     {
         $faker = Factory::create();
         $countryCode = $faker->countryCode();
-        $type = new TaxNumberType('eori');
+        $type = TaxNumberType::EORI;
         $description = null;
         $number = $faker->text(9);
 

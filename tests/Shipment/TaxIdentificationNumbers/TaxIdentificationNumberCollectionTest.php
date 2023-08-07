@@ -18,14 +18,14 @@ class TaxIdentificationNumberCollectionTest extends TestCase
         $faker = Factory::create();
         $firstSet = [
             'country_code' => $faker->countryCode(),
-            'type'         => TaxNumberType::EORI(),
+            'type'         => TaxNumberType::EORI,
             'description'  => $faker->text(25),
             'number'       => $faker->text(9),
         ];
 
         $secondSet = [
             'country_code' => $faker->countryCode(),
-            'type'         => TaxNumberType::IOSS(),
+            'type'         => TaxNumberType::IOSS,
             'description'  => $faker->text(25),
             'number'       => $faker->text(9),
         ];
