@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Order\Items;
 
-use Spatie\LaravelData\DataCollection;
+use MyParcelCom\Integration\Collection;
 
-class ItemCollection extends DataCollection
+/**
+ * @extends Collection<array-key, Item>
+ */
+class ItemCollection extends Collection
 {
 }
