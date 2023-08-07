@@ -6,6 +6,8 @@ namespace Tests\Order\Items;
 
 use Faker\Factory;
 use MyParcelCom\Integration\Order\Items\Item;
+use MyParcelCom\Integration\Price;
+use MyParcelCom\Integration\Weight;
 use MyParcelCom\Integration\WeightUnit;
 use Tests\TestCase;
 
@@ -21,18 +23,30 @@ class ItemTest extends TestCase
         $sku = $faker->uuid;
         $imageUrl = $faker->imageUrl;
         $quantity = $faker->numberBetween(1, 100);
+        $itemPrice = $faker->numberBetween(1000, 9001);
+        $itemCurrency = $faker->currencyCode;
         $weight = $faker->numberBetween(1, 100);
         $weightUnit = $faker->randomElement(WeightUnit::cases());
+        $itemFeature = ['key' => $faker->word, 'value' => $faker->word];
 
         $item = new Item(
             id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemPrice: Price::from([
+                'amount'   => $itemPrice,
+                'currency' => $itemCurrency,
+            ]),
             sku: $sku,
             imageUrl: $imageUrl,
-            itemWeight: $weight,
-            itemWeightUnit: $weightUnit,
+            itemWeight: Weight::from([
+                'amount' => $weight,
+                'unit'   => $weightUnit,
+            ]),
+            features: [
+                $itemFeature,
+            ],
         );
 
         self::assertEquals([
@@ -42,8 +56,17 @@ class ItemTest extends TestCase
             'description'      => $description,
             'image_url'        => $imageUrl,
             'quantity'         => $quantity,
-            'item_weight'      => $weight,
-            'item_weight_unit' => $weightUnit->value,
+            'item_price'  => [
+                'amount'   => $itemPrice,
+                'currency' => $itemCurrency,
+            ],
+            'item_weight' => [
+                'amount' => $weight,
+                'unit'   => $weightUnit->value,
+            ],
+            'features'    => [
+                $itemFeature,
+            ],
         ], $item->toArray());
     }
 
@@ -55,12 +78,18 @@ class ItemTest extends TestCase
         $name = $faker->name;
         $description = $faker->text;
         $quantity = $faker->numberBetween(1, 100);
+        $itemPrice = $faker->numberBetween(1000, 9001);
+        $itemCurrency = $faker->currencyCode;
 
         $item = new Item(
             id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemPrice: Price::from([
+                'amount'   => $itemPrice,
+                'currency' => $itemCurrency,
+            ]),
         );
 
         self::assertEquals([
@@ -68,6 +97,10 @@ class ItemTest extends TestCase
             'name'        => $name,
             'description' => $description,
             'quantity'    => $quantity,
+            'item_price'  => [
+                'amount'   => $itemPrice,
+                'currency' => $itemCurrency,
+            ],
         ], $item->toArray());
     }
 }
