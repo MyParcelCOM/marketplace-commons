@@ -17,13 +17,13 @@ class Item extends Data
     protected static string $_collectionClass = ItemCollection::class;
 
     public function __construct(
-        public string $id,
-        public string $name,
-        public string $description,
-        public int $quantity,
+        public readonly string $id,
+        public readonly string $name,
+        public readonly string $description,
+        public readonly int $quantity,
         public readonly Price $itemPrice,
-        public ?string $sku = null,
-        public ?string $imageUrl = null,
+        public readonly ?string $sku = null,
+        public readonly ?string $imageUrl = null,
         public readonly ?Weight $itemWeight = null,
         public readonly ?array $features = null,
     ) {
