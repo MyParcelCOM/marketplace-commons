@@ -6,7 +6,6 @@ namespace Tests;
 
 use Faker\Factory;
 use MyParcelCom\Integration\Price;
-use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
 {

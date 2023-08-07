@@ -7,7 +7,7 @@ namespace Tests\Order\Items;
 use Faker\Factory;
 use MyParcelCom\Integration\Order\Items\Item;
 use MyParcelCom\Integration\WeightUnit;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class ItemTest extends TestCase
 {
@@ -31,8 +31,8 @@ class ItemTest extends TestCase
             quantity: $quantity,
             sku: $sku,
             imageUrl: $imageUrl,
-            weight: $weight,
-            weightUnit: $weightUnit,
+            itemWeight: $weight,
+            itemWeightUnit: $weightUnit,
         );
 
         self::assertEquals([

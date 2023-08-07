@@ -4,22 +4,11 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-use JetBrains\PhpStorm\ArrayShape;
-
-class Price
+class Price extends Data
 {
     public function __construct(
-        private int $amount,
-        private string $currency,
+        public int $amount,
+        public string $currency,
     ) {
-    }
-
-    #[ArrayShape(['amount' => 'int', 'currency' => 'string'])]
-    public function toArray(): array
-    {
-        return [
-            'amount'   => $this->amount,
-            'currency' => $this->currency,
-        ];
     }
 }

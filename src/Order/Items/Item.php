@@ -4,38 +4,25 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Order\Items;
 
+use MyParcelCom\Integration\Data;
 use MyParcelCom\Integration\WeightUnit;
+use Spatie\LaravelData\Attributes\MapName;
+use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
-class Item
+#[MapName(SnakeCaseMapper::class)]
+class Item extends Data
 {
+    protected static string $_collectionClass = ItemCollection::class;
+
     public function __construct(
-        private string $id,
-        private string $name,
-        private string $description,
-        private int $quantity,
-        private ?string $sku = null,
-        private ?string $imageUrl = null,
-        private ?int $weight = null,
-        private ?WeightUnit $weightUnit = null,
+        public string $id,
+        public string $name,
+        public string $description,
+        public int $quantity,
+        public ?string $sku = null,
+        public ?string $imageUrl = null,
+        public ?int $itemWeight = null,
+        public ?WeightUnit $itemWeightUnit = null,
     ) {
-    }
-
-    public function toArray(): array
-    {
-        return array_filter([
-            'id'               => $this->id,
-            'sku'              => $this->sku,
-            'name'             => $this->name,
-            'description'      => $this->description,
-            'image_url'        => $this->imageUrl,
-            'quantity'         => $this->quantity,
-            'item_weight'      => $this->weight,
-            'item_weight_unit' => $this->weightUnit?->value,
-        ], [$this, 'isNotNull']);
-    }
-
-    private function isNotNull($value): bool
-    {
-        return $value !== null;
     }
 }
