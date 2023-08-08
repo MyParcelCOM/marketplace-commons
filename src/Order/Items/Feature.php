@@ -9,9 +9,9 @@ use JetBrains\PhpStorm\ArrayShape;
 class Feature
 {
     public function __construct(
-        private string $key,
-        private string|int|float|bool $value,
-        private ?string $annotation = null,
+        private readonly string $key,
+        private readonly string|int|float|bool $value,
+        private readonly ?Annotation $annotation = null,
     ) {
     }
 
@@ -21,7 +21,7 @@ class Feature
         return array_filter([
             'key'        => $this->key,
             'value'      => $this->value,
-            'annotation' => $this->annotation,
+            'annotation' => $this->annotation?->value,
         ], [$this, 'isNotNull']);
     }
 

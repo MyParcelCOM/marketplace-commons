@@ -7,10 +7,10 @@ namespace MyParcelCom\Integration\Shipment\TaxIdentificationNumbers;
 class TaxIdentificationNumber
 {
     public function __construct(
-        private string $countryCode,
-        private TaxNumberType $type,
-        private string $number,
-        private ?string $description = null,
+        private readonly string $countryCode,
+        private readonly TaxNumberType $type,
+        private readonly string $number,
+        private readonly ?string $description = null,
     ) {
     }
 

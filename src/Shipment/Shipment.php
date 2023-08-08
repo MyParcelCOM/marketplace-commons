@@ -19,22 +19,22 @@ use MyParcelCom\Integration\ShopId;
 class Shipment implements ProvidesJsonAPI
 {
     public function __construct(
-        private ShopId $shopId,
-        private Address $recipientAddress,
-        private string $description,
-        private string $customerReference,
-        private string $channel,
-        private Price $totalValue,
-        private Price $price,
-        private PhysicalProperties $physicalProperties,
-        private ItemCollection $items,
-        private ?DateTimeInterface $createdAt = null,
-        private ?Address $senderAddress = null,
-        private ?Address $returnAddress = null,
-        private ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
-        private ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
-        private ?Customs $customs = null,
-        private array $tags = [],
+        private readonly ShopId $shopId,
+        private readonly Address $recipientAddress,
+        private readonly string $description,
+        private readonly string $customerReference,
+        private readonly string $channel,
+        private readonly Price $totalValue,
+        private readonly Price $price,
+        private readonly PhysicalProperties $physicalProperties,
+        private readonly ItemCollection $items,
+        private readonly ?DateTimeInterface $createdAt = null,
+        private readonly ?Address $senderAddress = null,
+        private readonly ?Address $returnAddress = null,
+        private readonly ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
+        private readonly ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
+        private readonly ?Customs $customs = null,
+        private readonly array $tags = [],
     ) {
         if (empty($this->channel)) {
             throw new InvalidChannelException('Shipment channel cannot be empty');

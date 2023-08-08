@@ -9,11 +9,11 @@ use JetBrains\PhpStorm\ArrayShape;
 class PhysicalProperties
 {
     public function __construct(
-        private ?int $weight = null,
-        private ?int $height = null,
-        private ?int $width = null,
-        private ?int $length = null,
-        private ?float $volume = null,
+        private readonly ?int $weight = null,
+        private readonly ?int $height = null,
+        private readonly ?int $width = null,
+        private readonly ?int $length = null,
+        private readonly ?float $volume = null,
     ) {
     }
 

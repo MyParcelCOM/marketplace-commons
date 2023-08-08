@@ -7,19 +7,19 @@ namespace MyParcelCom\Integration;
 class Address
 {
     public function __construct(
-        private string $street1,
-        private string $city,
-        private string $countryCode,
-        private string $firstName,
-        private string $lastName,
-        private ?string $street2 = null,
-        private ?int $streetNumber = null,
-        private ?string $streetNumberSuffix = null,
-        private ?string $postalCode = null,
-        private ?string $stateCode = null,
-        private ?string $company = null,
-        private ?string $email = null,
-        private ?string $phoneNumber = null,
+        private readonly string $street1,
+        private readonly string $city,
+        private readonly string $countryCode,
+        private readonly string $firstName,
+        private readonly string $lastName,
+        private readonly ?string $street2 = null,
+        private readonly ?int $streetNumber = null,
+        private readonly ?string $streetNumberSuffix = null,
+        private readonly ?string $postalCode = null,
+        private readonly ?string $stateCode = null,
+        private readonly ?string $company = null,
+        private readonly ?string $email = null,
+        private readonly ?string $phoneNumber = null,
     ) {
     }
 
