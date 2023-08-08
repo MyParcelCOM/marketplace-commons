@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Tests\Order\Items;
 
 use Faker\Factory;
+use MyParcelCom\Integration\Order\Items\Feature;
+use MyParcelCom\Integration\Order\Items\FeatureCollection;
 use MyParcelCom\Integration\Order\Items\Item;
+use MyParcelCom\Integration\Price;
+use MyParcelCom\Integration\Weight;
 use MyParcelCom\Integration\WeightUnit;
 use PHPUnit\Framework\TestCase;
 
@@ -21,29 +25,57 @@ class ItemTest extends TestCase
         $sku = $faker->uuid;
         $imageUrl = $faker->imageUrl;
         $quantity = $faker->numberBetween(1, 100);
+        $price = $faker->numberBetween(1000, 9001);
+        $currency = $faker->currencyCode;
         $weight = $faker->numberBetween(1, 100);
         $weightUnit = $faker->randomElement(WeightUnit::cases());
+        $featureKey = $faker->word;
+        $featureValue = $faker->word;
 
         $item = new Item(
             id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemPrice: new Price(
+                amount: $price,
+                currency: $currency,
+            ),
             sku: $sku,
             imageUrl: $imageUrl,
-            weight: $weight,
-            weightUnit: $weightUnit,
+            itemWeight: new Weight(
+                amount: $weight,
+                unit: $weightUnit,
+            ),
+            features: new FeatureCollection(
+                new Feature(
+                    key: $featureKey,
+                    value: $featureValue,
+                ),
+            ),
         );
 
         self::assertEquals([
-            'id'               => $id,
-            'sku'              => $sku,
-            'name'             => $name,
-            'description'      => $description,
-            'image_url'        => $imageUrl,
-            'quantity'         => $quantity,
-            'item_weight'      => $weight,
-            'item_weight_unit' => $weightUnit->value,
+            'id'          => $id,
+            'sku'         => $sku,
+            'name'        => $name,
+            'description' => $description,
+            'image_url'   => $imageUrl,
+            'quantity'    => $quantity,
+            'item_price'  => [
+                'amount'   => $price,
+                'currency' => $currency,
+            ],
+            'item_weight' => [
+                'amount' => $weight,
+                'unit'   => $weightUnit->value,
+            ],
+            'features'    => [
+                [
+                    'key'   => $featureKey,
+                    'value' => $featureValue,
+                ],
+            ],
         ], $item->toArray());
     }
 
@@ -55,12 +87,18 @@ class ItemTest extends TestCase
         $name = $faker->name;
         $description = $faker->text;
         $quantity = $faker->numberBetween(1, 100);
+        $price = $faker->numberBetween(1000, 9001);
+        $currency = $faker->currencyCode;
 
         $item = new Item(
             id: $id,
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemPrice: new Price(
+                amount: $price,
+                currency: $currency,
+            ),
         );
 
         self::assertEquals([
@@ -68,6 +106,10 @@ class ItemTest extends TestCase
             'name'        => $name,
             'description' => $description,
             'quantity'    => $quantity,
+            'item_price'  => [
+                'amount'   => $price,
+                'currency' => $currency,
+            ],
         ], $item->toArray());
     }
 }
