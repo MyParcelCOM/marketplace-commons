@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Order\Items;
 
 use Faker\Factory;
+use MyParcelCom\Integration\Order\Items\Feature;
+use MyParcelCom\Integration\Order\Items\FeatureCollection;
 use MyParcelCom\Integration\Order\Items\Item;
 use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Weight;
@@ -27,7 +29,8 @@ class ItemTest extends TestCase
         $currency = $faker->currencyCode;
         $weight = $faker->numberBetween(1, 100);
         $weightUnit = $faker->randomElement(WeightUnit::cases());
-        $itemFeature = ['key' => $faker->word, 'value' => $faker->word];
+        $featureKey = $faker->word;
+        $featureValue = $faker->word;
 
         $item = new Item(
             id: $id,
@@ -44,9 +47,12 @@ class ItemTest extends TestCase
                 amount: $weight,
                 unit: $weightUnit,
             ),
-            features: [
-                $itemFeature,
-            ],
+            features: new FeatureCollection(
+                new Feature(
+                    key: $featureKey,
+                    value: $featureValue,
+                ),
+            ),
         );
 
         self::assertEquals([
@@ -65,7 +71,10 @@ class ItemTest extends TestCase
                 'unit'   => $weightUnit->value,
             ],
             'features'    => [
-                $itemFeature,
+                [
+                    'key'   => $featureKey,
+                    'value' => $featureValue,
+                ],
             ],
         ], $item->toArray());
     }

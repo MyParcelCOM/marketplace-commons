@@ -18,7 +18,7 @@ class Item
         private ?string $sku = null,
         private ?string $imageUrl = null,
         private ?Weight $itemWeight = null,
-        private ?array $features = null,
+        private ?FeatureCollection $features = null,
     ) {
     }
 
@@ -33,7 +33,7 @@ class Item
             'quantity'    => $this->quantity,
             'item_price'  => $this->itemPrice->toArray(),
             'item_weight' => $this->itemWeight?->toArray(),
-            'features'    => $this->features,
+            'features'    => $this->features?->toArray(),
         ], [$this, 'isNotNull']);
     }
 
