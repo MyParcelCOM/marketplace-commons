@@ -59,20 +59,14 @@ class Shipment implements ProvidesJsonAPI
                 'description'                          => $this->description,
                 'customer_reference'                   => $this->customerReference,
                 'channel'                              => $this->channel,
-                'total_value'                          => array_filter($this->totalValue->toArray()),
-                'price'                                => array_filter($this->price->toArray()),
-                'physical_properties'                  => array_filter($this->physicalProperties->toArray()),
-                'items'                                => array_filter($this->items->toArray()),
-                'tags'                                 => array_filter($this->tags),
-                'customs'                              => $this->customs
-                    ? array_filter($this->customs->toArray())
-                    : null,
-                'sender_tax_identification_numbers'    => $this->senderTaxIdentificationNumbers
-                    ? array_filter($this->senderTaxIdentificationNumbers->toArray())
-                    : null,
-                'recipient_tax_identification_numbers' => $this->recipientTaxIdentificationNumbers
-                    ? array_filter($this->recipientTaxIdentificationNumbers->toArray())
-                    : null,
+                'total_value'                          => $this->totalValue->toArray(),
+                'price'                                => $this->price->toArray(),
+                'physical_properties'                  => $this->physicalProperties->toArray(),
+                'items'                                => $this->items->toArray(),
+                'tags'                                 => $this->tags,
+                'customs'                              => $this->customs?->toArray(),
+                'sender_tax_identification_numbers'    => $this->senderTaxIdentificationNumbers?->toArray(),
+                'recipient_tax_identification_numbers' => $this->recipientTaxIdentificationNumbers?->toArray(),
             ]),
             'relationships' => [
                 'shop' => [
