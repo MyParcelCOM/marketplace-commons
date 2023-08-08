@@ -28,7 +28,7 @@ class Address
         return array_filter([
             'street_1'             => $this->street1,
             'street_2'             => $this->street2,
-            'street_number'        => $this->streetNumber ? (int) $this->streetNumber : null,
+            'street_number'        => $this->streetNumber,
             'street_number_suffix' => $this->streetNumberSuffix,
             'postal_code'          => $this->postalCode,
             'city'                 => $this->city,

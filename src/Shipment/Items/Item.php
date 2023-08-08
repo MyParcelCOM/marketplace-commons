@@ -27,7 +27,7 @@ class Item
             'sku'                    => $this->sku,
             'description'            => $this->description,
             'image_url'              => $this->imageUrl,
-            'item_value'             => $this->itemValue ? array_filter($this->itemValue->toArray()) : null,
+            'item_value'             => $this->itemValue?->toArray(),
             'quantity'               => $this->quantity,
             'hs_code'                => $this->hsCode,
             'item_weight'            => $this->itemWeight,
