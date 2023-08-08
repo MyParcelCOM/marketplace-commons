@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Order\Items;
 
-use MyParcelCom\Integration\WeightUnit;
+use MyParcelCom\Integration\Price;
+use MyParcelCom\Integration\Weight;
 
 class Item
 {
@@ -13,24 +14,26 @@ class Item
         private string $name,
         private string $description,
         private int $quantity,
+        private Price $itemPrice,
         private ?string $sku = null,
         private ?string $imageUrl = null,
-        private ?int $weight = null,
-        private ?WeightUnit $weightUnit = null,
+        private ?Weight $itemWeight = null,
+        private ?array $features = null,
     ) {
     }
 
     public function toArray(): array
     {
         return array_filter([
-            'id'               => $this->id,
-            'sku'              => $this->sku,
-            'name'             => $this->name,
-            'description'      => $this->description,
-            'image_url'        => $this->imageUrl,
-            'quantity'         => $this->quantity,
-            'item_weight'      => $this->weight,
-            'item_weight_unit' => $this->weightUnit?->value,
+            'id'          => $this->id,
+            'sku'         => $this->sku,
+            'name'        => $this->name,
+            'description' => $this->description,
+            'image_url'   => $this->imageUrl,
+            'quantity'    => $this->quantity,
+            'item_price'  => $this->itemPrice->toArray(),
+            'item_weight' => $this->itemWeight?->toArray(),
+            'features'    => $this->features,
         ], [$this, 'isNotNull']);
     }
 
