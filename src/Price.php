@@ -9,8 +9,8 @@ use JetBrains\PhpStorm\ArrayShape;
 class Price
 {
     public function __construct(
-        private int $amount,
-        private string $currency,
+        private readonly int $amount,
+        private readonly string $currency,
     ) {
     }
 

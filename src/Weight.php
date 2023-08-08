@@ -9,8 +9,8 @@ use JetBrains\PhpStorm\ArrayShape;
 class Weight
 {
     public function __construct(
-        private int $amount,
-        private WeightUnit $unit,
+        private readonly int $amount,
+        private readonly WeightUnit $unit,
     ) {
     }
 

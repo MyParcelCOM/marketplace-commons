@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Order\Items;
 
 use Faker\Factory;
+use MyParcelCom\Integration\Order\Items\Annotation;
 use MyParcelCom\Integration\Order\Items\Feature;
 use MyParcelCom\Integration\Order\Items\FeatureCollection;
 use MyParcelCom\Integration\Order\Items\Item;
@@ -51,6 +52,7 @@ class ItemTest extends TestCase
                 new Feature(
                     key: $featureKey,
                     value: $featureValue,
+                    annotation: Annotation::COLOR,
                 ),
             ),
         );
@@ -72,8 +74,9 @@ class ItemTest extends TestCase
             ],
             'features'    => [
                 [
-                    'key'   => $featureKey,
-                    'value' => $featureValue,
+                    'key'        => $featureKey,
+                    'value'      => $featureValue,
+                    'annotation' => 'color',
                 ],
             ],
         ], $item->toArray());
