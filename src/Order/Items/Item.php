@@ -14,10 +14,10 @@ class Item
         private readonly string $name,
         private readonly string $description,
         private readonly int $quantity,
+        private readonly Weight $itemWeight,
         private readonly Price $itemPrice,
         private readonly ?string $sku = null,
         private readonly ?string $imageUrl = null,
-        private readonly ?Weight $itemWeight = null,
         private readonly ?FeatureCollection $features = null,
     ) {
     }
@@ -32,7 +32,7 @@ class Item
             'image_url'   => $this->imageUrl,
             'quantity'    => $this->quantity,
             'item_price'  => $this->itemPrice->toArray(),
-            'item_weight' => $this->itemWeight?->toArray(),
+            'item_weight' => $this->itemWeight->toArray(),
             'features'    => $this->features?->toArray(),
         ], [$this, 'isNotNull']);
     }

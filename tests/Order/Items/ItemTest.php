@@ -38,16 +38,16 @@ class ItemTest extends TestCase
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemWeight: new Weight(
+                amount: $weight,
+                unit: $weightUnit,
+            ),
             itemPrice: new Price(
                 amount: $price,
                 currency: $currency,
             ),
             sku: $sku,
             imageUrl: $imageUrl,
-            itemWeight: new Weight(
-                amount: $weight,
-                unit: $weightUnit,
-            ),
             features: new FeatureCollection(
                 new Feature(
                     key: $featureKey,
@@ -98,6 +98,10 @@ class ItemTest extends TestCase
             name: $name,
             description: $description,
             quantity: $quantity,
+            itemWeight: new Weight(
+                amount: 1,
+                unit: WeightUnit::GRAM,
+            ),
             itemPrice: new Price(
                 amount: $price,
                 currency: $currency,
@@ -112,6 +116,10 @@ class ItemTest extends TestCase
             'item_price'  => [
                 'amount'   => $price,
                 'currency' => $currency,
+            ],
+            'item_weight' => [
+                'amount' => 1,
+                'unit'   => WeightUnit::GRAM->value,
             ],
         ], $item->toArray());
     }
