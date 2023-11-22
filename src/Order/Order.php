@@ -18,6 +18,7 @@ class Order implements ProvidesJsonAPI
         private readonly DateTimeInterface $createdAt,
         private readonly Address $recipientAddress,
         private readonly ItemCollection $items,
+        private readonly ?string $outboundShipmentIdentifier = null,
     ) {
     }
 
@@ -26,11 +27,12 @@ class Order implements ProvidesJsonAPI
         return [
             'type'          => 'orders',
             'id'            => $this->id,
-            'attributes'    => [
-                'created_at'        => $this->createdAt->format(DateTimeInterface::ATOM),
-                'recipient_address' => $this->recipientAddress->toArray(),
-                'items'             => $this->items->toArray(),
-            ],
+            'attributes'    => array_filter([
+                'created_at'                   => $this->createdAt->format(DateTimeInterface::ATOM),
+                'recipient_address'            => $this->recipientAddress->toArray(),
+                'items'                        => $this->items->toArray(),
+                'outbound_shipment_identifier' => $this->outboundShipmentIdentifier,
+            ]),
             'relationships' => [
                 'shop' => [
                     'data' => [
