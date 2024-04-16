@@ -13,3 +13,4 @@ jobs:
         with:
           configuration: phpunit.xml
           bootstrap: vendor/autoload.php
+          test_suffix: Test.php
