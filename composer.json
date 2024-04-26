@@ -1,5 +1,5 @@
 {
-  "name": "myparcelcom/integration-commons",
+  "name": "myparcelcom/marketplace-commons",
   "description": "Library with common classes used for constructing MyParcel.com eCommerce Integrations",
   "type": "library",
   "require": {
