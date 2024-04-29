@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 class Weight
 {
     public function __construct(
@@ -14,7 +12,9 @@ class Weight
     ) {
     }
 
-    #[ArrayShape(['amount' => 'int', 'unit' => 'string'])]
+    /**
+     * @return array{amount: int, unit: string}
+     */
     public function toArray(): array
     {
         return [

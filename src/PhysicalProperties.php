@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 class PhysicalProperties
 {
     public function __construct(
@@ -17,13 +15,15 @@ class PhysicalProperties
     ) {
     }
 
-    #[ArrayShape([
-        'weight' => 'int',
-        'height' => 'int|null',
-        'width'  => 'int|null',
-        'length' => 'int|null',
-        'volume' => 'float|null',
-    ])]
+    /**
+     * @return array{
+     *     weight: int,
+     *     height: int|null,
+     *     width: int|null,
+     *     length: int|null,
+     *     volume: float|null
+     * }
+     */
     public function toArray(): array
     {
         return array_filter([

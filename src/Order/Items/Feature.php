@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Order\Items;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 class Feature
 {
     public function __construct(
@@ -15,7 +13,13 @@ class Feature
     ) {
     }
 
-    #[ArrayShape(['key' => 'string', 'value' => 'string|int|float|bool', 'annotation' => 'string|null'])]
+    /**
+     * @return array{
+     *     key: string,
+     *     value: string|int|float|bool,
+     *     annotation: string|null
+     * }
+     */
     public function toArray(): array
     {
         return array_filter([
