@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration;
 
-use JetBrains\PhpStorm\Immutable;
 use Ramsey\Uuid\UuidInterface;
 
-#[Immutable]
+/**
+ * @psalm-immutable
+ */
 class ShopId
 {
     public function __construct(

@@ -1,5 +1,5 @@
-# integration-commons
-Library with common classes used for constructing MyParcel.com eCommerce Integrations
+# marketplace-commons
+Library with common classes used for constructing MyParcel.com marketplace integrations
 
 ## PHP 8
 The minimum PHP version is `8.2`. To update dependencies on a system without PHP 8 use:
