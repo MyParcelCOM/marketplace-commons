@@ -9,13 +9,13 @@ use MyParcelCom\Integration\Price;
 class Customs
 {
     public function __construct(
-        private readonly ?ContentType $contentType = null,
-        private readonly ?string $invoiceNumber = null,
-        private readonly ?NonDelivery $nonDelivery = null,
-        private readonly ?Incoterm $incoterm = null,
-        private readonly ?Price $shippingValue = null,
-        private readonly ?string $licenseNumber = null,
-        private readonly ?string $certificateNumber = null,
+        public readonly ?ContentType $contentType = null,
+        public readonly ?string $invoiceNumber = null,
+        public readonly ?NonDelivery $nonDelivery = null,
+        public readonly ?Incoterm $incoterm = null,
+        public readonly ?Price $shippingValue = null,
+        public readonly ?string $licenseNumber = null,
+        public readonly ?string $certificateNumber = null,
     ) {
     }
 

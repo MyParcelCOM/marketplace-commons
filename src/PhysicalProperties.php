@@ -7,11 +7,11 @@ namespace MyParcelCom\Integration;
 class PhysicalProperties
 {
     public function __construct(
-        private readonly ?int $weight = null,
-        private readonly ?int $height = null,
-        private readonly ?int $width = null,
-        private readonly ?int $length = null,
-        private readonly ?float $volume = null,
+        public readonly ?int $weight = null,
+        public readonly ?int $height = null,
+        public readonly ?int $width = null,
+        public readonly ?int $length = null,
+        public readonly ?float $volume = null,
     ) {
     }
 

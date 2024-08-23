@@ -12,7 +12,7 @@ use Ramsey\Uuid\UuidInterface;
 class ShopId
 {
     public function __construct(
-        private readonly UuidInterface $uuid,
+        public readonly UuidInterface $uuid,
     ) {
     }
 

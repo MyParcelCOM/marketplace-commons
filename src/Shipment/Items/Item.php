@@ -9,15 +9,15 @@ use MyParcelCom\Integration\Price;
 class Item
 {
     public function __construct(
-        private readonly ?string $description = null,
-        private readonly ?int $quantity = null,
-        private readonly ?string $sku = null,
-        private readonly ?string $imageUrl = null,
-        private readonly ?Price $itemValue = null,
-        private readonly ?string $hsCode = null,
-        private readonly ?int $itemWeight = null,
-        private readonly ?string $originCountryCode = null,
-        private readonly bool $isPreferentialOrigin = false,
+        public readonly ?string $description = null,
+        public readonly ?int $quantity = null,
+        public readonly ?string $sku = null,
+        public readonly ?string $imageUrl = null,
+        public readonly ?Price $itemValue = null,
+        public readonly ?string $hsCode = null,
+        public readonly ?int $itemWeight = null,
+        public readonly ?string $originCountryCode = null,
+        public readonly bool $isPreferentialOrigin = false,
     ) {
     }
 
