@@ -7,8 +7,8 @@ namespace MyParcelCom\Integration;
 class Price
 {
     public function __construct(
-        private readonly int $amount,
-        private readonly string $currency,
+        public readonly int $amount,
+        public readonly string $currency,
     ) {
     }
 

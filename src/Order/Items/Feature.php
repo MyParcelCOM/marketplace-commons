@@ -7,9 +7,9 @@ namespace MyParcelCom\Integration\Order\Items;
 class Feature
 {
     public function __construct(
-        private readonly string $key,
-        private readonly string|int|float|bool $value,
-        private readonly ?Annotation $annotation = null,
+        public readonly string $key,
+        public readonly string|int|float|bool $value,
+        public readonly ?Annotation $annotation = null,
     ) {
     }
 

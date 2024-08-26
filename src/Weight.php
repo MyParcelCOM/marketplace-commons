@@ -7,8 +7,8 @@ namespace MyParcelCom\Integration;
 class Weight
 {
     public function __construct(
-        private readonly int $amount,
-        private readonly WeightUnit $unit,
+        public readonly int $amount,
+        public readonly WeightUnit $unit,
     ) {
     }
 

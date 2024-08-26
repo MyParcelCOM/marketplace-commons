@@ -13,12 +13,12 @@ use MyParcelCom\Integration\ShopId;
 class Order implements ProvidesJsonAPI
 {
     public function __construct(
-        private readonly ShopId $shopId,
-        private readonly string $id,
-        private readonly DateTimeInterface $createdAt,
-        private readonly Address $recipientAddress,
-        private readonly ItemCollection $items,
-        private readonly ?string $outboundShipmentIdentifier = null,
+        public readonly ShopId $shopId,
+        public readonly string $id,
+        public readonly DateTimeInterface $createdAt,
+        public readonly Address $recipientAddress,
+        public readonly ItemCollection $items,
+        public readonly ?string $outboundShipmentIdentifier = null,
     ) {
     }
 

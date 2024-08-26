@@ -10,15 +10,15 @@ use MyParcelCom\Integration\Weight;
 class Item
 {
     public function __construct(
-        private readonly string $id,
-        private readonly string $name,
-        private readonly string $description,
-        private readonly int $quantity,
-        private readonly Price $itemPrice,
-        private readonly ?string $sku = null,
-        private readonly ?string $imageUrl = null,
-        private readonly ?Weight $itemWeight = null,
-        private readonly ?FeatureCollection $features = null,
+        public readonly string $id,
+        public readonly string $name,
+        public readonly string $description,
+        public readonly int $quantity,
+        public readonly Price $itemPrice,
+        public readonly ?string $sku = null,
+        public readonly ?string $imageUrl = null,
+        public readonly ?Weight $itemWeight = null,
+        public readonly ?FeatureCollection $features = null,
     ) {
     }
 

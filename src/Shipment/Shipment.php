@@ -19,22 +19,22 @@ use MyParcelCom\Integration\ShopId;
 class Shipment implements ProvidesJsonAPI
 {
     public function __construct(
-        private readonly ShopId $shopId,
-        private readonly Address $recipientAddress,
-        private readonly string $description,
-        private readonly string $customerReference,
-        private readonly string $channel,
-        private readonly Price $totalValue,
-        private readonly Price $price,
-        private readonly PhysicalProperties $physicalProperties,
-        private readonly ItemCollection $items,
-        private readonly ?DateTimeInterface $createdAt = null,
-        private readonly ?Address $senderAddress = null,
-        private readonly ?Address $returnAddress = null,
-        private readonly ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
-        private readonly ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
-        private readonly ?Customs $customs = null,
-        private readonly array $tags = [],
+        public readonly ShopId $shopId,
+        public readonly Address $recipientAddress,
+        public readonly string $description,
+        public readonly string $customerReference,
+        public readonly string $channel,
+        public readonly Price $totalValue,
+        public readonly Price $price,
+        public readonly PhysicalProperties $physicalProperties,
+        public readonly ItemCollection $items,
+        public readonly ?DateTimeInterface $createdAt = null,
+        public readonly ?Address $senderAddress = null,
+        public readonly ?Address $returnAddress = null,
+        public readonly ?TaxIdentificationNumberCollection $senderTaxIdentificationNumbers = null,
+        public readonly ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
+        public readonly ?Customs $customs = null,
+        public readonly array $tags = [],
     ) {
         if (empty($this->channel)) {
             throw new InvalidChannelException('Shipment channel cannot be empty');
