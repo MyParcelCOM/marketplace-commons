@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Tests\Configuration\Properties;
+namespace Tests\Configuration\Form;
 
 use Faker\Factory;
-use MyParcelCom\Integration\Configuration\Properties\Checkbox;
+use MyParcelCom\Integration\Configuration\Form\Number;
 use PHPUnit\Framework\TestCase;
 
-class CheckboxTest extends TestCase
+class NumberTest extends TestCase
 {
-    public function test_it_converts_a_boolean_property_into_an_array(): void
+    public function test_it_converts_a_number_property_into_an_array(): void
     {
         $faker = Factory::create();
 
         $name = $faker->word;
         $description = $faker->words(asText: true);
 
-        $property = new Checkbox(
+        $number = new Number(
             name: $name,
             description: $description,
         );
 
         self::assertEquals([
             $name => [
-                'type'        => 'boolean',
+                'type'        => 'number',
                 'description' => $description,
             ],
-        ], $property->toArray());
+        ], $number->toJsonSchemaProperty()->toArray());
     }
 }

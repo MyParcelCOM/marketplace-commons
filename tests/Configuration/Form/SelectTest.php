@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Configuration\Properties;
+namespace Tests\Configuration\Form;
 
 use Faker\Factory;
 use InvalidArgumentException;
+use MyParcelCom\Integration\Configuration\Form\Select;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\Properties\Select;
 use PHPUnit\Framework\TestCase;
 
 class SelectTest extends TestCase
@@ -19,7 +19,7 @@ class SelectTest extends TestCase
         $name = $faker->word;
         $description = $faker->words(asText: true);
 
-        $property = new Select(
+        $select = new Select(
             name: $name,
             type: PropertyType::STRING,
             description: $description,
@@ -40,7 +40,7 @@ class SelectTest extends TestCase
                     3,
                 ],
             ],
-        ], $property->toArray());
+        ], $select->toJsonSchemaProperty()->toArray());
     }
 
     public function test_it_throws_an_invalid_argument_exception_without_enum_values(): void

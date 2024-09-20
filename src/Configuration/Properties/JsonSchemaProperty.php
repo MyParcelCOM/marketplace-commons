@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Configuration\Properties;
 
-class Property
+class JsonSchemaProperty
 {
     public function __construct(
         public readonly string $name,
@@ -13,7 +13,7 @@ class Property
         public readonly bool $isRequired = false,
         public readonly bool $isPassword = false,
         public readonly array $enum = [],
-        public readonly string $hint = '',
+        public readonly ?string $hint = null,
     ) {
     }
 

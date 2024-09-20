@@ -8,14 +8,14 @@ use Faker\Factory;
 use Illuminate\Http\Request;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use MyParcelCom\Integration\Configuration\Form\Checkbox;
+use MyParcelCom\Integration\Configuration\Form\Form;
+use MyParcelCom\Integration\Configuration\Form\Number;
+use MyParcelCom\Integration\Configuration\Form\Password;
+use MyParcelCom\Integration\Configuration\Form\Select;
+use MyParcelCom\Integration\Configuration\Form\Text;
 use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
-use MyParcelCom\Integration\Configuration\Properties\Checkbox;
-use MyParcelCom\Integration\Configuration\Properties\Number;
-use MyParcelCom\Integration\Configuration\Properties\Password;
-use MyParcelCom\Integration\Configuration\Properties\PropertyCollection;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\Properties\Select;
-use MyParcelCom\Integration\Configuration\Properties\Text;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationResponseTest extends TestCase
@@ -24,12 +24,12 @@ class ConfigurationResponseTest extends TestCase
 
     public function test_it_creates_a_configuration_response_with_minimal_data(): void
     {
-        $properties = Mockery::mock(PropertyCollection::class, [
+        $form = Mockery::mock(Form::class, [
             'toArray'     => [],
             'getRequired' => [],
         ]);
 
-        $configuration = new ConfigurationResponse($properties);
+        $configuration = new ConfigurationResponse($form);
 
         self::assertEquals(
             [
@@ -83,10 +83,10 @@ class ConfigurationResponseTest extends TestCase
             name: $nameSelect,
             type: PropertyType::STRING,
             description: $description,
-            enum: ['1', '2', '3'],
             isRequired: true,
+            enum: ['1', '2', '3'],
         );
-        $properties = new PropertyCollection(
+        $form = new Form(
             $text,
             $number,
             $checkbox,
@@ -94,7 +94,7 @@ class ConfigurationResponseTest extends TestCase
             $select,
         );
 
-        $configuration = new ConfigurationResponse($properties);
+        $configuration = new ConfigurationResponse($form);
 
         self::assertEquals(
             [
