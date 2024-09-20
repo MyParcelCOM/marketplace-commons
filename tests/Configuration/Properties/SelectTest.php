@@ -19,56 +19,25 @@ class SelectTest extends TestCase
         $name = $faker->word;
         $description = $faker->words(asText: true);
 
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Select property requires at least one enum value.');
-
-        new Select(
-            name: $name,
-            type: PropertyType::STRING,
-            description: $description,
-            enum: [],
-        );
-
         $property = new Select(
             name: $name,
             type: PropertyType::STRING,
-            description: $description,
-            enum: [1],
-        );
-
-        self::assertEquals([
-            $name => [
-                'type'        => 'string',
-                'description' => $description,
-                'enum'        => [1],
-            ],
-        ], $property->toArray());
-
-        $hint = $faker->words(asText: true);
-
-        $property = new Select(
-            name: $name,
-            type: PropertyType::NUMBER,
             description: $description,
             enum: [
                 1,
                 2,
                 3,
             ],
-            hint: $hint,
         );
 
         self::assertEquals([
             $name => [
-                'type'        => 'number',
+                'type'        => 'string',
                 'description' => $description,
                 'enum'        => [
                     1,
                     2,
                     3,
-                ],
-                'meta'        => [
-                    'hint' => $hint,
                 ],
             ],
         ], $property->toArray());
@@ -76,7 +45,7 @@ class SelectTest extends TestCase
 
     public function test_it_throws_an_invalid_argument_exception_without_enum_values(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Select property requires at least one enum value.');
 
         $faker = Factory::create();

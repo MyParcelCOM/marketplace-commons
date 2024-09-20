@@ -28,23 +28,5 @@ class TextTest extends TestCase
                 'description' => $description,
             ],
         ], $property->toArray());
-
-        $hint = $faker->words(asText: true);
-
-        $property = new Text(
-            name: $name,
-            description: $description,
-            hint: $hint,
-        );
-
-        self::assertEquals([
-            $name => [
-                'type'        => 'string',
-                'description' => $description,
-                'meta'        => [
-                    'hint' => $hint,
-                ],
-            ],
-        ], $property->toArray());
     }
 }

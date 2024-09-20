@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Configuration\Properties;
 
 use Faker\Factory;
+use Illuminate\Support\Arr;
 use MyParcelCom\Integration\Configuration\Properties\Property;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 use MyParcelCom\Integration\Order\Items\Annotation;
@@ -21,17 +22,18 @@ class PropertyTest extends TestCase
 
         $name = $faker->word;
         $description = $faker->words(asText: true);
+        $type = $faker->randomElement(PropertyType::cases());
 
         $property = new Property(
             name: $name,
-            type: PropertyType::STRING,
+            type: $type,
             description: $description,
         );
 
         self::assertFalse($property->isRequired);
         self::assertEquals([
             $name => [
-                'type'        => 'string',
+                'type'        => $type->value,
                 'description' => $description,
             ],
         ], $property->toArray());
@@ -42,6 +44,7 @@ class PropertyTest extends TestCase
         $faker = Factory::create();
 
         $name = $faker->word;
+        $type = $faker->randomElement(PropertyType::cases());
         $description = $faker->words(asText: true);
         $enum = [
             $faker->word,
@@ -52,7 +55,7 @@ class PropertyTest extends TestCase
 
         $property = new Property(
             name: $name,
-            type: PropertyType::STRING,
+            type: $type,
             description: $description,
             isRequired: true,
             isPassword: true,
@@ -63,7 +66,7 @@ class PropertyTest extends TestCase
         self::assertTrue($property->isRequired);
         self::assertEquals([
             $name => [
-                'type'        => 'string',
+                'type'        => $type->value,
                 'description' => $description,
                 'enum'        => $enum,
                 'meta'        => [

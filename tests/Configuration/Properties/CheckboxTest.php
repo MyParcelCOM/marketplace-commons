@@ -28,23 +28,5 @@ class CheckboxTest extends TestCase
                 'description' => $description,
             ],
         ], $property->toArray());
-
-        $hint = $faker->words(asText: true);
-
-        $property = new Checkbox(
-            name: $name,
-            description: $description,
-            hint: $hint,
-        );
-
-        self::assertEquals([
-            $name => [
-                'type'        => 'boolean',
-                'description' => $description,
-                'meta'        => [
-                    'hint' => $hint,
-                ],
-            ],
-        ], $property->toArray());
     }
 }

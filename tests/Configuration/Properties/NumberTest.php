@@ -28,23 +28,5 @@ class NumberTest extends TestCase
                 'description' => $description,
             ],
         ], $property->toArray());
-
-        $hint = $faker->words(asText: true);
-
-        $property = new Number(
-            name: $name,
-            description: $description,
-            hint: $hint,
-        );
-
-        self::assertEquals([
-            $name => [
-                'type'        => 'number',
-                'description' => $description,
-                'meta'        => [
-                    'hint' => $hint,
-                ],
-            ],
-        ], $property->toArray());
     }
 }

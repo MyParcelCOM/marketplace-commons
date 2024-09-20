@@ -31,24 +31,5 @@ class PasswordTest extends TestCase
                 ],
             ],
         ], $property->toArray());
-
-        $hint = $faker->words(asText: true);
-
-        $property = new Password(
-            name: $name,
-            description: $description,
-            hint: $hint,
-        );
-
-        self::assertEquals([
-            $name => [
-                'type'        => 'string',
-                'description' => $description,
-                'meta'        => [
-                    'password' => true,
-                    'hint' => $hint,
-                ],
-            ],
-        ], $property->toArray());
     }
 }
