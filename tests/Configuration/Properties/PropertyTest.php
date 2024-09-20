@@ -20,15 +20,19 @@ class PropertyTest extends TestCase
         $faker = Factory::create();
 
         $name = $faker->word;
+        $description = $faker->words(asText: true);
 
         $property = new Property(
             name: $name,
             type: PropertyType::STRING,
+            description: $description,
         );
 
+        self::assertFalse($property->isRequired);
         self::assertEquals([
             $name => [
-                'type' => 'string',
+                'type'        => 'string',
+                'description' => $description,
             ],
         ], $property->toArray());
     }
@@ -44,24 +48,28 @@ class PropertyTest extends TestCase
             $faker->word,
             $faker->word,
         ];
-        $meta = [
-            'additionalData' => $faker->words(asText: true)
-        ];
+        $hint = $faker->words(asText: true);
 
         $property = new Property(
             name: $name,
             type: PropertyType::STRING,
             description: $description,
+            isRequired: true,
+            isPassword: true,
             enum: $enum,
-            meta: $meta,
+            hint: $hint,
         );
 
+        self::assertTrue($property->isRequired);
         self::assertEquals([
             $name => [
-                'type' => 'string',
+                'type'        => 'string',
                 'description' => $description,
-                'enum' => $enum,
-                'meta' => $meta,
+                'enum'        => $enum,
+                'meta'        => [
+                    'hint' => $hint,
+                    'password' => true,
+                ],
             ],
         ], $property->toArray());
     }

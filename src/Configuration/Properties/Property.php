@@ -7,11 +7,13 @@ namespace MyParcelCom\Integration\Configuration\Properties;
 class Property
 {
     public function __construct(
-        private readonly string $name,
-        private readonly PropertyType $type,
-        private readonly ?string $description = null,
-        private readonly array $enum = [],
-        private readonly array $meta = [],
+        public readonly string $name,
+        public readonly PropertyType $type,
+        public readonly string $description,
+        public readonly bool $isRequired = false,
+        public readonly bool $isPassword = false,
+        public readonly array $enum = [],
+        public readonly string $hint = '',
     ) {
     }
 
@@ -22,7 +24,10 @@ class Property
                 'type' => $this->type->value,
                 'description' => $this->description,
                 'enum' => $this->enum,
-                'meta' => $this->meta,
+                'meta' => array_filter([
+                    'hint' => $this->hint,
+                    'password' => $this->isPassword,
+                ]),
             ])
         ];
     }

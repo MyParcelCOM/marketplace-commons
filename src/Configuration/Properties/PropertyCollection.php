@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Configuration\Properties;
 
-use ArrayObject;
+use Illuminate\Support\Arr;
+use MyParcelCom\Integration\Collection;
 
-class PropertyCollection extends ArrayObject
+/**
+ * @extends Collection<array-key, Property>
+ */
+class PropertyCollection extends Collection
 {
-    public function __construct(Property ...$properties)
+    public function getRequired(): array
     {
-        parent::__construct($properties);
-    }
+        $requiredProperties = array_filter(
+            (array) $this,
+            static fn (Property $property) => $property->isRequired,
+        );
 
-    public function toArray(): array
-    {
-        return array_map(static fn (Property $property) => $property->toArray(), (array) $this);
+        return array_values(
+            Arr::map(
+                $requiredProperties,
+                static fn (Property $property) => $property->name,
+            ),
+        );
     }
 }
