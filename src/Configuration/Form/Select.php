@@ -7,9 +7,9 @@ namespace MyParcelCom\Integration\Configuration\Form;
 use InvalidArgumentException;
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\JsonSchemaTransformable;
+use MyParcelCom\Integration\Configuration\Field;
 
-class Select implements JsonSchemaTransformable
+class Select implements Field
 {
     public function __construct(
         public readonly string $name,
@@ -22,11 +22,6 @@ class Select implements JsonSchemaTransformable
         if (count($enum) < 1) {
             throw new InvalidArgumentException('Select property requires at least one enum value.');
         }
-    }
-
-    public function isRequired(): bool
-    {
-        return $this->isRequired;
     }
 
     public function toJsonSchemaProperty(): JsonSchemaProperty

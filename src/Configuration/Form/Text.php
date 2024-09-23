@@ -6,9 +6,9 @@ namespace MyParcelCom\Integration\Configuration\Form;
 
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\JsonSchemaTransformable;
+use MyParcelCom\Integration\Configuration\Field;
 
-class Text implements JsonSchemaTransformable
+class Text implements Field
 {
     public function __construct(
         public readonly string $name,
@@ -16,11 +16,6 @@ class Text implements JsonSchemaTransformable
         public readonly bool $isRequired = false,
         public readonly ?string $hint = null,
     ) {
-    }
-
-    public function isRequired(): bool
-    {
-        return $this->isRequired;
     }
 
     public function toJsonSchemaProperty(): JsonSchemaProperty

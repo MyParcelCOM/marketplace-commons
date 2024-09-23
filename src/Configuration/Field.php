@@ -6,8 +6,7 @@ namespace MyParcelCom\Integration\Configuration;
 
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 
-interface JsonSchemaTransformable
+interface Field
 {
-    public function isRequired(): bool;
     public function toJsonSchemaProperty(): JsonSchemaProperty;
 }

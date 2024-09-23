@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Configuration\Form;
 
-use MyParcelCom\Integration\Configuration\JsonSchemaTransformable;
+use MyParcelCom\Integration\Configuration\Field;
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 
-class Checkbox implements JsonSchemaTransformable
+class Checkbox implements Field
 {
     public function __construct(
         public readonly string $name,

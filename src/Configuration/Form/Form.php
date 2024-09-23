@@ -6,19 +6,18 @@ namespace MyParcelCom\Integration\Configuration\Form;
 
 use Illuminate\Support\Arr;
 use MyParcelCom\Integration\Collection;
-use MyParcelCom\Integration\Configuration\JsonSchemaTransformable;
+use MyParcelCom\Integration\Configuration\Field;
 
 /**
- * @extends Collection<array-key, JsonSchemaTransformable>
+ * @extends Collection<array-key, Field>
  */
 class Form extends Collection
 {
-
     public function toArray(): array
     {
         return Arr::map(
             (array) $this,
-            static fn (JsonSchemaTransformable $field) => $field->toJsonSchemaProperty()->toArray(),
+            static fn (Field $field) => $field->toJsonSchemaProperty()->toArray(),
         );
     }
 
@@ -26,13 +25,13 @@ class Form extends Collection
     {
         $requiredProperties = array_filter(
             (array) $this,
-            static fn (JsonSchemaTransformable $field) => $field->isRequired(),
+            static fn (Field $field) => $field->toJsonSchemaProperty()->isRequired,
         );
 
         return array_values(
             Arr::map(
                 $requiredProperties,
-                static fn (JsonSchemaTransformable $field) => $field->name,
+                static fn (Field $field) => $field->name,
             ),
         );
     }
