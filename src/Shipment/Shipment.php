@@ -14,7 +14,7 @@ use MyParcelCom\Integration\Shipment\Exception\InvalidChannelException;
 use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 
 class Shipment implements ProvidesJsonAPI
 {

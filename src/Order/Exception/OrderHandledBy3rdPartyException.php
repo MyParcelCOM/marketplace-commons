@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Shipment\Exception;
+namespace MyParcelCom\Integration\Order\Exception;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +12,7 @@ class OrderHandledBy3rdPartyException extends Exception
 {
     protected $code = 409;
 
-    public function __construct($message = null, private string $platform = '')
+    public function __construct($message = null, private readonly string $platform = '')
     {
         parent::__construct($message);
     }

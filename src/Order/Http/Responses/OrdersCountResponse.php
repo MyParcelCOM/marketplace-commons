@@ -1,6 +1,6 @@
 <?php
 
-namespace MyParcelCom\Integration\Order;
+namespace MyParcelCom\Integration\Order\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;

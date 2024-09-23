@@ -8,7 +8,7 @@ use DateTimeInterface;
 use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\ProvidesJsonAPI;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 
 class Order implements ProvidesJsonAPI
 {
