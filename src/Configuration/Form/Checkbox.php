@@ -18,11 +18,6 @@ class Checkbox implements Field
     ) {
     }
 
-    public function isRequired(): bool
-    {
-        return $this->isRequired;
-    }
-
     public function toJsonSchemaProperty(): JsonSchemaProperty
     {
         return new JsonSchemaProperty(
