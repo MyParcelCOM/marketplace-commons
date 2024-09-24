@@ -15,17 +15,17 @@ class NumberTest extends TestCase
         $faker = Factory::create();
 
         $name = $faker->word;
-        $description = $faker->words(asText: true);
+        $label = $faker->words(asText: true);
 
         $number = new Number(
             name: $name,
-            description: $description,
+            label: $label,
         );
 
         self::assertEquals([
             $name => [
                 'type'        => 'number',
-                'description' => $description,
+                'description' => $label,
             ],
         ], $number->toJsonSchemaProperty()->toArray());
     }

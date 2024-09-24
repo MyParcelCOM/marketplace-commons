@@ -16,15 +16,15 @@ class FormTest extends TestCase
         $faker = Factory::create();
 
         [$nameOne, $nameTwo] = [$faker->word, $faker->word];
-        $description = $faker->words(asText: true);
+        $label = $faker->words(asText: true);
 
         $propertyOne = new Text(
             name: $nameOne,
-            description: $description,
+            label: $label,
         );
         $propertyTwo = new Text(
             name: $nameTwo,
-            description: $description,
+            label: $label,
             isRequired: true,
         );
 
