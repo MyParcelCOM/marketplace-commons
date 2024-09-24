@@ -15,7 +15,7 @@ use MyParcelCom\Integration\Shipment\Exception\InvalidTagException;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\Shipment;
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationNumberCollection;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 use PHPUnit\Framework\TestCase;
 
 class ShipmentTest extends TestCase

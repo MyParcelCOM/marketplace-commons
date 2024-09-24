@@ -31,7 +31,7 @@ class TransformsManyToJsonApi
 
         return new JsonResponse([
             'data' => array_map(
-                static fn (ProvidesJsonAPI $shipment) => $shipment->transformToJsonApiArray(),
+                static fn (ProvidesJsonAPI $resource) => $resource->transformToJsonApiArray(),
                 Arr::get($originalControllerResponse, 'items', []),
             ),
             'meta' => array_filter([

@@ -11,7 +11,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\Order\Order;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase

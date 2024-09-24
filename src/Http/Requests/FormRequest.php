@@ -6,17 +6,12 @@ namespace MyParcelCom\Integration\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as IlluminateFormRequest;
 use MyParcelCom\Integration\Exceptions\RequestInputException;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 
 class FormRequest extends IlluminateFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

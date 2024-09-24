@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Support;
+namespace MyParcelCom\Integration\Shop;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use MyParcelCom\Integration\ShopId;
 use Ramsey\Uuid\Uuid;
 
 /**

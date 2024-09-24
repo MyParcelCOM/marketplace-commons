@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Shop;
 
 use ArgumentCountError;
-use MyParcelCom\Integration\ShopId;
+use MyParcelCom\Integration\Shop\ShopId;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 

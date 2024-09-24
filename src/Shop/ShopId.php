@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration;
+namespace MyParcelCom\Integration\Shop;
 
 use Ramsey\Uuid\UuidInterface;
 

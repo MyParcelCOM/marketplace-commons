@@ -8,11 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ShopSetupRequest extends FormRequest
 {
-    public function authorize(): true
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
