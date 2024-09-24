@@ -15,17 +15,17 @@ class PasswordTest extends TestCase
         $faker = Factory::create();
 
         $name = $faker->word;
-        $description = $faker->words(asText: true);
+        $label = $faker->words(asText: true);
 
         $password = new Password(
             name: $name,
-            description: $description,
+            label: $label,
         );
 
         self::assertEquals([
             $name => [
                 'type'        => 'string',
-                'description' => $description,
+                'description' => $label,
                 'meta'        => [
                     'password' => true,
                 ],

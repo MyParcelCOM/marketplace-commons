@@ -12,7 +12,7 @@ class Password implements Field
 {
     public function __construct(
         public readonly string $name,
-        public readonly string $description,
+        public readonly string $label,
         public readonly bool $isRequired = false,
         public readonly ?string $hint = null,
     ) {
@@ -23,7 +23,7 @@ class Password implements Field
         return new JsonSchemaProperty(
             name: $this->name,
             type: PropertyType::STRING,
-            description: $this->description,
+            description: $this->label,
             isRequired: $this->isRequired,
             isPassword: true,
             hint: $this->hint,

@@ -56,33 +56,33 @@ class ConfigurationResponseTest extends TestCase
             $faker->word,
             $faker->word,
         ];
-        $description = $faker->words(asText: true);
+        $label = $faker->words(asText: true);
 
         $text = new Text(
             name: $nameText,
-            description: $description,
+            label: $label,
             isRequired: true,
         );
         $number = new Number(
             name: $nameNumber,
-            description: $description,
+            label: $label,
             isRequired: true,
         );
         $checkbox = new Checkbox(
             name: $nameCheckbox,
-            description: $description,
+            label: $label,
             isRequired: true,
             hint: 'A hint for this property',
         );
         $password = new Password(
             name: $namePassword,
-            description: $description,
+            label: $label,
             isRequired: true,
         );
         $select = new Select(
             name: $nameSelect,
             type: PropertyType::STRING,
-            description: $description,
+            label: $label,
             isRequired: true,
             enum: ['1', '2', '3'],
         );
@@ -105,29 +105,29 @@ class ConfigurationResponseTest extends TestCase
                     'properties'           => [
                         $nameText     => [
                             'type'        => 'string',
-                            'description' => $description,
+                            'description' => $label,
                         ],
                         $nameNumber   => [
                             'type'        => 'number',
-                            'description' => $description,
+                            'description' => $label,
                         ],
                         $nameCheckbox => [
                             'type'        => 'boolean',
-                            'description' => $description,
+                            'description' => $label,
                             'meta'        => [
                                 'hint' => 'A hint for this property',
                             ],
                         ],
                         $namePassword => [
                             'type'        => 'string',
-                            'description' => $description,
+                            'description' => $label,
                             'meta'        => [
                                 'password' => true,
                             ],
                         ],
                         $nameSelect   => [
                             'type'        => 'string',
-                            'description' => $description,
+                            'description' => $label,
                             'enum'        => [
                                 '1',
                                 '2',

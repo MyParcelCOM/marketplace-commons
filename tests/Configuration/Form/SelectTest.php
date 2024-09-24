@@ -17,12 +17,12 @@ class SelectTest extends TestCase
         $faker = Factory::create();
 
         $name = $faker->word;
-        $description = $faker->words(asText: true);
+        $label = $faker->words(asText: true);
 
         $select = new Select(
             name: $name,
             type: PropertyType::STRING,
-            description: $description,
+            label: $label,
             enum: [
                 1,
                 2,
@@ -33,7 +33,7 @@ class SelectTest extends TestCase
         self::assertEquals([
             $name => [
                 'type'        => 'string',
-                'description' => $description,
+                'description' => $label,
                 'enum'        => [
                     1,
                     2,
@@ -53,7 +53,7 @@ class SelectTest extends TestCase
         new Select(
             name: $faker->word,
             type: PropertyType::STRING,
-            description: $faker->words(asText: true),
+            label: $faker->words(asText: true),
             enum: [],
         );
     }
