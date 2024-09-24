@@ -14,7 +14,7 @@ class Select implements Field
     public function __construct(
         public readonly string $name,
         public readonly PropertyType $type,
-        public readonly string $description,
+        public readonly string $label,
         public readonly bool $isRequired = false,
         public readonly array $enum = [],
         public readonly ?string $hint = null,
@@ -29,7 +29,7 @@ class Select implements Field
         return new JsonSchemaProperty(
             name: $this->name,
             type: $this->type,
-            description: $this->description,
+            description: $this->label,
             isRequired: $this->isRequired,
             enum: $this->enum,
             hint: $this->hint,
