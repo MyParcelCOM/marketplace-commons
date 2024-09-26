@@ -30,8 +30,8 @@ class ItemTest extends TestCase
         $currency = $faker->currencyCode;
         $weight = $faker->numberBetween(1, 100);
         $weightUnit = $faker->randomElement(WeightUnit::cases());
-        $featureKey = $faker->word;
-        $featureValue = $faker->word;
+        $featureKey = $faker->word();
+        $featureValue = $faker->word();
 
         $item = new Item(
             id: $id,

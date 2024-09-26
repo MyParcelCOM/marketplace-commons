@@ -9,12 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class ValueTest extends TestCase
 {
-    public function testValue(): void
+    public function test_value(): void
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
-        $value = $faker->word;
+        $name = $faker->word();
+        $value = $faker->word();
 
         $valueObject = new Value($name, $value);
 

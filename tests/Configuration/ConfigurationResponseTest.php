@@ -56,8 +56,8 @@ class ConfigurationResponseTest extends TestCase
 
         $faker = Factory::create();
 
-        $name = $faker->word;
-        $value = $faker->word;
+        $name = $faker->word();
+        $value = $faker->word();
 
         $valueObject = new Value($name, $value);
 
@@ -87,11 +87,11 @@ class ConfigurationResponseTest extends TestCase
         $faker = Factory::create();
 
         [$nameText, $nameNumber, $nameCheckbox, $namePassword, $nameSelect] = [
-            $faker->word,
-            $faker->word,
-            $faker->word,
-            $faker->word,
-            $faker->word,
+            $faker->word(),
+            $faker->word(),
+            $faker->word(),
+            $faker->word(),
+            $faker->word(),
         ];
         $label = $faker->words(asText: true);
 
@@ -131,8 +131,8 @@ class ConfigurationResponseTest extends TestCase
             $select,
         );
 
-        $name = $faker->word;
-        $value = $faker->word;
+        $name = $faker->word();
+        $value = $faker->word();
 
         $valueObject = new Value($name, $value);
 

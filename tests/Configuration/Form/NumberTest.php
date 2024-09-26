@@ -14,7 +14,7 @@ class NumberTest extends TestCase
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
+        $name = $faker->word();
         $label = $faker->words(asText: true);
 
         $number = new Number(
