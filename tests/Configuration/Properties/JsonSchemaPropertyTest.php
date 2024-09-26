@@ -20,7 +20,7 @@ class JsonSchemaPropertyTest extends TestCase
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
+        $name = $faker->word();
         $description = $faker->words(asText: true);
         $type = $faker->randomElement(PropertyType::cases());
 
@@ -43,13 +43,13 @@ class JsonSchemaPropertyTest extends TestCase
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
+        $name = $faker->word();
         $type = $faker->randomElement(PropertyType::cases());
         $description = $faker->words(asText: true);
         $enum = [
-            $faker->word,
-            $faker->word,
-            $faker->word,
+            $faker->word(),
+            $faker->word(),
+            $faker->word(),
         ];
         $help = $faker->words(asText: true);
 

@@ -16,7 +16,7 @@ class SelectTest extends TestCase
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
+        $name = $faker->word();
         $label = $faker->words(asText: true);
 
         $select = new Select(

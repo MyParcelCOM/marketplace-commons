@@ -17,9 +17,9 @@ class FeatureTest extends TestCase
     {
         $faker = Factory::create();
 
-        $key = $faker->word;
+        $key = $faker->word();
         $value = $faker->randomElement(
-            [$faker->word, $faker->boolean, $faker->randomNumber(2), $faker->randomFloat()],
+            [$faker->word(), $faker->boolean, $faker->randomNumber(2), $faker->randomFloat()],
         );
 
         $feature = new Feature(
@@ -37,7 +37,7 @@ class FeatureTest extends TestCase
     {
         $faker = Factory::create();
 
-        $key = $faker->word;
+        $key = $faker->word();
         $value = $faker->randomElement(
             [$faker->word, $faker->boolean, $faker->randomNumber(2), $faker->randomFloat()],
         );

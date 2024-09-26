@@ -14,7 +14,7 @@ class PasswordTest extends TestCase
     {
         $faker = Factory::create();
 
-        $name = $faker->word;
+        $name = $faker->word();
         $label = $faker->words(asText: true);
 
         $password = new Password(
