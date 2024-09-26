@@ -17,7 +17,7 @@ class Select implements Field
         public readonly string $label,
         public readonly bool $isRequired = false,
         public readonly array $enum = [],
-        public readonly ?string $hint = null,
+        public readonly ?string $help = null,
     ) {
         if (count($enum) < 1) {
             throw new InvalidArgumentException('Select property requires at least one enum value.');
@@ -32,7 +32,7 @@ class Select implements Field
             description: $this->label,
             isRequired: $this->isRequired,
             enum: $this->enum,
-            hint: $this->hint,
+            help: $this->help,
         );
     }
 }

@@ -72,7 +72,7 @@ class ConfigurationResponseTest extends TestCase
             name: $nameCheckbox,
             label: $label,
             isRequired: true,
-            hint: 'A hint for this property',
+            help: 'A help for this property',
         );
         $password = new Password(
             name: $namePassword,
@@ -115,7 +115,7 @@ class ConfigurationResponseTest extends TestCase
                             'type'        => 'boolean',
                             'description' => $label,
                             'meta'        => [
-                                'hint' => 'A hint for this property',
+                                'help' => 'A help for this property',
                             ],
                         ],
                         $namePassword => [

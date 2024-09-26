@@ -51,7 +51,7 @@ class JsonSchemaPropertyTest extends TestCase
             $faker->word,
             $faker->word,
         ];
-        $hint = $faker->words(asText: true);
+        $help = $faker->words(asText: true);
 
         $property = new JsonSchemaProperty(
             name: $name,
@@ -60,7 +60,7 @@ class JsonSchemaPropertyTest extends TestCase
             isRequired: true,
             isPassword: true,
             enum: $enum,
-            hint: $hint,
+            help: $help,
         );
 
         self::assertTrue($property->isRequired);
@@ -70,7 +70,7 @@ class JsonSchemaPropertyTest extends TestCase
                 'description' => $description,
                 'enum'        => $enum,
                 'meta'        => [
-                    'hint' => $hint,
+                    'help' => $help,
                     'password' => true,
                 ],
             ],
