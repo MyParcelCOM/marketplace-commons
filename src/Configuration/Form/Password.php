@@ -14,7 +14,7 @@ class Password implements Field
         public readonly string $name,
         public readonly string $label,
         public readonly bool $isRequired = false,
-        public readonly ?string $hint = null,
+        public readonly ?string $help = null,
     ) {
     }
 
@@ -26,7 +26,7 @@ class Password implements Field
             description: $this->label,
             isRequired: $this->isRequired,
             isPassword: true,
-            hint: $this->hint,
+            help: $this->help,
         );
     }
 }

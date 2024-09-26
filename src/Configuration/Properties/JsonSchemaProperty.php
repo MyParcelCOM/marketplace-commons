@@ -13,7 +13,7 @@ class JsonSchemaProperty
         public readonly bool $isRequired = false,
         public readonly bool $isPassword = false,
         public readonly array $enum = [],
-        public readonly ?string $hint = null,
+        public readonly ?string $help = null,
     ) {
     }
 
@@ -25,7 +25,7 @@ class JsonSchemaProperty
                 'description' => $this->description,
                 'enum' => $this->enum,
                 'meta' => array_filter([
-                    'hint' => $this->hint,
+                    'help' => $this->help,
                     'password' => $this->isPassword,
                 ]),
             ])

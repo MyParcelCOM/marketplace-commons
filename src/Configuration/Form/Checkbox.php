@@ -14,7 +14,7 @@ class Checkbox implements Field
         public readonly string $name,
         public readonly string $label,
         public readonly bool $isRequired = false,
-        public readonly ?string $hint = null,
+        public readonly ?string $help = null,
     ) {
     }
 
@@ -25,7 +25,7 @@ class Checkbox implements Field
             type: PropertyType::BOOLEAN,
             description: $this->label,
             isRequired: $this->isRequired,
-            hint: $this->hint,
+            help: $this->help,
         );
     }
 }
