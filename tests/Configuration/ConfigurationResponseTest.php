@@ -16,6 +16,8 @@ use MyParcelCom\Integration\Configuration\Form\Select;
 use MyParcelCom\Integration\Configuration\Form\Text;
 use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
+use MyParcelCom\Integration\Configuration\Values\Value;
+use MyParcelCom\Integration\Configuration\Values\ValueCollection;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationResponseTest extends TestCase
@@ -40,6 +42,41 @@ class ConfigurationResponseTest extends TestCase
                         'required'             => [],
                         'properties'           => [],
                     ],
+            ],
+            $configuration->toResponse(Mockery::mock(Request::class))->getData(true),
+        );
+    }
+
+    public function test_it_creates_a_configuration_response_with_values(): void
+    {
+        $form = Mockery::mock(Form::class, [
+            'toArray'     => [],
+            'getRequired' => [],
+        ]);
+
+        $faker = Factory::create();
+
+        $name = $faker->word;
+        $value = $faker->word;
+
+        $valueObject = new Value($name, $value);
+
+        $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
+
+        self::assertEquals(
+            [
+                'configuration_schema' => [
+                    '$schema'              => 'http://json-schema.org/draft-04/schema#',
+                    'additionalProperties' => false,
+                    'required'             => [],
+                    'properties'           => [],
+                ],
+                'values'               => [
+                    [
+                        'name'  => $name,
+                        'value' => $value,
+                    ],
+                ],
             ],
             $configuration->toResponse(Mockery::mock(Request::class))->getData(true),
         );
@@ -94,7 +131,12 @@ class ConfigurationResponseTest extends TestCase
             $select,
         );
 
-        $configuration = new ConfigurationResponse($form);
+        $name = $faker->word;
+        $value = $faker->word;
+
+        $valueObject = new Value($name, $value);
+
+        $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
 
         self::assertEquals(
             [
@@ -134,6 +176,12 @@ class ConfigurationResponseTest extends TestCase
                                 '3',
                             ],
                         ],
+                    ],
+                ],
+                'values'               => [
+                    [
+                        'name'  => $name,
+                        'value' => $value,
                     ],
                 ],
             ],
