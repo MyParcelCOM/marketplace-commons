@@ -15,7 +15,7 @@ class Value
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
+            'name'  => $this->name,
             'value' => $this->value,
         ];
     }

@@ -105,11 +105,11 @@ class OrderTest extends TestCase
             'type'          => 'orders',
             'id'            => $id,
             'attributes'    => [
-                'created_at'        => $createdAt->format(DateTimeInterface::ATOM),
-                'recipient_address' => [
+                'created_at'                   => $createdAt->format(DateTimeInterface::ATOM),
+                'recipient_address'            => [
                     'test' => 'test',
                 ],
-                'items'             => [
+                'items'                        => [
                     [
                         'test' => 'test',
                     ],

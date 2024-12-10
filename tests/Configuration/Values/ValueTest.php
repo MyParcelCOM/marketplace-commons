@@ -1,7 +1,8 @@
 <?php
 
 declare(strict_types=1);
- namespace Tests\Configuration\Values;
+
+namespace Tests\Configuration\Values;
 
 use Faker\Factory;
 use MyParcelCom\Integration\Configuration\Values\Value;
@@ -19,7 +20,7 @@ class ValueTest extends TestCase
         $valueObject = new Value($name, $value);
 
         self::assertEquals([
-            'name' => $name,
+            'name'  => $name,
             'value' => $value,
         ], $valueObject->toArray());
     }

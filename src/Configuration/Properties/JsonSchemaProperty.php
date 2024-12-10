@@ -21,14 +21,14 @@ class JsonSchemaProperty
     {
         return [
             $this->name => array_filter([
-                'type' => $this->type->value,
+                'type'        => $this->type->value,
                 'description' => $this->description,
-                'enum' => $this->enum,
-                'meta' => array_filter([
-                    'help' => $this->help,
+                'enum'        => $this->enum,
+                'meta'        => array_filter([
+                    'help'     => $this->help,
                     'password' => $this->isPassword,
                 ]),
-            ])
+            ]),
         ];
     }
 }

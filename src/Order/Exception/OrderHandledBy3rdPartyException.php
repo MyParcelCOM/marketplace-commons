@@ -6,7 +6,6 @@ namespace MyParcelCom\Integration\Order\Exception;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class OrderHandledBy3rdPartyException extends Exception
 {
@@ -21,12 +20,12 @@ class OrderHandledBy3rdPartyException extends Exception
     {
         return response()->json([
             'error' => [
-                'code' => 'order_handled_by_3rd_party',
+                'code'    => 'order_handled_by_3rd_party',
                 'message' => $this->getMessage(),
-                'meta' => [
-                    '3rd_party' => $this->platform
-                ]
-            ]
+                'meta'    => [
+                    '3rd_party' => $this->platform,
+                ],
+            ],
         ], $this->code);
     }
 }

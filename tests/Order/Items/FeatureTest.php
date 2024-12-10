@@ -51,8 +51,8 @@ class FeatureTest extends TestCase
         );
 
         assertEquals([
-            'key'   => $key,
-            'value' => $value,
+            'key'        => $key,
+            'value'      => $value,
             'annotation' => $annotation->value,
         ], $feature->toArray());
     }
