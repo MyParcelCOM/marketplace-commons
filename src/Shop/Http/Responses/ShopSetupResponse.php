@@ -28,7 +28,7 @@ class ShopSetupResponse implements Responsable
         return new JsonResponse([
             'data' => [
                 'authorization_url' => $this->authorizationUrl,
-            ]
+            ],
         ]);
     }
 }

@@ -5,14 +5,9 @@ declare(strict_types=1);
 namespace Tests\Configuration\Properties;
 
 use Faker\Factory;
-use Illuminate\Support\Arr;
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Order\Items\Annotation;
-use MyParcelCom\Integration\Order\Items\Feature;
 use PHPUnit\Framework\TestCase;
-
-use function PHPUnit\Framework\assertEquals;
 
 class JsonSchemaPropertyTest extends TestCase
 {
@@ -70,7 +65,7 @@ class JsonSchemaPropertyTest extends TestCase
                 'description' => $description,
                 'enum'        => $enum,
                 'meta'        => [
-                    'help' => $help,
+                    'help'     => $help,
                     'password' => true,
                 ],
             ],

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Configuration\Form;
 
 use InvalidArgumentException;
+use MyParcelCom\Integration\Configuration\Field;
 use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\Field;
 
 class Select implements Field
 {

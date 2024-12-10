@@ -39,7 +39,7 @@ class TaxIdentificationNumberCollectionTest extends TestCase
 
         $collection = new TaxIdentificationNumberCollection(
             $firstNumber,
-            $secondNumber
+            $secondNumber,
         );
 
         self::assertEquals([$firstSet, $secondSet], $collection->toArray());
