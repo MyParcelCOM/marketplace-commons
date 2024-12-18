@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Http\Requests;
+namespace MyParcelCom\Integration\Shipment\Http\Requests;
 
 use Carbon\Carbon;
+use MyParcelCom\Integration\Http\Requests\FormRequest;
 
 class ShipmentRequest extends FormRequest
 {

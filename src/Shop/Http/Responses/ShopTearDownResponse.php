@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Http\Responses;
+namespace MyParcelCom\Integration\Shop\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Response;
