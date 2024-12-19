@@ -16,9 +16,6 @@ class ShopSetupResponse implements Responsable
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
     public function toResponse($request): SymfonyResponse
     {
         if (!$this->authorizationUrl) {

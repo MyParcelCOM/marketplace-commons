@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class ShopTearDownResponse implements Responsable
 {
-    /**
-     * @inheritDoc
-     */
     public function toResponse($request): SymfonyResponse
     {
         return new Response('', SymfonyResponse::HTTP_NO_CONTENT);
