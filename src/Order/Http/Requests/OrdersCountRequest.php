@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace MyParcelCom\Integration\Http\Requests;
+namespace MyParcelCom\Integration\Order\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use MyParcelCom\Integration\Http\Requests\FormRequest;
 
 class OrdersCountRequest extends FormRequest
 {
