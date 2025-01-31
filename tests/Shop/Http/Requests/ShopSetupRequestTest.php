@@ -24,15 +24,13 @@ class ShopSetupRequestTest extends TestCase
         $faker = Factory::create();
 
         return [
-            [[]],
-            [['data' => []]],
             [
                 [
                     'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => 'https://example.com',
+                        'redirect_url' => $faker->url(),
                         'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
                     ],
                 ],
@@ -43,7 +41,7 @@ class ShopSetupRequestTest extends TestCase
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => 'https://example.com',
+                        'redirect_url' => $faker->url(),
                     ],
                 ],
             ],
@@ -52,66 +50,55 @@ class ShopSetupRequestTest extends TestCase
 
     public static function failure_data(): array
     {
+        $faker = Factory::create();
+
         return [
+            // Missing mp_client.secret
             [
                 [
                     'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => 'https://example.com',
-                        'mp_client'    => ['id' => ''],
+                        'redirect_url' => $faker->url(),
+                        'mp_client'    => ['id' => $faker->uuid()],
                     ],
                 ],
             ],
+            // Missing mp_client.id
             [
                 [
                     'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => 'https://example.com',
-                        'mp_client'    => ['secret' => ''],
+                        'redirect_url' => $faker->url(),
+                        'mp_client'    => ['secret' => $faker->password()],
                     ],
                 ],
             ],
+            // Missing mp_client.id and mp_client.secret
             [
                 [
                     'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'mp_client'    => ['id' => '', 'secret' => ''],
+                        'redirect_url' => $faker->url(),
+                        'mp_client'    => [],
                     ],
                 ],
             ],
-            [
-                [
-                    'data' => [
-                        'settings'  => [
-                            'foo' => 'bar',
-                        ],
-                        'mp_client' => ['id' => '', 'secret' => ''],
-                    ],
-                ],
-            ],
-            [
-                [
-                    'data' => [
-                        'redirect_url' => 'https://example.com',
-                        'mp_client'    => ['id' => '', 'secret' => ''],
-                    ],
-                ],
-            ],
+            // Missing redirect_url
+            [[]],
+            [['data' => []]],
             [
                 [
                     'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => 'https://example.com',
-                        'mp_client'    => ['id' => '', 'secret' => ''],
-                        'foo'          => 'bar',
+                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
                     ],
                 ],
             ],
