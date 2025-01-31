@@ -9,7 +9,7 @@
   },
   "require-dev": {
     "fakerphp/faker": "^1.13",
-    "phpunit/phpunit": ">=9.5",
+    "phpunit/phpunit": ">=11.5",
     "roave/security-advisories": "dev-latest",
     "mockery/mockery": "^1.6"
   },
