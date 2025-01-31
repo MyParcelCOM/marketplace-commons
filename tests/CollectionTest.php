@@ -8,6 +8,8 @@ use Faker\Factory;
 use MyParcelCom\Integration\Collection;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertSame;
+
 class CollectionTest extends TestCase
 {
     public function test_it_should_convert_items_collection_to_array(): void
@@ -19,7 +21,7 @@ class CollectionTest extends TestCase
         $items = new Collection(
             new class($description1) {
                 public function __construct(
-                    private string $description,
+                    private readonly string $description,
                 ) {
                 }
 
@@ -32,7 +34,7 @@ class CollectionTest extends TestCase
             },
             new class($description2) {
                 public function __construct(
-                    private string $description,
+                    private readonly string $description,
                 ) {
                 }
 
@@ -45,7 +47,7 @@ class CollectionTest extends TestCase
             },
         );
 
-        self::assertEquals([
+        assertSame([
             [
                 'description' => $description1,
             ],

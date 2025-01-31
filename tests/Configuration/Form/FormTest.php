@@ -9,13 +9,15 @@ use MyParcelCom\Integration\Configuration\Form\Form;
 use MyParcelCom\Integration\Configuration\Form\Text;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class FormTest extends TestCase
 {
     public function test_get_required_property_names(): void
     {
         $faker = Factory::create();
 
-        [$nameOne, $nameTwo] = [$faker->word, $faker->word];
+        [$nameOne, $nameTwo] = [$faker->word(), $faker->word()];
         $label = $faker->words(asText: true);
 
         $propertyOne = new Text(
@@ -30,6 +32,6 @@ class FormTest extends TestCase
 
         $form = new Form($propertyOne, $propertyTwo);
 
-        self::assertEquals([$nameTwo], $form->getRequired());
+        assertEquals([$nameTwo], $form->getRequired());
     }
 }

@@ -20,6 +20,8 @@ use MyParcelCom\Integration\Configuration\Values\Value;
 use MyParcelCom\Integration\Configuration\Values\ValueCollection;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ConfigurationResponseTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -33,7 +35,7 @@ class ConfigurationResponseTest extends TestCase
 
         $configuration = new ConfigurationResponse($form);
 
-        self::assertEquals(
+        assertEquals(
             [
                 'configuration_schema' =>
                     [
@@ -63,7 +65,7 @@ class ConfigurationResponseTest extends TestCase
 
         $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
 
-        self::assertEquals(
+        assertEquals(
             [
                 'configuration_schema' => [
                     '$schema'              => 'http://json-schema.org/draft-04/schema#',
@@ -138,7 +140,7 @@ class ConfigurationResponseTest extends TestCase
 
         $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
 
-        self::assertEquals(
+        assertEquals(
             [
                 'configuration_schema' => [
                     '$schema'              => 'http://json-schema.org/draft-04/schema#',

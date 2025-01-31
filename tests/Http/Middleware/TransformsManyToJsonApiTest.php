@@ -12,6 +12,10 @@ use MyParcelCom\Integration\ProvidesJsonAPI;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertNotInstanceOf;
+use function PHPUnit\Framework\assertSame;
+
 class TransformsManyToJsonApiTest extends TestCase
 {
     public function test_it_should_not_transform_if_response_is_not_json(): void
@@ -22,7 +26,7 @@ class TransformsManyToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        self::assertNotInstanceOf(JsonResponse::class, $middleware->handle($requestMock, $next));
+        assertNotInstanceOf(JsonResponse::class, $middleware->handle($requestMock, $next));
     }
 
     public function test_it_should_not_transform_if_original_content_does_not_have_json_api_objects(): void
@@ -37,7 +41,7 @@ class TransformsManyToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        self::assertSame($responseMock, $middleware->handle($requestMock, $next));
+        assertSame($responseMock, $middleware->handle($requestMock, $next));
     }
 
     public function test_it_should_transform_if_original_content_have_json_api_objects(): void
@@ -60,7 +64,7 @@ class TransformsManyToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        self::assertEquals([
+        assertEquals([
             'data' => [
                 [],
             ],
@@ -83,7 +87,7 @@ class TransformsManyToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        self::assertEquals([
+        assertSame([
             'data' => [],
         ], $middleware->handle($requestMock, $next)->getOriginalContent());
     }

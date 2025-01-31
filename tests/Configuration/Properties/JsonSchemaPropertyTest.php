@@ -9,6 +9,10 @@ use MyParcelCom\Integration\Configuration\Properties\JsonSchemaProperty;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertTrue;
+
 class JsonSchemaPropertyTest extends TestCase
 {
     public function test_it_converts_property_with_minimal_properties_into_array(): void
@@ -25,8 +29,8 @@ class JsonSchemaPropertyTest extends TestCase
             description: $description,
         );
 
-        self::assertFalse($property->isRequired);
-        self::assertEquals([
+        assertFalse($property->isRequired);
+        assertEquals([
             $name => [
                 'type'        => $type->value,
                 'description' => $description,
@@ -58,8 +62,8 @@ class JsonSchemaPropertyTest extends TestCase
             help: $help,
         );
 
-        self::assertTrue($property->isRequired);
-        self::assertEquals([
+        assertTrue($property->isRequired);
+        assertEquals([
             $name => [
                 'type'        => $type->value,
                 'description' => $description,

@@ -11,6 +11,8 @@ use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationN
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class TaxIdentificationNumberCollectionTest extends TestCase
 {
     public function test_it_should_convert_items_collection_to_array(): void
@@ -42,6 +44,6 @@ class TaxIdentificationNumberCollectionTest extends TestCase
             $secondNumber,
         );
 
-        self::assertEquals([$firstSet, $secondSet], $collection->toArray());
+        assertEquals([$firstSet, $secondSet], $collection->toArray());
     }
 }

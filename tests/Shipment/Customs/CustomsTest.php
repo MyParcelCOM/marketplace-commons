@@ -13,6 +13,9 @@ use MyParcelCom\Integration\Shipment\Customs\Incoterm;
 use MyParcelCom\Integration\Shipment\Customs\NonDelivery;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
+
 class CustomsTest extends TestCase
 {
     public function test_it_should_convert_customs_object_into_array(): void
@@ -32,7 +35,7 @@ class CustomsTest extends TestCase
             certificateNumber: $certificateNumber,
         );
 
-        self::assertEquals([
+        assertEquals([
             'content_type'       => ContentType::MERCHANDISE->value,
             'invoice_number'     => $invoiceNumber,
             'non_delivery'       => NonDelivery::RETURN->value,
@@ -47,6 +50,6 @@ class CustomsTest extends TestCase
     {
         $customs = new Customs();
 
-        self::assertEquals([], $customs->toArray());
+        assertSame([], $customs->toArray());
     }
 }
