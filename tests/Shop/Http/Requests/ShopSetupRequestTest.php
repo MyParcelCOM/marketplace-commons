@@ -24,6 +24,8 @@ class ShopSetupRequestTest extends TestCase
         $faker = Factory::create();
 
         return [
+            [[]],
+            [['data' => []]],
             [
                 [
                     'data' => [
@@ -42,6 +44,16 @@ class ShopSetupRequestTest extends TestCase
                             'foo' => 'bar',
                         ],
                         'redirect_url' => $faker->url(),
+                    ],
+                ],
+            ],
+            [
+                [
+                    'data' => [
+                        'settings'     => [
+                            'foo' => 'bar',
+                        ],
+                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
                     ],
                 ],
             ],
@@ -86,19 +98,6 @@ class ShopSetupRequestTest extends TestCase
                         ],
                         'redirect_url' => $faker->url(),
                         'mp_client'    => [],
-                    ],
-                ],
-            ],
-            // Missing redirect_url
-            [[]],
-            [['data' => []]],
-            [
-                [
-                    'data' => [
-                        'settings'     => [
-                            'foo' => 'bar',
-                        ],
-                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
                     ],
                 ],
             ],
