@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Shop\Http\Requests;
 
+use Faker\Factory;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\Validator;
 use Mockery;
@@ -20,6 +21,8 @@ class ShopSetupRequestTest extends TestCase
 
     public static function success_data(): array
     {
+        $faker = Factory::create();
+
         return [
             [[]],
             [['data' => []]],
@@ -30,7 +33,7 @@ class ShopSetupRequestTest extends TestCase
                             'foo' => 'bar',
                         ],
                         'redirect_url' => 'https://example.com',
-                        'mp_client'    => ['id' => '', 'secret' => ''],
+                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
                     ],
                 ],
             ],
@@ -116,14 +119,17 @@ class ShopSetupRequestTest extends TestCase
     }
 
     #[DataProvider('success_data')]
-    public function test_validation_rules_pass(): void
+    public function test_validation_rules_pass(array $data): void
     {
         $request = new ShopSetupRequest();
         $rules = $request->rules();
 
+        $translator = Mockery::mock(Translator::class);
+        $translator->expects('get')->never();
+
         $validator = new Validator(
-            Mockery::mock(Translator::class),
-            ['data' => []],
+            $translator,
+            $data,
             $rules,
         );
 
