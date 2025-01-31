@@ -8,6 +8,8 @@ use Faker\Factory;
 use MyParcelCom\Integration\Configuration\Values\Value;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ValueTest extends TestCase
 {
     public function test_value(): void
@@ -19,7 +21,7 @@ class ValueTest extends TestCase
 
         $valueObject = new Value($name, $value);
 
-        self::assertEquals([
+        assertEquals([
             'name'  => $name,
             'value' => $value,
         ], $valueObject->toArray());

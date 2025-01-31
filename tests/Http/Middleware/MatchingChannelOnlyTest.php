@@ -13,6 +13,9 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use MyParcelCom\Integration\Http\Middleware\MatchingChannelOnly;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertSame;
+
 class MatchingChannelOnlyTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -26,9 +29,9 @@ class MatchingChannelOnlyTest extends TestCase
 
         /** @var Request $requestMock */
         $requestMock = Mockery::mock(Request::class)
-            ->shouldReceive('get')
+            ->allows('get')
             ->with('included')
-            ->andReturn([
+            ->andReturns([
                 [
                     'type'       => 'shipments',
                     'attributes' => [
@@ -40,8 +43,8 @@ class MatchingChannelOnlyTest extends TestCase
 
         $response = $middleware->handle($requestMock, function (Request $request) {}, $expectedChannel);
 
-        self::assertInstanceOf(JsonResponse::class, $response);
-        self::assertSame(204, $response->getStatusCode());
+        assertInstanceOf(JsonResponse::class, $response);
+        assertSame(204, $response->getStatusCode());
     }
 
     public function test_it_continues_request_when_channels_match(): void
@@ -52,9 +55,9 @@ class MatchingChannelOnlyTest extends TestCase
 
         /** @var Request $requestMock */
         $requestMock = Mockery::mock(Request::class)
-            ->shouldReceive('get')
+            ->allows('get')
             ->with('included')
-            ->andReturn([
+            ->andReturns([
                 [
                     'type'       => 'shipments',
                     'attributes' => [
@@ -68,6 +71,6 @@ class MatchingChannelOnlyTest extends TestCase
 
         $response = $middleware->handle($requestMock, fn (Request $request) => $responseMock, $expectedChannel);
 
-        self::assertSame($responseMock, $response);
+        assertSame($responseMock, $response);
     }
 }

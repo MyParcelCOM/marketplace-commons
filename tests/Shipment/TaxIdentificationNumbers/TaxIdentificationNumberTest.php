@@ -9,6 +9,8 @@ use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationN
 use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxNumberType;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class TaxIdentificationNumberTest extends TestCase
 {
     public function test_it_should_return_full_item_with_all_inputs(): void
@@ -26,7 +28,7 @@ class TaxIdentificationNumberTest extends TestCase
             description: $description,
         );
 
-        self::assertEquals([
+        assertEquals([
             'description'  => $description,
             'country_code' => $countryCode,
             'number'       => $number,
@@ -49,7 +51,7 @@ class TaxIdentificationNumberTest extends TestCase
             description: $description,
         );
 
-        self::assertEquals([
+        assertEquals([
             'country_code' => $countryCode,
             'number'       => $number,
             'type'         => 'eori',

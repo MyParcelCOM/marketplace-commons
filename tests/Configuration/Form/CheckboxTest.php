@@ -8,6 +8,8 @@ use Faker\Factory;
 use MyParcelCom\Integration\Configuration\Form\Checkbox;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class CheckboxTest extends TestCase
 {
     public function test_it_converts_a_boolean_property_into_an_array(): void
@@ -22,7 +24,7 @@ class CheckboxTest extends TestCase
             label: $label,
         );
 
-        self::assertEquals([
+        assertEquals([
             $name => [
                 'type'        => 'boolean',
                 'description' => $label,

@@ -7,19 +7,27 @@ namespace Tests;
 use MyParcelCom\Integration\PhysicalProperties;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class PhysicalPropertiesTest extends TestCase
 {
+    /**
+     * @throws \Random\RandomException
+     */
     public function test_it_should_convert_physical_properties_to_array_with_weight_only(): void
     {
         $weight = random_int(1000, 9000);
 
         $physicalProperties = new PhysicalProperties($weight);
 
-        self::assertEquals([
+        assertEquals([
             'weight' => $weight,
         ], $physicalProperties->toArray());
     }
 
+    /**
+     * @throws \Random\RandomException
+     */
     public function test_it_should_convert_physical_properties_to_array_with_all_inputs(): void
     {
         $weight = random_int(1000, 9000);
@@ -36,7 +44,7 @@ class PhysicalPropertiesTest extends TestCase
             volume: $volume,
         );
 
-        self::assertEquals([
+        assertEquals([
             'weight' => $weight,
             'height' => $height,
             'width'  => $width,

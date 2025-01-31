@@ -8,6 +8,8 @@ use Faker\Factory;
 use MyParcelCom\Integration\Configuration\Form\Number;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class NumberTest extends TestCase
 {
     public function test_it_converts_a_number_property_into_an_array(): void
@@ -22,7 +24,7 @@ class NumberTest extends TestCase
             label: $label,
         );
 
-        self::assertEquals([
+        assertEquals([
             $name => [
                 'type'        => 'number',
                 'description' => $label,

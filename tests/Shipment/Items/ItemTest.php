@@ -10,17 +10,22 @@ use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Items\Item;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ItemTest extends TestCase
 {
     public function test_it_should_return_is_preferential_origin_only_when_all_inputs_are_nulls(): void
     {
         $item = new Item();
 
-        self::assertEquals([
+        assertEquals([
             'is_preferential_origin' => false,
         ], $item->toArray());
     }
 
+    /**
+     * @throws \Random\RandomException
+     */
     public function test_it_should_return_full_item_with_all_inputs(): void
     {
         $faker = Factory::create();
@@ -51,7 +56,7 @@ class ItemTest extends TestCase
             originCountryCode: $originCountryCode,
         );
 
-        self::assertEquals([
+        assertEquals([
             'description'            => $description,
             'quantity'               => $quantity,
             'sku'                    => $sku,

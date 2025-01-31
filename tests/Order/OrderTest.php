@@ -14,6 +14,8 @@ use MyParcelCom\Integration\Order\Order;
 use MyParcelCom\Integration\Shop\ShopId;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class OrderTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -21,10 +23,10 @@ class OrderTest extends TestCase
     public function test_it_convert_an_order_with_minimal_properties_to_json_api_array(): void
     {
         $faker = Factory::create();
-        $shopUuid = $faker->uuid;
+        $shopUuid = $faker->uuid();
         $shopId = Mockery::mock(ShopId::class, ['toString' => $shopUuid]);
-        $createdAt = $faker->dateTime;
-        $id = $faker->uuid;
+        $createdAt = $faker->dateTime();
+        $id = $faker->uuid();
         $address = Mockery::mock(Address::class, [
             'toArray' => [
                 'test' => 'test',
@@ -46,7 +48,7 @@ class OrderTest extends TestCase
             items: $items,
         );
 
-        self::assertEquals([
+        assertEquals([
             'type'          => 'orders',
             'id'            => $id,
             'attributes'    => [
@@ -74,10 +76,10 @@ class OrderTest extends TestCase
     public function test_it_convert_an_order_with_all_properties_to_json_api_array(): void
     {
         $faker = Factory::create();
-        $shopUuid = $faker->uuid;
+        $shopUuid = $faker->uuid();
         $shopId = Mockery::mock(ShopId::class, ['toString' => $shopUuid]);
-        $createdAt = $faker->dateTime;
-        $id = $faker->uuid;
+        $createdAt = $faker->dateTime();
+        $id = $faker->uuid();
         $address = Mockery::mock(Address::class, [
             'toArray' => [
                 'test' => 'test',
@@ -90,7 +92,7 @@ class OrderTest extends TestCase
                 ],
             ],
         ]);
-        $outboundShipmentId = $faker->uuid;
+        $outboundShipmentId = $faker->uuid();
 
         $order = new Order(
             shopId: $shopId,
@@ -101,7 +103,7 @@ class OrderTest extends TestCase
             outboundShipmentIdentifier: $outboundShipmentId,
         );
 
-        self::assertEquals([
+        assertEquals([
             'type'          => 'orders',
             'id'            => $id,
             'attributes'    => [

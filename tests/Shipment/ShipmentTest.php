@@ -18,6 +18,8 @@ use MyParcelCom\Integration\Shipment\TaxIdentificationNumbers\TaxIdentificationN
 use MyParcelCom\Integration\Shop\ShopId;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ShipmentTest extends TestCase
 {
     public function test_it_should_throw_exception_when_tags_contain_non_strings(): void
@@ -113,7 +115,7 @@ class ShipmentTest extends TestCase
             items: $itemsMock,
         );
 
-        self::assertEquals([
+        assertEquals([
             'type'          => 'shipments',
             'attributes'    => [
                 'recipient_address'   => [
@@ -253,10 +255,7 @@ class ShipmentTest extends TestCase
 
         $shipment = new Shipment(
             shopId: $shopIdMock,
-            createdAt: $createdAt,
             recipientAddress: $recipientAddressMock,
-            senderAddress: $senderAddressMock,
-            returnAddress: $returnAddressMock,
             description: $description,
             customerReference: $customerReference,
             channel: $channel,
@@ -264,13 +263,16 @@ class ShipmentTest extends TestCase
             price: $priceMock,
             physicalProperties: $physicalPropertiesMock,
             items: $itemsMock,
+            createdAt: $createdAt,
+            senderAddress: $senderAddressMock,
+            returnAddress: $returnAddressMock,
             senderTaxIdentificationNumbers: $taxNumberCollectionMock,
             recipientTaxIdentificationNumbers: $taxNumberCollectionMock,
             customs: $customsMock,
             tags: [$tag],
         );
 
-        self::assertEquals([
+        assertEquals([
             'type'          => 'shipments',
             'attributes'    => [
                 'created_at'                           => $createdAt->getTimestamp(),

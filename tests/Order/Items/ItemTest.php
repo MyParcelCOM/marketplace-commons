@@ -14,20 +14,22 @@ use MyParcelCom\Integration\Weight;
 use MyParcelCom\Integration\WeightUnit;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class ItemTest extends TestCase
 {
     public function test_it_converts_an_item_to_array(): void
     {
         $faker = Factory::create();
 
-        $id = $faker->uuid;
-        $name = $faker->name;
-        $description = $faker->text;
-        $sku = $faker->uuid;
-        $imageUrl = $faker->imageUrl;
+        $id = $faker->uuid();
+        $name = $faker->name();
+        $description = $faker->text();
+        $sku = $faker->uuid();
+        $imageUrl = $faker->imageUrl();
         $quantity = $faker->numberBetween(1, 100);
         $price = $faker->numberBetween(1000, 9001);
-        $currency = $faker->currencyCode;
+        $currency = $faker->currencyCode();
         $weight = $faker->numberBetween(1, 100);
         $weightUnit = $faker->randomElement(WeightUnit::cases());
         $featureKey = $faker->word();
@@ -57,7 +59,7 @@ class ItemTest extends TestCase
             ),
         );
 
-        self::assertEquals([
+        assertEquals([
             'id'          => $id,
             'sku'         => $sku,
             'name'        => $name,
@@ -86,12 +88,12 @@ class ItemTest extends TestCase
     {
         $faker = Factory::create();
 
-        $id = $faker->uuid;
-        $name = $faker->name;
-        $description = $faker->text;
+        $id = $faker->uuid();
+        $name = $faker->name();
+        $description = $faker->text();
         $quantity = $faker->numberBetween(1, 100);
         $price = $faker->numberBetween(1000, 9001);
-        $currency = $faker->currencyCode;
+        $currency = $faker->currencyCode();
 
         $item = new Item(
             id: $id,
@@ -104,7 +106,7 @@ class ItemTest extends TestCase
             ),
         );
 
-        self::assertEquals([
+        assertEquals([
             'id'          => $id,
             'name'        => $name,
             'description' => $description,

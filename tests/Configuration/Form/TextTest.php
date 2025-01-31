@@ -8,6 +8,8 @@ use Faker\Factory;
 use MyParcelCom\Integration\Configuration\Form\Text;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class TextTest extends TestCase
 {
     public function test_it_converts_a_text_property_into_an_array(): void
@@ -22,7 +24,7 @@ class TextTest extends TestCase
             label: $label,
         );
 
-        self::assertEquals([
+        assertEquals([
             $name => [
                 'type'        => 'string',
                 'description' => $label,

@@ -10,6 +10,8 @@ use MyParcelCom\Integration\Configuration\Form\Select;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
+
 class SelectTest extends TestCase
 {
     public function test_it_converts_a_select_property_into_an_array(): void
@@ -30,7 +32,7 @@ class SelectTest extends TestCase
             ],
         );
 
-        self::assertEquals([
+        assertEquals([
             $name => [
                 'type'        => 'string',
                 'description' => $label,
