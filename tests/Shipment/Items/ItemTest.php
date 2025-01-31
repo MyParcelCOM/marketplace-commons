@@ -11,6 +11,7 @@ use MyParcelCom\Integration\Shipment\Items\Item;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
 
 class ItemTest extends TestCase
 {
@@ -18,7 +19,7 @@ class ItemTest extends TestCase
     {
         $item = new Item();
 
-        assertEquals([
+        assertSame([
             'is_preferential_origin' => false,
         ], $item->toArray());
     }
@@ -57,14 +58,14 @@ class ItemTest extends TestCase
         );
 
         assertEquals([
-            'description'            => $description,
-            'quantity'               => $quantity,
             'sku'                    => $sku,
+            'description'            => $description,
             'image_url'              => $imageUrl,
             'item_value'             => [
                 'amount'   => $amount,
                 'currency' => $currencyCode,
             ],
+            'quantity'               => $quantity,
             'hs_code'                => $hsCode,
             'item_weight'            => $itemWeight,
             'origin_country_code'    => $originCountryCode,

@@ -8,7 +8,7 @@ use Faker\Factory;
 use MyParcelCom\Integration\Collection;
 use PHPUnit\Framework\TestCase;
 
-use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
 
 class CollectionTest extends TestCase
 {
@@ -47,7 +47,7 @@ class CollectionTest extends TestCase
             },
         );
 
-        assertEquals([
+        assertSame([
             [
                 'description' => $description1,
             ],

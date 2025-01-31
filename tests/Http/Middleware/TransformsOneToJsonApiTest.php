@@ -13,7 +13,6 @@ use MyParcelCom\Integration\ProvidesJsonAPI;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
@@ -44,7 +43,7 @@ class TransformsOneToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        assertEquals(['data' => []], $middleware->handle($requestMock, $next)->getData(true));
+        assertSame(['data' => []], $middleware->handle($requestMock, $next)->getData(true));
     }
 
     public function test_it_should_not_transform_if_original_content_does_not_have_json_api_object(): void
@@ -78,7 +77,7 @@ class TransformsOneToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        assertEquals([
+        assertSame([
             'data' => [
                 'test' => 'test',
             ],

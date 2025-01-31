@@ -14,6 +14,7 @@ use MyParcelCom\Integration\Shipment\Customs\NonDelivery;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
 
 class CustomsTest extends TestCase
 {
@@ -49,6 +50,6 @@ class CustomsTest extends TestCase
     {
         $customs = new Customs();
 
-        self::assertEquals([], $customs->toArray());
+        assertSame([], $customs->toArray());
     }
 }

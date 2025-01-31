@@ -8,6 +8,7 @@ use MyParcelCom\Integration\PhysicalProperties;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
 
 class PhysicalPropertiesTest extends TestCase
 {
@@ -20,7 +21,7 @@ class PhysicalPropertiesTest extends TestCase
 
         $physicalProperties = new PhysicalProperties($weight);
 
-        assertEquals([
+        assertSame([
             'weight' => $weight,
         ], $physicalProperties->toArray());
     }
@@ -49,7 +50,7 @@ class PhysicalPropertiesTest extends TestCase
             'height' => $height,
             'width'  => $width,
             'length' => $length,
-            'volume' => $volume,
+            'volume' => (float) $volume,
         ], $physicalProperties->toArray());
     }
 }

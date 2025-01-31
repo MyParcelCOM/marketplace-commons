@@ -17,6 +17,9 @@ use MyParcelCom\Integration\Exceptions\Handler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
+use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertEquals;
+
 class HandlerTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -36,7 +39,7 @@ class HandlerTest extends TestCase
             ->responseFactoryMock
             ->allows('json')
             ->andReturnUsing(function ($response) {
-                $this->assertEquals([
+                assertEquals([
                     'errors' => [
                         [
                             'status' => 500,
@@ -61,7 +64,7 @@ class HandlerTest extends TestCase
             ->responseFactoryMock
             ->allows('json')
             ->andReturnUsing(function ($response) {
-                $this->assertEquals([
+                assertEquals([
                     'errors' => [
                         [
                             'status' => 400,
@@ -86,7 +89,7 @@ class HandlerTest extends TestCase
             ->responseFactoryMock
             ->allows('json')
             ->andReturnUsing(function ($response) {
-                $this->assertCount(2, $response['errors']);
+                assertCount(2, $response['errors']);
             });
         $this->handler->setResponseFactory($this->responseFactoryMock);
 

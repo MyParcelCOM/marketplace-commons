@@ -17,7 +17,7 @@ class FormTest extends TestCase
     {
         $faker = Factory::create();
 
-        [$nameOne, $nameTwo] = [$faker->word, $faker->word];
+        [$nameOne, $nameTwo] = [$faker->word(), $faker->word()];
         $label = $faker->words(asText: true);
 
         $propertyOne = new Text(

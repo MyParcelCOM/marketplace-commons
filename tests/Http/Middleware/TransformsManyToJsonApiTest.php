@@ -87,7 +87,7 @@ class TransformsManyToJsonApiTest extends TestCase
 
         $requestMock = Mockery::mock(Request::class);
 
-        assertEquals([
+        assertSame([
             'data' => [],
         ], $middleware->handle($requestMock, $next)->getOriginalContent());
     }

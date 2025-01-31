@@ -24,8 +24,8 @@ class MatchingChannelOnlyTest extends TestCase
     {
         $faker = Factory::create();
         $middleware = new MatchingChannelOnly();
-        $expectedChannel = $faker->word();
-        $shipmentChannel = $faker->word();
+        $expectedChannel = $faker->unique()->word();
+        $shipmentChannel = $faker->unique()->word();
 
         /** @var Request $requestMock */
         $requestMock = Mockery::mock(Request::class)
@@ -41,7 +41,8 @@ class MatchingChannelOnlyTest extends TestCase
             ])
             ->getMock();
 
-        $response = $middleware->handle($requestMock, function (Request $request) {}, $expectedChannel);
+        $response = $middleware->handle($requestMock, function (Request $request) {
+        }, $expectedChannel);
 
         assertInstanceOf(JsonResponse::class, $response);
         assertSame(204, $response->getStatusCode());
