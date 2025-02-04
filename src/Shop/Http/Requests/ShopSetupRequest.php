@@ -13,6 +13,8 @@ class ShopSetupRequest extends FormRequest
         return [
             'data.settings'         => 'array',
             'data.redirect_url'     => 'url',
+            'data.organization_id'  => 'required|string|uuid',
+            'data.broker_id'        => 'required|string|uuid',
             // Optional, but if exists, it must be an array with 2 elements.
             // This makes sure that an empty array wouldn't` pass the validation.
             'data.mp_client'        => 'array|min:2|max:2',
@@ -35,5 +37,15 @@ class ShopSetupRequest extends FormRequest
     public function mpClientSecret(): ?string
     {
         return $this->input('data.mp_client.secret');
+    }
+
+    public function organizationId(): string
+    {
+        return $this->input('data.organization_id');
+    }
+
+    public function brokerId(): string
+    {
+        return $this->input('data.broker_id');
     }
 }
