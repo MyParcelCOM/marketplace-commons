@@ -24,36 +24,48 @@ class ShopSetupRequestTest extends TestCase
         $faker = Factory::create();
 
         return [
-            [[]],
-            [['data' => []]],
             [
                 [
                     'data' => [
-                        'settings'     => [
-                            'foo' => 'bar',
-                        ],
-                        'redirect_url' => $faker->url(),
-                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
                     ],
                 ],
             ],
             [
                 [
                     'data' => [
-                        'settings'     => [
+                        'settings'        => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => $faker->url(),
+                        'redirect_url'    => $faker->url(),
+                        'mp_client'       => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
                     ],
                 ],
             ],
             [
                 [
                     'data' => [
-                        'settings'     => [
+                        'settings'        => [
                             'foo' => 'bar',
                         ],
-                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'redirect_url'    => $faker->url(),
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
+                    ],
+                ],
+            ],
+            [
+                [
+                    'data' => [
+                        'settings'        => [
+                            'foo' => 'bar',
+                        ],
+                        'mp_client'       => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
                     ],
                 ],
             ],
@@ -69,11 +81,13 @@ class ShopSetupRequestTest extends TestCase
             [
                 [
                     'data' => [
-                        'settings'     => [
+                        'settings'        => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => $faker->url(),
-                        'mp_client'    => ['id' => $faker->uuid()],
+                        'redirect_url'    => $faker->url(),
+                        'mp_client'       => ['id' => $faker->uuid()],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
                     ],
                 ],
             ],
@@ -81,11 +95,13 @@ class ShopSetupRequestTest extends TestCase
             [
                 [
                     'data' => [
-                        'settings'     => [
+                        'settings'        => [
                             'foo' => 'bar',
                         ],
-                        'redirect_url' => $faker->url(),
-                        'mp_client'    => ['secret' => $faker->password()],
+                        'redirect_url'    => $faker->url(),
+                        'mp_client'       => ['secret' => $faker->password()],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
                     ],
                 ],
             ],
@@ -93,11 +109,39 @@ class ShopSetupRequestTest extends TestCase
             [
                 [
                     'data' => [
+                        'settings'        => [
+                            'foo' => 'bar',
+                        ],
+                        'redirect_url'    => $faker->url(),
+                        'mp_client'       => [],
+                        'organization_id' => $faker->uuid(),
+                        'broker_id'       => $faker->uuid(),
+                    ],
+                ],
+            ],
+            // Missing organization_id
+            [
+                [
+                    'data' => [
                         'settings'     => [
                             'foo' => 'bar',
                         ],
                         'redirect_url' => $faker->url(),
-                        'mp_client'    => [],
+                        'mp_client'    => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'broker_id'    => $faker->uuid(),
+                    ],
+                ],
+            ],
+            // Missing broker_id
+            [
+                [
+                    'data' => [
+                        'settings'        => [
+                            'foo' => 'bar',
+                        ],
+                        'redirect_url'    => $faker->url(),
+                        'mp_client'       => ['id' => $faker->uuid(), 'secret' => $faker->password()],
+                        'organization_id' => $faker->uuid(),
                     ],
                 ],
             ],
