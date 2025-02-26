@@ -69,13 +69,9 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof ValidationException) {
             return $this->responseFactory->json(
-                [
-                    'errors' => $this->mapValidationException($e),
-                ],
+                $this->getValidationExceptionBody($e),
                 $e->status,
-                [
-                    'Content-Type' => 'application/vnd.api+json',
-                ],
+                $this->getExceptionHeaders(),
             );
         }
 
@@ -105,13 +101,11 @@ class Handler extends ExceptionHandler
                 ],
             ],
             $status,
-            [
-                'Content-Type' => 'application/vnd.api+json',
-            ],
+            self::getExceptionHeaders(),
         );
     }
 
-    private function mapValidationException(ValidationException $exception): array
+    private static function mapValidationExceptionErrors(ValidationException $exception): array
     {
         $validator = $exception->validator;
         $invalidAttributes = array_keys($validator->failed());
@@ -135,4 +129,19 @@ class Handler extends ExceptionHandler
 
         return $errors;
     }
+
+    public static function getValidationExceptionBody(ValidationException $e): array
+    {
+        return [
+            'errors' => self::mapValidationExceptionErrors($e),
+        ];
+    }
+
+    public static function getExceptionHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/vnd.api+json',
+        ];
+    }
+
 }
