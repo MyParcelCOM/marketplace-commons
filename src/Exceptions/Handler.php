@@ -75,32 +75,9 @@ class Handler extends ExceptionHandler
             );
         }
 
-        $error = [
-            'status' => $e->getCode(),
-            'detail' => $e->getMessage(),
-        ];
-
-        if ($this->debug) {
-            $error['trace'] = $e->getTrace();
-        }
-
-        $status = 500;
-
-        if ($e instanceof RequestExceptionInterface) {
-            $status = (int) $e->getCode();
-        }
-
-        if ($e instanceof HttpExceptionInterface) {
-            $status = (int) $e->getStatusCode();
-        }
-
         return $this->responseFactory->json(
-            [
-                'errors' => [
-                    $error,
-                ],
-            ],
-            $status,
+            self::getDefaultExceptionBody($e, $this->debug),
+            self::getDefaultExceptionStatus($e),
             self::getExceptionHeaders(),
         );
     }
@@ -135,6 +112,36 @@ class Handler extends ExceptionHandler
         return [
             'errors' => self::mapValidationExceptionErrors($e),
         ];
+    }
+
+    public static function getDefaultExceptionBody(Throwable $e, bool $debug): array
+    {
+        $error = [
+            'status' => $e->getCode(),
+            'detail' => $e->getMessage(),
+        ];
+        if ($debug) {
+            $error['trace'] = $e->getTrace();
+        }
+
+        return [
+            'errors' => [
+                $error,
+            ],
+        ];
+    }
+
+    public static function getDefaultExceptionStatus(Throwable $e): int
+    {
+        if ($e instanceof RequestExceptionInterface) {
+            return (int) $e->getCode();
+        }
+
+        if ($e instanceof HttpExceptionInterface) {
+            return (int) $e->getStatusCode();
+        }
+
+        return 500;
     }
 
     public static function getExceptionHeaders(): array
