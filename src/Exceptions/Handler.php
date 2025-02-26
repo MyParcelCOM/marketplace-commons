@@ -69,9 +69,9 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof ValidationException) {
             return $this->responseFactory->json(
-                $this->getValidationExceptionBody($e),
+                self::getValidationExceptionBody($e),
                 $e->status,
-                $this->getExceptionHeaders(),
+                self::getExceptionHeaders(),
             );
         }
 
@@ -141,6 +141,7 @@ class Handler extends ExceptionHandler
     {
         return [
             'Content-Type' => 'application/vnd.api+json',
+            'foo' => 'bar',
         ];
     }
 
