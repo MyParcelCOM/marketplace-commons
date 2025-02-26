@@ -141,7 +141,6 @@ class Handler extends ExceptionHandler
     {
         return [
             'Content-Type' => 'application/vnd.api+json',
-            'foo' => 'bar',
         ];
     }
 
