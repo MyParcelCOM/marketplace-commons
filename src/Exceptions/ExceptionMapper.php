@@ -17,9 +17,6 @@ use Throwable;
 
 readonly class ExceptionMapper
 {
-    public function __construct(private bool $debug = false)
-    {
-    }
 
     public function __invoke(Exceptions $exceptions): void
     {
@@ -35,7 +32,7 @@ readonly class ExceptionMapper
         });
         $exceptions->render(function (Throwable $e) {
             return response()->json(
-                self::getDefaultExceptionBody($e, $this->debug),
+                self::getDefaultExceptionBody($e, config('app.debug', false)),
                 self::getDefaultExceptionStatus($e),
                 self::getExceptionHeaders()
             );
