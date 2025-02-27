@@ -11,9 +11,11 @@ use Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
-/**
- * This class is used to map exceptions to API error responses.
- */
+/*
+| Maps exceptions to API error responses.
+| It does this by being passed to `Application::configure()->withExceptions()` in `boostrap/app.php`
+| Internally this class gets invoked and overwrite the default Laravel Exception HTTP responses.
+*/
 
 readonly class ExceptionMapper
 {
