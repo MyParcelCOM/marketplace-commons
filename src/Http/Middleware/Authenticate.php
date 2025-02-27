@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MyParcelCom\Integration\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Auth\Middleware\Authenticate as BaseAuthenticate;
 use Illuminate\Http\Request;
 
-class Authenticate extends Middleware
+class Authenticate extends BaseAuthenticate
 {
     /**
      * Get the path the user should be redirected to when they are not authenticated.
@@ -20,5 +20,6 @@ class Authenticate extends Middleware
         if (!$request->expectsJson()) {
             return route('login');
         }
+        return null;
     }
 }
