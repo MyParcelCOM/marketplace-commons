@@ -42,7 +42,7 @@ readonly class ExceptionMapper
         });
     }
 
-    public static function getValidationExceptionBody(ValidationException $e): array
+    private static function getValidationExceptionBody(ValidationException $e): array
     {
         $validator = $e->validator;
         $invalidAttributes = array_keys($validator->failed());
@@ -68,7 +68,7 @@ readonly class ExceptionMapper
         ];
     }
 
-    public static function getDefaultExceptionBody(Throwable $e, bool $debug): array
+    private static function getDefaultExceptionBody(Throwable $e, bool $debug): array
     {
         $error = [
             'status' => $e->getCode(),
@@ -85,7 +85,7 @@ readonly class ExceptionMapper
         ];
     }
 
-    public static function getDefaultExceptionStatus(Throwable $e): int
+    private static function getDefaultExceptionStatus(Throwable $e): int
     {
         if ($e instanceof RequestExceptionInterface) {
             return (int) $e->getCode();
@@ -98,7 +98,7 @@ readonly class ExceptionMapper
         return 500;
     }
 
-    public static function getExceptionHeaders(): array
+    private static function getExceptionHeaders(): array
     {
         return [
             'Content-Type' => 'application/vnd.api+json',
