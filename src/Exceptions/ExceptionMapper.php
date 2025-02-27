@@ -30,21 +30,21 @@ readonly class ExceptionMapper
         ]);
         $exceptions->render(function (ValidationException $e) {
             return response()->json(
-                self::getValidationExceptionBody($e),
+                $this->getValidationExceptionBody($e),
                 $e->status,
-                self::getExceptionHeaders()
+                $this->getExceptionHeaders()
             );
         });
         $exceptions->render(function (Throwable $e) {
             return response()->json(
-                self::getDefaultExceptionBody($e, $this->debug),
-                self::getDefaultExceptionStatus($e),
-                self::getExceptionHeaders()
+                $this->getDefaultExceptionBody($e, $this->debug),
+                $this->getDefaultExceptionStatus($e),
+                $this->getExceptionHeaders()
             );
         });
     }
 
-    private static function getValidationExceptionBody(ValidationException $e): array
+    private function getValidationExceptionBody(ValidationException $e): array
     {
         $validator = $e->validator;
         $invalidAttributes = array_keys($validator->failed());
@@ -70,7 +70,7 @@ readonly class ExceptionMapper
         ];
     }
 
-    private static function getDefaultExceptionBody(Throwable $e, bool $debug): array
+    private function getDefaultExceptionBody(Throwable $e, bool $debug): array
     {
         $error = [
             'status' => $e->getCode(),
@@ -87,7 +87,7 @@ readonly class ExceptionMapper
         ];
     }
 
-    private static function getDefaultExceptionStatus(Throwable $e): int
+    private function getDefaultExceptionStatus(Throwable $e): int
     {
         if ($e instanceof RequestExceptionInterface) {
             return (int) $e->getCode();
@@ -100,7 +100,7 @@ readonly class ExceptionMapper
         return 500;
     }
 
-    private static function getExceptionHeaders(): array
+    private function getExceptionHeaders(): array
     {
         return [
             'Content-Type' => 'application/vnd.api+json',
