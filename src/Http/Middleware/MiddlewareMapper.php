@@ -10,7 +10,6 @@ use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Http\Middleware\HandleCors;
@@ -27,7 +26,6 @@ class MiddlewareMapper
         $middleware->use([
             TrustProxies::class,
             HandleCors::class,
-            PreventRequestsDuringMaintenance::class,
             ValidatePostSize::class,
             TrimStrings::class,
             ConvertEmptyStringsToNull::class,
