@@ -33,6 +33,7 @@ class ExceptionMapperTest extends TestCase
 
         $response = $exceptionMapper->getValidationExceptionBody($exception);
 
+        // since status and message are final and cannot be changed, from their default values by mocking the class.
         $this->assertEquals([
             'errors' => [
                 [
