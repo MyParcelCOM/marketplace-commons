@@ -70,7 +70,7 @@ readonly class ExceptionMapper
         ];
     }
 
-    private function getDefaultExceptionBody(Throwable $e, bool $debug): array
+    public function getDefaultExceptionBody(Throwable $e, bool $debug): array
     {
         $error = [
             'status' => $e->getCode(),

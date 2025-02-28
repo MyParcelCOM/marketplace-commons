@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exceptions;
 
+use Exception;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
@@ -56,5 +57,30 @@ class ExceptionMapperTest extends TestCase
                 ],
             ],
         ], $response);
+    }
+
+    public function test_it_maps_default_exception_correctly(): void
+    {
+        $exceptionMapper = new ExceptionMapper();
+
+        $exception = new Exception('Some error',300);
+
+        $response = $exceptionMapper->getDefaultExceptionBody($exception, false);
+
+        $this->assertEquals([
+            'errors' => [
+                [
+                    'status'  => 300,
+                    'detail'  => 'Some error',
+                ],
+            ],
+        ], $response);
+
+        $response = $exceptionMapper->getDefaultExceptionBody($exception, true);
+        $error = $response['errors'][0];
+
+        $this->assertEquals(300, $error['status']);
+        $this->assertEquals('Some error', $error['detail']);
+        $this->assertArrayHasKey('trace', $error);
     }
 }
