@@ -44,7 +44,7 @@ readonly class ExceptionMapper
         });
     }
 
-    private function getValidationExceptionBody(ValidationException $e): array
+    public function getValidationExceptionBody(ValidationException $e): array
     {
         $validator = $e->validator;
         $invalidAttributes = array_keys($validator->failed());
