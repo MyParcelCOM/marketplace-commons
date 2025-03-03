@@ -16,10 +16,17 @@ use PHPUnit\Framework\TestCase;
 class ExceptionMapperTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
+
+    private ExceptionMapper $exceptionMapper;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->exceptionMapper = new ExceptionMapper();
+    }
+
     public function test_it_maps_validation_exception_correctly(): void
     {
-        $exceptionMapper = new ExceptionMapper();
-
         $validator = Mockery::mock(Validator::class);
         $validator->expects('failed')->andReturn(['path.to.problem' => 'Something']);
 
@@ -32,14 +39,15 @@ class ExceptionMapperTest extends TestCase
 
         $exception->validator = $validator;
 
-        $response = $exceptionMapper->getValidationExceptionBody($exception);
+        $response = $this->exceptionMapper->getValidationExceptionBody($exception);
 
-        // since status and message are final and cannot be changed, from their default values by mocking the class.
+        // In `ValidationException`, `status` and `message` are final  and cannot be mocked.
+        // For this reason, we compare the default values instead (extracted with `getCode` and `getMessage` respectively).
         $this->assertEquals([
             'errors' => [
                 [
-                    'status'  => 0,
-                    'message' => '',
+                    'status'  => $exception->getCode(),
+                    'message' => $exception->getMessage(),
                     'title'   => 'Invalid input',
                     'detail'  => 'Some Error',
                     'source'  => [
@@ -47,8 +55,8 @@ class ExceptionMapperTest extends TestCase
                     ],
                 ],
                 [
-                    'status'  => 0,
-                    'message' => '',
+                    'status'  => $exception->getCode(),
+                    'message' => $exception->getMessage(),
                     'title'   => 'Missing input',
                     'detail'  => 'field is required',
                     'source'  => [
@@ -61,11 +69,9 @@ class ExceptionMapperTest extends TestCase
 
     public function test_it_maps_default_exception_correctly(): void
     {
-        $exceptionMapper = new ExceptionMapper();
-
         $exception = new Exception('Some error',300);
 
-        $response = $exceptionMapper->getDefaultExceptionBody($exception, false);
+        $response = $this->exceptionMapper->getDefaultExceptionBody($exception, false);
 
         $this->assertEquals([
             'errors' => [
@@ -76,7 +82,7 @@ class ExceptionMapperTest extends TestCase
             ],
         ], $response);
 
-        $response = $exceptionMapper->getDefaultExceptionBody($exception, true);
+        $response = $this->exceptionMapper->getDefaultExceptionBody($exception, true);
         $error = $response['errors'][0];
 
         $this->assertEquals(300, $error['status']);
