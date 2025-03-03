@@ -5,46 +5,49 @@ declare(strict_types=1);
 namespace MyParcelCom\Integration\Exceptions;
 
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
-/*
-| Maps exceptions to API error responses.
-| It does this by being passed to `Application::configure()->withExceptions()` in `boostrap/app.php`
-| Internally this class gets invoked and overwrite the default Laravel Exception HTTP responses.
-*/
-
-readonly class ExceptionMapper
+/**
+ * Maps exceptions to API error responses.
+ * It does this by being passed to `Application::configure()->withExceptions()` in `boostrap/app.php`
+ * Internally this class gets invoked and overwrites the default Laravel Exception HTTP responses.
+ */
+readonly class ExceptionRendering
 {
+
     public function __construct(private bool $debug = false)
     {
     }
 
     public function __invoke(Exceptions $exceptions): void
     {
-        $exceptions->dontReport([
-            InvalidArgumentException::class,
-        ]);
-        $exceptions->render(function (ValidationException $e) {
-            return response()->json(
-                $this->getValidationExceptionBody($e),
-                $e->status,
-                $this->getExceptionHeaders()
-            );
-        });
-        $exceptions->render(function (Throwable $e) {
-            return response()->json(
-                $this->getDefaultExceptionBody($e, $this->debug),
-                $this->getDefaultExceptionStatus($e),
-                $this->getExceptionHeaders()
-            );
-        });
+        $exceptions->render($this->renderValidationErrors(...));
+        $exceptions->render($this->renderDefaultErrors(...));
     }
 
-    public function getValidationExceptionBody(ValidationException $e): array
+    private function renderValidationErrors(ValidationException $e): JsonResponse
+    {
+        return new JsonResponse(
+            $this->getValidationExceptionBody($e),
+            $e->status,
+            $this->getExceptionHeaders(),
+        );
+    }
+
+    private function renderDefaultErrors(Throwable $e): JsonResponse
+    {
+        return new JsonResponse(
+            $this->getDefaultExceptionBody($e, $this->debug),
+            $this->getDefaultExceptionStatus($e),
+            $this->getExceptionHeaders(),
+        );
+    }
+
+    private function getValidationExceptionBody(ValidationException $e): array
     {
         $validator = $e->validator;
         $invalidAttributes = array_keys($validator->failed());
@@ -65,12 +68,13 @@ readonly class ExceptionMapper
                 ];
             }
         }
+
         return [
             'errors' => $errors,
         ];
     }
 
-    public function getDefaultExceptionBody(Throwable $e, bool $debug): array
+    private function getDefaultExceptionBody(Throwable $e, bool $debug): array
     {
         $error = [
             'status' => $e->getCode(),
@@ -90,11 +94,11 @@ readonly class ExceptionMapper
     private function getDefaultExceptionStatus(Throwable $e): int
     {
         if ($e instanceof RequestExceptionInterface) {
-            return (int) $e->getCode();
+            return $e->getCode();
         }
 
         if ($e instanceof HttpExceptionInterface) {
-            return (int) $e->getStatusCode();
+            return $e->getStatusCode();
         }
 
         return 500;
@@ -106,5 +110,4 @@ readonly class ExceptionMapper
             'Content-Type' => 'application/vnd.api+json',
         ];
     }
-
 }

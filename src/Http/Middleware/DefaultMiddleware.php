@@ -20,12 +20,10 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 
 /**
- * | Maps the default middleware needed for marketplaces.
- * | It does this by being passed to `Application::configure()->withMiddleware()` in `boostrap/app.php`
- **/
-
-
-class MiddlewareMapper
+ * Maps the default middleware needed for marketplaces.
+ * It does this by being passed to `Application::configure()->withMiddleware()` in `boostrap/app.php`
+ */
+class DefaultMiddleware
 {
     public function __invoke(Middleware $middleware): void
     {
