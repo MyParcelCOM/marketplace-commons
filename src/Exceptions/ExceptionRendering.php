@@ -94,7 +94,7 @@ readonly class ExceptionRendering
     private function getDefaultExceptionStatus(Throwable $e): int
     {
         if ($e instanceof RequestExceptionInterface) {
-            return (int) $e->getCode();
+            return $e->getCode();
         }
 
         if ($e instanceof HttpExceptionInterface) {
