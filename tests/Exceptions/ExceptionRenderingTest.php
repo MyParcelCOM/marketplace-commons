@@ -6,6 +6,7 @@ namespace Tests\Exceptions;
 
 use Exception;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Http\Request;
@@ -20,19 +21,30 @@ use PHPUnit\Framework\TestCase;
 class ExceptionRenderingTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
+
     public function test_it_maps_validation_exception_correctly(): void
     {
         $exceptionRendering = new ExceptionRendering();
 
+        $translator = Mockery::mock(Translator::class);
+        $translator
+            ->expects('get')
+            ->with('The given data was invalid.')
+            ->andReturn('The given data was invalid.');
+
         $validator = Mockery::mock(Validator::class);
         $validator->expects('failed')->andReturn(['path.to.problem' => 'Something']);
+        $validator->expects('getTranslator')->andReturn($translator);
 
         $errors = Mockery::mock(MessageBag::class);
         $errors->expects('get')->andReturn(['Some Error', 'field is required']);
+        $errors->expects('all')->andReturn([['Some Error', 'field is required']]);
 
-        $validator->expects('errors')->andReturn($errors);
+        $validator->expects('errors')->twice()->andReturn($errors);
 
-        $exception = Mockery::mock(ValidationException::class);
+        $exception = new class ($validator) extends ValidationException {
+            protected $code = 422;
+        };
 
         $exception->validator = $validator;
 
@@ -47,8 +59,8 @@ class ExceptionRenderingTest extends TestCase
         $this->assertEquals([
             'errors' => [
                 [
-                    'status'  => 0,
-                    'message' => '',
+                    'status'  => 422,
+                    'message' => 'The given data was invalid.',
                     'title'   => 'Invalid input',
                     'detail'  => 'Some Error',
                     'source'  => [
@@ -56,8 +68,8 @@ class ExceptionRenderingTest extends TestCase
                     ],
                 ],
                 [
-                    'status'  => 0,
-                    'message' => '',
+                    'status'  => 422,
+                    'message' => 'The given data was invalid.',
                     'title'   => 'Missing input',
                     'detail'  => 'field is required',
                     'source'  => [
