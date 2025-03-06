@@ -35,6 +35,7 @@ class Shipment implements ProvidesJsonAPI
         public readonly ?TaxIdentificationNumberCollection $recipientTaxIdentificationNumbers = null,
         public readonly ?Customs $customs = null,
         public readonly array $tags = [],
+        public readonly ?PickUpLocation $pickUpLocation = null,
     ) {
         if (empty($this->channel)) {
             throw new InvalidChannelException('Shipment channel cannot be empty');
@@ -54,6 +55,7 @@ class Shipment implements ProvidesJsonAPI
             'attributes'    => array_filter([
                 'created_at'                           => $this->createdAt?->getTimestamp(),
                 'recipient_address'                    => $this->recipientAddress->toArray(),
+                'pick_up_location'                     => $this->pickUpLocation?->toArray(),
                 'sender_address'                       => $this->senderAddress?->toArray(),
                 'return_address'                       => $this->returnAddress?->toArray(),
                 'description'                          => $this->description,

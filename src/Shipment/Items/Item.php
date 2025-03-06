@@ -18,6 +18,7 @@ class Item
         public readonly ?int $itemWeight = null,
         public readonly ?string $originCountryCode = null,
         public readonly bool $isPreferentialOrigin = false,
+        public readonly ?ItemWeightUnit $itemWeightUnit = null,
     ) {
     }
 
@@ -31,9 +32,10 @@ class Item
             'quantity'               => $this->quantity,
             'hs_code'                => $this->hsCode,
             'item_weight'            => $this->itemWeight,
+            'item_weight_unit'       => $this->itemWeightUnit?->value,
             'origin_country_code'    => $this->originCountryCode,
             'is_preferential_origin' => $this->isPreferentialOrigin,
-        ], [$this, 'isNotNull']);
+        ], $this->isNotNull(...));
     }
 
     private function isNotNull($value): bool
