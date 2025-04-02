@@ -7,8 +7,8 @@ namespace MyParcelCom\Integration\Configuration\Http\Responses;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
-use MyParcelCom\Integration\Configuration\Form\Form;
-use MyParcelCom\Integration\Configuration\Values\ValueCollection;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Form;
+use MyParcelCom\JsonSchema\FormBuilder\Values\ValueCollection;
 
 class ConfigurationResponse implements Responsable
 {

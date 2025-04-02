@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f799e2d01b331ad2e620dbf2d8f151a",
+    "content-hash": "5c197933f8008b52380051fb6db74653",
     "packages": [
         {
             "name": "brick/math",
@@ -2042,6 +2042,54 @@
                 }
             ],
             "time": "2024-12-05T17:15:07+00:00"
+        },
+        {
+            "name": "myparcelcom/json-schema-form-builder",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MyParcelCOM/json-schema-form-builder.git",
+                "reference": "ebe6e60616edb0fb7f3f6ef170d820a93201043b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MyParcelCOM/json-schema-form-builder/zipball/ebe6e60616edb0fb7f3f6ef170d820a93201043b",
+                "reference": "ebe6e60616edb0fb7f3f6ef170d820a93201043b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=12.0",
+                "php": ">=8.4",
+                "ramsey/uuid": "^4.7"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.24",
+                "mockery/mockery": "^1.6",
+                "phpunit/phpunit": ">=12.0",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyParcelCom\\JsonSchema\\FormBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "MyParcel.com",
+                    "email": "info@myparcel.com"
+                }
+            ],
+            "description": "A library that provides an object-oriented API for constructing forms, which can then be converted into a JSON Schema.",
+            "support": {
+                "issues": "https://github.com/MyParcelCOM/json-schema-form-builder/issues",
+                "source": "https://github.com/MyParcelCOM/json-schema-form-builder/tree/v1.0.0"
+            },
+            "time": "2025-04-02T11:37:06+00:00"
         },
         {
             "name": "nesbot/carbon",
