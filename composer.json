@@ -3,7 +3,7 @@
   "description": "Library with common classes used for constructing MyParcel.com eCommerce Integrations",
   "type": "library",
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.4",
     "laravel/framework": ">=8.40",
     "ramsey/uuid": "^4.1",
     "myparcelcom/json-schema-form-builder": "^1.0"
