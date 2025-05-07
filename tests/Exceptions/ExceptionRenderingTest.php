@@ -21,6 +21,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+use function PHPUnit\Framework\assertArrayHasKey;
+use function PHPUnit\Framework\assertEquals;
+
 class ExceptionRenderingTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
@@ -55,7 +58,7 @@ class ExceptionRenderingTest extends TestCase
         $response = $handler->render(new Request(), $exception);
 
         // since status and message are final and cannot be changed, from their default values by mocking the class.
-        $this->assertEquals([
+        assertEquals([
             'errors' => [
                 [
                     'status'  => 422,
@@ -87,7 +90,7 @@ class ExceptionRenderingTest extends TestCase
         /** @var JsonResponse $response */
         $response = $handler->render(new Request(), $exception);
 
-        $this->assertEquals([
+        assertEquals([
             'errors' => [
                 [
                     'status' => 300,
@@ -107,9 +110,9 @@ class ExceptionRenderingTest extends TestCase
 
         $error = $response->getData(true)['errors'][0];
 
-        $this->assertEquals(300, $error['status']);
-        $this->assertEquals('Some error', $error['detail']);
-        $this->assertArrayHasKey('trace', $error);
+        assertEquals(300, $error['status']);
+        assertEquals('Some error', $error['detail']);
+        assertArrayHasKey('trace', $error);
     }
 
     public function test_it_maps_default_exception_status(): void
@@ -119,17 +122,17 @@ class ExceptionRenderingTest extends TestCase
         // BadRequestException Implements `RequestExceptionInterface` which we handle
         $exception = new BadRequestException();
         $response = $handler->render(new Request(), $exception);
-        $this->assertEquals(400, $response->getStatusCode());
+        assertEquals(400, $response->getStatusCode());
 
         // HttpException implements `RequestExceptionInterface` which we handle
         $exception = new HttpException(301);
         $response = $handler->render(new Request(), $exception);
-        $this->assertEquals(301, $response->getStatusCode());
+        assertEquals(301, $response->getStatusCode());
 
         // If an unhandled exception is encountered, defaults to 500
         $exception = new Exception();
         $response = $handler->render(new Request(), $exception);
-        $this->assertEquals(500, $response->getStatusCode());
+        assertEquals(500, $response->getStatusCode());
     }
 
     private function mockExceptionHandler(bool $debug = false): Handler

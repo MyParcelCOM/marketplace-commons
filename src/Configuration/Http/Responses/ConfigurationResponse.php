@@ -22,12 +22,7 @@ class ConfigurationResponse implements Responsable
     {
         return new JsonResponse(
             array_filter([
-                'configuration_schema' => [
-                    '$schema'              => 'http://json-schema.org/draft-04/schema#',
-                    'additionalProperties' => false,
-                    'required'             => $this->form->getRequired(),
-                    'properties'           => Arr::collapse($this->form->toArray()),
-                ],
+                'configuration_schema' => $this->form->toJsonSchema(),
                 'values'               => $this->values?->toArray(),
             ]),
         );
