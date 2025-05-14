@@ -115,9 +115,9 @@ class ConfigurationResponseTest extends TestCase
             name: $nameSelect,
             label: $label,
             options: new OptionCollection(
-                new Option('1'),
-                new Option('2'),
-                new Option('3'),
+                new Option('1', 'One'),
+                new Option('2', 'Two'),
+                new Option('3', 'Three'),
             ),
             isRequired: true,
         );
@@ -173,7 +173,14 @@ class ConfigurationResponseTest extends TestCase
                                 '2',
                                 '3',
                             ],
-                            'meta' => ['field_type' => 'radio']
+                            'meta' => [
+                                'field_type' => 'radio',
+                                'enum_labels' => [
+                                    '1' => 'One',
+                                    '2' => 'Two',
+                                    '3' => 'Three',
+                                ]
+                            ]
                         ],
                     ],
                 ],

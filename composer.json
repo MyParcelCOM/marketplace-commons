@@ -6,7 +6,7 @@
     "php": ">=8.4",
     "laravel/framework": ">=8.40",
     "ramsey/uuid": "^4.1",
-    "myparcelcom/json-schema-form-builder": "dev-feature/MP-7241-expand-rendering-features"
+    "myparcelcom/json-schema-form-builder": "^1.1.0"
   },
   "require-dev": {
     "fakerphp/faker": "^1.13",
