@@ -19,9 +19,13 @@ class ConfigureRequestTest extends TestCase
         $request->replace([
             'data' => [
                'my_name' => 'my_value',
+                'my_group' => [
+                    'my_sub_name' => 'my_sub_value',
+                ],
             ],
         ]);
-        assertNull($request->getPropertyValue('no_such_key'));
+        assertNull($request->getPropertyValue('no.such_key'));
         assertEquals('my_value', $request->getPropertyValue('my_name'));
+        assertEquals('my_sub_value', $request->getPropertyValue('my_group.my_sub_name'));
     }
 }
