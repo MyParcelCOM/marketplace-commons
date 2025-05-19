@@ -6,7 +6,6 @@ namespace Configuration\Http\Requests;
 
 use MyParcelCom\Integration\Configuration\Http\Requests\ConfigureRequest;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\InputBag;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
@@ -18,7 +17,7 @@ class ConfigureRequestTest extends TestCase
         $request = new ConfigureRequest();
         $request->replace([
             'data' => [
-               'my_name' => 'my_value',
+                'my_name'  => 'my_value',
                 'my_group' => [
                     'my_sub_name' => 'my_sub_value',
                 ],
