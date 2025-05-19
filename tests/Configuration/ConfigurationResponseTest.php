@@ -15,10 +15,8 @@ use MyParcelCom\JsonSchema\FormBuilder\Form\Number;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Option;
 use MyParcelCom\JsonSchema\FormBuilder\Form\OptionCollection;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Password;
-use MyParcelCom\JsonSchema\FormBuilder\Form\RadioButtons;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Select;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Text;
-use MyParcelCom\JsonSchema\FormBuilder\Values\Value;
-use MyParcelCom\JsonSchema\FormBuilder\Values\ValueCollection;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -34,44 +32,43 @@ class ConfigurationResponseTest extends TestCase
 
         assertEquals(
             [
-                'configuration_schema' =>
-                    [
-                        '$schema'              => 'http://json-schema.org/draft-04/schema#',
-                        'additionalProperties' => false,
-                        'required'             => [],
-                        'properties'           => [],
-                    ],
+                'configuration_schema' => [
+                    '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
+                    'additionalProperties' => false,
+                    'required'             => [],
+                    'properties'           => [],
+                ],
             ],
             $configuration->toResponse(Mockery::mock(Request::class))->getData(true),
         );
     }
 
-    public function test_it_creates_a_configuration_response_with_values(): void
+    public function test_it_creates_a_configuration_response_with_field_and_value(): void
     {
-        $faker = Factory::create();
+        $field = new Text(
+            name: 'field_name',
+            label: 'Field Label',
+            value: 'field_value',
+        );
 
-        $form = new Form();
-        $name = $faker->word();
-        $value = $faker->word();
+        $form = new Form($field);
 
-        $valueObject = new Value($name, $value);
-
-        $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
+        $configuration = new ConfigurationResponse($form);
 
         assertEquals(
             [
                 'configuration_schema' => [
-                    '$schema'              => 'http://json-schema.org/draft-04/schema#',
+                    '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
                     'additionalProperties' => false,
                     'required'             => [],
-                    'properties'           => [],
-                ],
-                'values'               => [
-                    [
-                        'name'  => $name,
-                        'value' => $value,
+                    'properties'           => [
+                        'field_name' => [
+                            'type'        => 'string',
+                            'description' => 'Field Label',
+                        ],
                     ],
                 ],
+                'values'               => ['field_name' => 'field_value'],
             ],
             $configuration->toResponse(Mockery::mock(Request::class))->getData(true),
         );
@@ -79,47 +76,38 @@ class ConfigurationResponseTest extends TestCase
 
     public function test_it_creates_a_configuration_response_with_all_data(): void
     {
-        $faker = Factory::create();
-
-        [$nameText, $nameNumber, $nameCheckbox, $namePassword, $nameSelect] = [
-            $faker->word(),
-            $faker->word(),
-            $faker->word(),
-            $faker->word(),
-            $faker->word(),
-        ];
-        $label = $faker->words(asText: true);
-
         $text = new Text(
-            name: $nameText,
-            label: $label,
+            name: 'text_field',
+            label: 'Text Field',
             isRequired: true,
+            value: 'text_value',
         );
         $number = new Number(
-            name: $nameNumber,
-            label: $label,
+            name: 'number_field',
+            label: 'Number Field',
             isRequired: true,
+            value: 23.2,
         );
         $checkbox = new Checkbox(
-            name: $nameCheckbox,
-            label: $label,
+            name: 'checkbox_field',
+            label: 'Checkbox Field',
             isRequired: true,
             help: 'A help for this property',
         );
         $password = new Password(
-            name: $namePassword,
-            label: $label,
+            name: 'password_field',
+            label: 'Password Field',
             isRequired: true,
         );
-        $select = new RadioButtons(
-            name: $nameSelect,
-            label: $label,
+        $select = new Select(
+            name: 'select_field',
+            label: 'Select Field',
             options: new OptionCollection(
                 new Option('1', 'One'),
                 new Option('2', 'Two'),
                 new Option('3', 'Three'),
             ),
-            isRequired: true,
+            value: '3',
         );
         $form = new Form(
             $text,
@@ -129,66 +117,57 @@ class ConfigurationResponseTest extends TestCase
             $select,
         );
 
-        $name = $faker->word();
-        $value = $faker->word();
 
-        $valueObject = new Value($name, $value);
-
-        $configuration = new ConfigurationResponse($form, new ValueCollection($valueObject));
+        $configuration = new ConfigurationResponse($form);
 
         assertEquals(
             [
                 'configuration_schema' => [
-                    '$schema'              => 'http://json-schema.org/draft-04/schema#',
+                    '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
                     'additionalProperties' => false,
-                    'required'             => [$nameText, $nameNumber, $nameCheckbox, $namePassword, $nameSelect],
+                    'required'             => ['text_field', 'number_field', 'checkbox_field', 'password_field'],
                     'properties'           => [
-                        $nameText     => [
+                        'text_field'     => [
                             'type'        => 'string',
-                            'description' => $label,
+                            'description' => 'Text Field',
                         ],
-                        $nameNumber   => [
+                        'number_field'   => [
                             'type'        => 'number',
-                            'description' => $label,
+                            'description' => 'Number Field',
                         ],
-                        $nameCheckbox => [
+                        'checkbox_field' => [
                             'type'        => 'boolean',
-                            'description' => $label,
+                            'description' => 'Checkbox Field',
                             'meta'        => [
                                 'help' => 'A help for this property',
                             ],
                         ],
-                        $namePassword => [
+                        'password_field' => [
                             'type'        => 'string',
-                            'description' => $label,
+                            'description' => 'Password Field',
                             'meta'        => [
                                 'password' => true,
                             ],
                         ],
-                        $nameSelect   => [
+                        'select_field'   => [
                             'type'        => 'string',
-                            'description' => $label,
-                            'enum'        => [
-                                '1',
-                                '2',
-                                '3',
-                            ],
-                            'meta' => [
-                                'field_type' => 'radio',
+                            'description' => 'Select Field',
+                            'enum'        => ['1', '2', '3'],
+                            'meta'        => [
+                                'field_type'  => 'select',
                                 'enum_labels' => [
                                     '1' => 'One',
                                     '2' => 'Two',
                                     '3' => 'Three',
-                                ]
-                            ]
+                                ],
+                            ],
                         ],
                     ],
                 ],
                 'values'               => [
-                    [
-                        'name'  => $name,
-                        'value' => $value,
-                    ],
+                    'text_field'   => 'text_value',
+                    'number_field' => 23.2,
+                    'select_field' => '3',
                 ],
             ],
             $configuration->toResponse(Mockery::mock(Request::class))->getData(true),
