@@ -12,7 +12,7 @@ class ConfigureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'data' => 'array',
+            'data' => 'required|array',
         ];
     }
 
