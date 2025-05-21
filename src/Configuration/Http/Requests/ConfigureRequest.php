@@ -19,8 +19,8 @@ class ConfigureRequest extends FormRequest
     /**
      * Get a property value from the request using "dot" notation.
      */
-    public function getPropertyValue(string $propertyName): mixed
+    public function getPropertyValue(string $propertyName, mixed $default = null): mixed
     {
-        return Arr::get($this->input('data', []), $propertyName);
+        return Arr::get($this->input('data', []), $propertyName, $default);
     }
 }
