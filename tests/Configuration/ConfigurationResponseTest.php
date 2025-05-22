@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Configuration;
 
-use Faker\Factory;
 use Illuminate\Http\Request;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Shipment;
 
-use Faker\Factory;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use MyParcelCom\Integration\Address;
