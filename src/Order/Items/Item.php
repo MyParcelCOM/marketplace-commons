@@ -19,22 +19,24 @@ class Item
         public readonly ?string $imageUrl = null,
         public readonly ?Weight $itemWeight = null,
         public readonly ?FeatureCollection $features = null,
+        public readonly ?bool $nonReturnable = false,
     ) {
     }
 
     public function toArray(): array
     {
         return array_filter([
-            'id'          => $this->id,
-            'sku'         => $this->sku,
-            'name'        => $this->name,
-            'description' => $this->description,
-            'image_url'   => $this->imageUrl,
-            'quantity'    => $this->quantity,
-            'item_price'  => $this->itemPrice->toArray(),
-            'item_weight' => $this->itemWeight?->toArray(),
-            'features'    => $this->features?->toArray(),
-        ], [$this, 'isNotNull']);
+            'id'             => $this->id,
+            'sku'            => $this->sku,
+            'name'           => $this->name,
+            'description'    => $this->description,
+            'image_url'      => $this->imageUrl,
+            'quantity'       => $this->quantity,
+            'item_price'     => $this->itemPrice->toArray(),
+            'item_weight'    => $this->itemWeight?->toArray(),
+            'features'       => $this->features?->toArray(),
+            'non_returnable' => $this->nonReturnable,
+        ], $this->isNotNull(...));
     }
 
     private function isNotNull($value): bool
