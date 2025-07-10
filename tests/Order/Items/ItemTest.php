@@ -34,6 +34,7 @@ class ItemTest extends TestCase
         $weightUnit = $faker->randomElement(WeightUnit::cases());
         $featureKey = $faker->word();
         $featureValue = $faker->word();
+        $nonReturnable = $faker->boolean();
 
         $item = new Item(
             id: $id,
@@ -57,30 +58,32 @@ class ItemTest extends TestCase
                     annotation: Annotation::COLOR,
                 ),
             ),
+            nonReturnable: $nonReturnable,
         );
 
         assertEquals([
-            'id'          => $id,
-            'sku'         => $sku,
-            'name'        => $name,
-            'description' => $description,
-            'image_url'   => $imageUrl,
-            'quantity'    => $quantity,
-            'item_price'  => [
+            'id'             => $id,
+            'sku'            => $sku,
+            'name'           => $name,
+            'description'    => $description,
+            'image_url'      => $imageUrl,
+            'quantity'       => $quantity,
+            'item_price'     => [
                 'amount'   => $price,
                 'currency' => $currency,
             ],
-            'item_weight' => [
+            'item_weight'    => [
                 'amount' => $weight,
                 'unit'   => $weightUnit->value,
             ],
-            'features'    => [
+            'features'       => [
                 [
                     'key'        => $featureKey,
                     'value'      => $featureValue,
                     'annotation' => 'color',
                 ],
             ],
+            'non_returnable' => $nonReturnable,
         ], $item->toArray());
     }
 
@@ -107,14 +110,15 @@ class ItemTest extends TestCase
         );
 
         assertEquals([
-            'id'          => $id,
-            'name'        => $name,
-            'description' => $description,
-            'quantity'    => $quantity,
-            'item_price'  => [
+            'id'             => $id,
+            'name'           => $name,
+            'description'    => $description,
+            'quantity'       => $quantity,
+            'item_price'     => [
                 'amount'   => $price,
                 'currency' => $currency,
             ],
+            'non_returnable' => false,
         ], $item->toArray());
     }
 }
