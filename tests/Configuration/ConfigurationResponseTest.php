@@ -33,6 +33,7 @@ class ConfigurationResponseTest extends TestCase
             [
                 'configuration_schema' => [
                     '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
+                    'type'                 => 'object',
                     'additionalProperties' => false,
                     'required'             => [],
                     'properties'           => [],
@@ -58,6 +59,7 @@ class ConfigurationResponseTest extends TestCase
             [
                 'configuration_schema' => [
                     '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
+                    'type'                 => 'object',
                     'additionalProperties' => false,
                     'required'             => [],
                     'properties'           => [
@@ -123,6 +125,7 @@ class ConfigurationResponseTest extends TestCase
             [
                 'configuration_schema' => [
                     '$schema'              => 'https://json-schema.org/draft/2020-12/schema',
+                    'type'                 => 'object',
                     'additionalProperties' => false,
                     'required'             => ['text_field', 'number_field', 'checkbox_field', 'password_field'],
                     'properties'           => [
