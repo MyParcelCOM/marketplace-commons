@@ -6,7 +6,7 @@
     "php": ">=8.4",
     "laravel/framework": ">=8.40",
     "ramsey/uuid": "^4.1",
-    "myparcelcom/json-schema-form-builder": "dev-feature/MP-7662-improved-json-schema-validation-handling"
+    "myparcelcom/json-schema-form-builder": "2.0.3"
   },
   "require-dev": {
     "fakerphp/faker": "^1.13",
