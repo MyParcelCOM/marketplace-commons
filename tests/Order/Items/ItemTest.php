@@ -121,4 +121,57 @@ class ItemTest extends TestCase
             'non_returnable' => false,
         ], $item->toArray());
     }
+
+    public function test_it_limits_description_to_255_characters(): void
+    {
+        $faker = Factory::create();
+
+        $id = $faker->uuid();
+        $name = $faker->name();
+        // Create a description longer than 255 characters
+        $longDescription = str_repeat('a', 300);
+        $quantity = $faker->numberBetween(1, 100);
+        $price = $faker->numberBetween(1000, 9001);
+        $currency = $faker->currencyCode();
+
+        $item = new Item(
+            id: $id,
+            name: $name,
+            description: $longDescription,
+            quantity: $quantity,
+            itemPrice: new Price(
+                amount: $price,
+                currency: $currency,
+            ),
+        );
+
+        // Description should be truncated to 255 characters
+        assertEquals(255, mb_strlen($item->description));
+        assertEquals(str_repeat('a', 255), $item->description);
+    }
+
+    public function test_it_preserves_description_shorter_than_255_characters(): void
+    {
+        $faker = Factory::create();
+
+        $id = $faker->uuid();
+        $name = $faker->name();
+        $shortDescription = 'This is a short description';
+        $quantity = $faker->numberBetween(1, 100);
+        $price = $faker->numberBetween(1000, 9001);
+        $currency = $faker->currencyCode();
+
+        $item = new Item(
+            id: $id,
+            name: $name,
+            description: $shortDescription,
+            quantity: $quantity,
+            itemPrice: new Price(
+                amount: $price,
+                currency: $currency,
+            ),
+        );
+
+        assertEquals($shortDescription, $item->description);
+    }
 }

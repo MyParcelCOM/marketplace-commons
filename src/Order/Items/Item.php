@@ -9,10 +9,12 @@ use MyParcelCom\Integration\Weight;
 
 class Item
 {
+    public readonly string $description;
+
     public function __construct(
         public readonly string $id,
         public readonly string $name,
-        public readonly string $description,
+        string $description,
         public readonly int $quantity,
         public readonly Price $itemPrice,
         public readonly ?string $sku = null,
@@ -21,6 +23,7 @@ class Item
         public readonly ?FeatureCollection $features = null,
         public readonly ?bool $nonReturnable = false,
     ) {
+        $this->description = mb_substr($description, 0, 255);
     }
 
     public function toArray(): array
