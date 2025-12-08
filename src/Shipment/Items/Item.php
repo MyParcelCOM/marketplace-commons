@@ -9,7 +9,7 @@ use MyParcelCom\Integration\Price;
 class Item
 {
     public function __construct(
-        public readonly ?string $description = null,
+        ?string $description = null,
         public readonly ?int $quantity = null,
         public readonly ?string $sku = null,
         public readonly ?string $imageUrl = null,
@@ -20,7 +20,10 @@ class Item
         public readonly bool $isPreferentialOrigin = false,
         public readonly ?ItemWeightUnit $itemWeightUnit = null,
     ) {
+        $this->description = $description !== null ? mb_substr($description, 0, 255) : null;
     }
+
+    public readonly ?string $description;
 
     public function toArray(): array
     {
