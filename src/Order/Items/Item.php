@@ -9,6 +9,8 @@ use MyParcelCom\Integration\Weight;
 
 class Item
 {
+    public readonly string $description;
+
     public function __construct(
         public readonly string $id,
         public readonly string $name,
@@ -23,8 +25,6 @@ class Item
     ) {
         $this->description = mb_substr($description, 0, 255);
     }
-
-    public readonly string $description;
 
     public function toArray(): array
     {

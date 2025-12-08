@@ -8,6 +8,8 @@ use MyParcelCom\Integration\Price;
 
 class Item
 {
+    public readonly ?string $description;
+
     public function __construct(
         ?string $description = null,
         public readonly ?int $quantity = null,
@@ -22,8 +24,6 @@ class Item
     ) {
         $this->description = $description !== null ? mb_substr($description, 0, 255) : null;
     }
-
-    public readonly ?string $description;
 
     public function toArray(): array
     {
